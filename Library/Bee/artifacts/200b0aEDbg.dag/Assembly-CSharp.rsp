@@ -359,7 +359,9 @@
 -r:"Library/Bee/artifacts/200b0aEDbg.dag/VSSettingsProvider.ref.dll"
 "Assets/Scripts/Card.cs"
 "Assets/Scripts/Draggable.cs"
+"Assets/Scripts/Field.cs"
 "Assets/Scripts/Hand.cs"
+"Assets/Scripts/TileGrid.cs"
 -langversion:8.0
 
 /deterministic

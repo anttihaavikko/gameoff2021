@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class Hand : MonoBehaviour
 {
     [SerializeField] private Card cardPrefab;
+    [SerializeField] private Field field;
 
     private Card card;
 
@@ -42,6 +43,7 @@ public class Hand : MonoBehaviour
     private void CardMoved()
     {
         card.draggable.dropped -= CardMoved;
+        field.Place(card);
         AddCard();
     }
 }
