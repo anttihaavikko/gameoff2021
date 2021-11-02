@@ -36,6 +36,7 @@ public class Field : MonoBehaviour
             
             var visited = new List<Pip>();
             Fill(pip, visited);
+            visited = visited.OrderBy(p => p.GetDistanceTo(pip)).ToList();
             StartCoroutine(MarkCoroutine(visited));
             allVisited.AddRange(visited);
         });

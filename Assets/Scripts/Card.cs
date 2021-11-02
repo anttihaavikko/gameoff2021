@@ -56,4 +56,9 @@ public class Pip
         this.x = x;
         this.y = y;
     }
+
+    public float GetDistanceTo(Pip pip)
+    {
+        return Mathf.Pow(pip.x - x, 2) + Mathf.Pow(pip.y - y, 2);
+    }
 }
