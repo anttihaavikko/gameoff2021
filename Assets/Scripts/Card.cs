@@ -16,13 +16,21 @@ public class Card : MonoBehaviour
         points.ForEach(p => p.gameObject.SetActive(Random.value < 0.5f));
     }
 
-    public IEnumerable<IntPair> GetPoints()
+    public IEnumerable<Pip> GetPoints()
     {
+        var pos = GetBasePosition();
+        
         return points.Where(p => p.gameObject.activeSelf).Select(p =>
         {
             var i = points.IndexOf(p);
-            return new IntPair(i % 3, i / 3);
+            return new Pip(p, i % 3 + pos.x, i / 3 + pos.y);
         });
+    }
+
+    public IntPair GetBasePosition()
+    {
+        var p = transform.position;
+        return new IntPair(((int)p.x + 2) * 3, (-(int)p.y + 2) * 3);
     }
 }
 
@@ -32,6 +40,19 @@ public class IntPair
 
     public IntPair(int x, int y)
     {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+public class Pip
+{
+    public SpriteRenderer sprite;
+    public int x, y;
+
+    public Pip(SpriteRenderer sprite, int x, int y)
+    {
+        this.sprite = sprite;
         this.x = x;
         this.y = y;
     }

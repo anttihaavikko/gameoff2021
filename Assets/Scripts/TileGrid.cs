@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class TileGrid {
+public class TileGrid<T> {
 
-	private int[,] data;
+	private T[,] data;
 	private int width = 5;
 	private int height = 5;
 
@@ -12,76 +13,41 @@ public class TileGrid {
 		width = w;
 		height = h;
 
-		data = new int[width,height];
+		data = new T[width,height];
 
-		for (int iy = 0; iy < height; iy++) {
-			for (int ix = 0; ix < width; ix++) {
-				data [ix, iy] = 0;
+		for (var iy = 0; iy < height; iy++) {
+			for (var ix = 0; ix < width; ix++) {
+				data[ix, iy] = default;
 			}
 		}
 	}
 
-	public string DataAsString() {
-		string str = "";
-
-		string[] values = {
-			".",
-			"X",
-			"<color=#ff0000>O</color>",
-			"<color=#00ff00>O</color>"
-		};
-
-		for (int iy = 0; iy < height; iy++) {
-			for (int ix = 0; ix < width; ix++) {
-				str += values[data [ix, iy]];
-			}
-
-			if (iy < height - 1) {
-				str += "\n";
-			}
-		}
-
-		return str;
+	public void Set(T value, int x, int y) {
+		data[x, y] = value;
 	}
 
-	public void AddNumber(int num, int x, int y) {
-		data [x, y] = num;
+	public IEnumerable<T> GetNeighbours(int x, int y)
+	{
+		var list = new List<T>();
+		AddIfNotDefault(x + 1, y, list);
+		AddIfNotDefault(x - 1, y, list);
+		AddIfNotDefault(x, y + 1, list);
+		AddIfNotDefault(x, y - 1, list);
+		// Debug.Log($"Finding neighbours for ({x},{y}) => {list.Count}");
+		return list;
 	}
 
-	public void Slide(int x, int y) {
-		int safeCheck = 0;
-		while (SlideOnce (x, y) && safeCheck < 999) {
-			safeCheck++;
+	private void AddIfNotDefault(int x, int y, ICollection<T> list)
+	{
+		if (x >= 0 && x < width && y >= 0 && y < height)
+		{
+			// Debug.Log("Adding " + x + ", " + y);
+			list.Add(data[x, y]);
 		}
 	}
 
-	public bool SlideOnce(int x, int y) {
-		bool didSlide = false;
-
-		for (int iy = 0; iy < height; iy++) {
-			for (int ix = 0; ix < width; ix++) {
-
-				if (InBounds(ix + x, iy + y) && TileFree(ix + x, iy + y) && CanSlide(ix, iy)) {
-					data [ix + x, iy + y] = data [ix, iy];
-					data [ix, iy] = 0;
-					didSlide = true;
-				}
-
-			}
-		}
-
-		return didSlide;
-	}
-
-	public bool TileFree(int x, int y) {
-		return (data [x, y] == 0);
-	}
-
-	public bool InBounds(int x, int y) {
-		return (x >= 0 && x < width && y >= 0 && y < height);
-	}
-
-	public bool CanSlide(int x, int y) {
-		return (data [x, y] > 1);
+	public IEnumerable<T> All()
+	{
+		return data.Cast<T>();
 	}
 }
