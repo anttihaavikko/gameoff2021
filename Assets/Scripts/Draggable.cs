@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Draggable : MonoBehaviour
 {
-    public Action dropped;
+    public Action dropped, hidePreview;
     public Action<Vector2> preview;
     
     [SerializeField] private LayerMask dropMask, blockMask;
@@ -36,17 +36,24 @@ public class Draggable : MonoBehaviour
         if (dragging)
         {
             transform.position = GetMousePos() + offset;
-
-            if (CanDrop(GetRoundedPos()))
-            {
-                preview?.Invoke(GetRoundedPos());
-            }
+            InvokePreview();
         }
 
         if (dragging && Input.GetMouseButtonUp(0))
         {
             StopDrag();
         }
+    }
+
+    private void InvokePreview()
+    {
+        if (CanDrop(GetRoundedPos()))
+        {
+            preview?.Invoke(GetRoundedPos());
+            return;
+        }
+        
+        hidePreview?.Invoke();
     }
 
     private void StopDrag()

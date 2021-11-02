@@ -39,6 +39,12 @@ public class Hand : MonoBehaviour
         card = Instantiate(cardPrefab, transform.position, Quaternion.identity);
         card.draggable.dropped += CardMoved;
         card.draggable.preview += ConnectionPreview;
+        card.draggable.hidePreview += HidePreview;
+    }
+
+    private void HidePreview()
+    {
+        field.HidePreview();
     }
 
     private void ConnectionPreview(Vector2 pos)
@@ -50,6 +56,7 @@ public class Hand : MonoBehaviour
     {
         card.draggable.dropped -= CardMoved;
         card.draggable.preview -= ConnectionPreview;
+        card.draggable.hidePreview -= HidePreview;
         field.Place(card);
         AddCard();
     }

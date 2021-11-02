@@ -148,4 +148,9 @@ public class Field : MonoBehaviour
             connectionLines.ShowLine(index, pip.position, targetPip.sprite.transform.position);
         }
     }
+
+    public void HidePreview()
+    {
+        connectionLines.Hide();
+    }
 }
