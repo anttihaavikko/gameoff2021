@@ -50,4 +50,10 @@ public class TileGrid<T> {
 	{
 		return data.Cast<T>();
 	}
+
+	public T Get(int x, int y)
+	{
+		if (x < 0 || y < 0 || x >= width || y >= height) return default;
+		return data[x, y];
+	}
 }

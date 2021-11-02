@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Extensions;
@@ -34,7 +33,7 @@ public class Card : MonoBehaviour
             return new Pip(p, i % 3, i / 3, isStar);
         }).ToList();
         
-        Debug.Log($"Card has {pips.Count} pips");
+        // Debug.Log($"Card has {pips.Count} pips");
     }
 
     private static int[] GetBasePips()
@@ -78,17 +77,31 @@ public class Card : MonoBehaviour
         };
     }
 
-    public IEnumerable<Pip> GetPoints()
+    public IEnumerable<Pip> GetPoints(bool addBase = false)
     {
-        var pos = GetBasePosition();
-        pips.ForEach(p => p.AddBase(pos));
+        if (addBase)
+        {
+            var pos = GetBasePosition();
+            pips.ForEach(p => p.AddBase(pos));    
+        }
+        
         return pips;
     }
 
-    public IntPair GetBasePosition()
+    private IntPair GetBasePosition()
     {
         var p = transform.position;
+        return GetBasePositionFor(p);
+    }
+
+    public IntPair GetBasePositionFor(Vector3 p)
+    {
         return new IntPair(((int)p.x + 2) * 3, (-(int)p.y + 2) * 3);
+    }
+
+    public IEnumerable<Transform> GetAllPips()
+    {
+        return points.Select(p => p.transform);
     }
 }
 

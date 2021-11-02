@@ -10,6 +10,7 @@ public class Field : MonoBehaviour
 {
     [SerializeField] private TMP_Text output, totalScoreField;
     [SerializeField] private TextWithBackground scorePopPrefab;
+    [SerializeField] private ConnectionLines connectionLines;
 
     private TileGrid<Pip> grid;
     private int totalScore;
@@ -21,9 +22,11 @@ public class Field : MonoBehaviour
 
     public void Place(Card card)
     {
+        connectionLines.Hide();
+        
         grid.All().Where(p => p != null).ToList().ForEach(p => p.sprite.color = Color.black);
         
-        var pips = card.GetPoints().ToList();
+        var pips = card.GetPoints(true).ToList();
         pips.ForEach(pip =>
         {
             grid.Set(pip, pip.x, pip.y); 
@@ -113,5 +116,36 @@ public class Field : MonoBehaviour
         {
             Fill(n, visited); 
         });
+    }
+
+    public void Preview(Card card, Vector3 pos)
+    {
+        connectionLines.Hide();
+        
+        var pips = card.GetAllPips().ToList();
+        
+        PreviewLine(0, card, pos, pips[0], 0+0, -1);
+        PreviewLine(1, card, pos, pips[0], 0-1, 0);
+        PreviewLine(2, card, pos, pips[1], 1+0, -1);
+        PreviewLine(3, card, pos, pips[2], 2+0, -1);
+        PreviewLine(4, card, pos, pips[2], 2+1, 0);
+        PreviewLine(5, card, pos, pips[3], 0-1, 1+0);
+        PreviewLine(6, card, pos, pips[5], 2+1, 1+0);
+        PreviewLine(7, card, pos, pips[8], 2+0, 2+1);
+        PreviewLine(8, card, pos, pips[8], 2+1, 2+0);
+        PreviewLine(9, card, pos, pips[7], 1+0, 2+1);
+        PreviewLine(10, card, pos, pips[6], 0+0, 2+1);
+        PreviewLine(11, card, pos, pips[6], 0-1, 2+0);
+    }
+
+    private void PreviewLine(int index, Card card, Vector3 pos, Transform pip, int x, int y)
+    {
+        var cardPos = card.GetBasePositionFor(pos);
+        var targetPip = grid.Get(cardPos.x + x, cardPos.y + y);
+
+        if (pip.gameObject.activeSelf && targetPip != null)
+        {
+            connectionLines.ShowLine(index, pip.position, targetPip.sprite.transform.position);
+        }
     }
 }
