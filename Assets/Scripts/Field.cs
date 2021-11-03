@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using AnttiStarterKit.Animations;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -70,8 +71,11 @@ public class Field : MonoBehaviour
         {
             if (pip == null) continue;
             
-            pip.sprite.color = state ? Color.red : Color.black;
-            pip.sprite.transform.localScale = Vector3.one * (state ? 0.2f : 0.18f);
+            var targetColor = state ? Color.red : Color.black;
+            var targetSize = Vector3.one * (state ? 0.21f : 0.17f);
+            const float duration = 0.15f;
+            Tweener.ColorToBounceOut(pip.sprite, targetColor, duration);
+            Tweener.ScaleToBounceOut(pip.sprite.transform, targetSize, duration);
 
             if (state)
             {
