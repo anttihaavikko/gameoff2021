@@ -57,13 +57,13 @@ public class Hand : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadSceneAsync("Main");
+            SceneChanger.Instance.ChangeScene("Main");
         }
         
         if (Input.GetKeyDown(KeyCode.D))
         {
             Saver.Clear();
-            SceneManager.LoadSceneAsync("Main");
+            SceneChanger.Instance.ChangeScene("Main");
         }
     }
 
@@ -119,7 +119,7 @@ public class Hand : MonoBehaviour
                 card.draggable.click = null;
                 deck.Add(data);
                 Saver.Save(deck);
-                SceneManager.LoadSceneAsync("Main");
+                SceneChanger.Instance.ChangeScene("Main");
             };
         }
     }
