@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
 using Save;
 using UnityEngine;
@@ -12,25 +13,45 @@ public class Card : MonoBehaviour
     
     [SerializeField] private List<SpriteRenderer> points;
     [SerializeField] private Sprite starSprite;
+    [SerializeField] private Transform visualContents;
 
     private List<Pip> pips;
+    private CardData data;
+    private float angle;
 
     public void Setup(CardData cardData)
     {
-        pips = points.Where((_, i) => cardData.pips.Contains(i)).Select(p =>
+        data = cardData.Clone();
+        PositionPips();
+    }
+
+    private void PositionPips()
+    {
+        points.ForEach(p => p.gameObject.SetActive(false));
+        
+        pips = points.Where((_, i) => data.pips.Contains(i)).Select(p =>
         {
             var i = points.IndexOf(p);
             p.gameObject.SetActive(true);
-            
-            var isStar = cardData.stars.Contains(i);
+
+            var isStar = data.stars.Contains(i);
             if (isStar)
             {
                 p.sprite = starSprite;
                 p.transform.Rotate(0, 0, Random.Range(0f, 360f));
             }
-            
+
             return new Pip(p, i % 3, i / 3, isStar);
         }).ToList();
+    }
+
+    public void Rotate(bool clockWise)
+    {
+        var dir = clockWise ? 1 : -1;
+        visualContents.rotation = Quaternion.Euler(0, 0, 90f * dir);
+        Tweener.RotateToBounceOut(visualContents, Quaternion.identity, 0.3f);
+        data.Rotate(dir);
+        PositionPips();
     }
 
     public IEnumerable<Pip> GetPoints(bool addBase = false)

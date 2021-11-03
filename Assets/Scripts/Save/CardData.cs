@@ -24,6 +24,15 @@ namespace Save
             return data;
         }
 
+        public CardData Clone()
+        {
+            return new CardData
+            {
+                pips = pips.ToList(),
+                stars = stars.ToList()
+            };
+        }
+
         public static CardData Random()
         {
             var c = Starter();
@@ -68,6 +77,12 @@ namespace Save
         private void RotateRandomly()
         {
             var rotations = UnityEngine.Random.Range(0, 4);
+            pips = pips.Select(p => RotatePip(p, rotations)).ToList();
+        }
+
+        public void Rotate(int direction)
+        {
+            var rotations = direction > 0 ? 1 : 3;
             pips = pips.Select(p => RotatePip(p, rotations)).ToList();
         }
         

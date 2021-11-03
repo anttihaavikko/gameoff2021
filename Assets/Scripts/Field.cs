@@ -23,6 +23,8 @@ public class Field : MonoBehaviour
 
     public void Place(Card card)
     {
+        card.Rotate(true);
+        
         connectionLines.Hide();
         
         grid.All().Where(p => p != null).ToList().ForEach(p => p.sprite.color = Color.black);

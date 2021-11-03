@@ -1000,6 +1000,7 @@ MonoBehaviour:
   - {fileID: 2024160299988670592}
   - {fileID: 2024160301075873060}
   starSprite: {fileID: 21300000, guid: df8ef98d57e034c70b2989b74fb7ba15, type: 3}
+  visualContents: {fileID: 2024160301851604901}
 --- !u!114 &-1639243591707058243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1042,7 +1043,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2024160301851604901}
   m_Layer: 0
-  m_Name: Points
+  m_Name: Contents
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
