@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Extensions;
+using Save;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -16,14 +17,34 @@ public class Card : MonoBehaviour
 
     private void Start()
     {
-        var rotates = Random.Range(0, 4);
-        var pipIds = GetBasePips().Select(i => RotateIndex(i, rotates));
-        pips = points.Where((_, i) => pipIds.Contains(i)).Select(p =>
+        // var rotates = Random.Range(0, 4);
+        // var pipIds = GetBasePips().Select(i => RotateIndex(i, rotates));
+        // pips = points.Where((_, i) => pipIds.Contains(i)).Select(p =>
+        // {
+        //     var i = points.IndexOf(p);
+        //     p.gameObject.SetActive(true);
+        //     
+        //     var isStar = Random.value < 0.1f;
+        //     if (isStar)
+        //     {
+        //         p.sprite = starSprite;
+        //         p.transform.Rotate(0, 0, Random.Range(0f, 360f));
+        //     }
+        //     
+        //     return new Pip(p, i % 3, i / 3, isStar);
+        // }).ToList();
+        
+        // Debug.Log($"Card has {pips.Count} pips");
+    }
+    
+    public void Setup(CardData cardData)
+    {
+        pips = points.Where((_, i) => cardData.pips.Contains(i)).Select(p =>
         {
             var i = points.IndexOf(p);
             p.gameObject.SetActive(true);
             
-            var isStar = Random.value < 0.1f;
+            var isStar = cardData.stars.Contains(i);
             if (isStar)
             {
                 p.sprite = starSprite;
@@ -32,22 +53,6 @@ public class Card : MonoBehaviour
             
             return new Pip(p, i % 3, i / 3, isStar);
         }).ToList();
-        
-        // Debug.Log($"Card has {pips.Count} pips");
-    }
-
-    private static int[] GetBasePips()
-    {
-        return new []
-        {
-            new []{ 0, 1, 2, 4 },
-            new []{ 0, 1, 4, 7 },
-            new []{ 2, 1, 4, 7 },
-            new []{ 0, 1, 3, 4 },
-            new []{ 0, 1, 4, 5 },
-            new []{ 1, 2, 3, 4 },
-            new []{ 3, 4, 5, 7 }
-        }.Random();
     }
 
     private int RotateIndex(int index, int times)

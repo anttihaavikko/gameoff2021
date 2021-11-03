@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Draggable : MonoBehaviour
 {
-    public Action dropped, hidePreview;
+    public Action dropped, hidePreview, click;
     public Action<Vector2> preview;
     
     [SerializeField] private LayerMask dropMask, blockMask;
     [SerializeField] private bool lockAfterDrop = true;
+
+    public bool CanDrag { get; set; } = true;
 
     private Camera cam;
     private bool dragging;
@@ -23,12 +25,19 @@ public class Draggable : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (!CanDrag) return;
+        
         var go = gameObject;
         dragging = true;
         start = transform.position;
         offset = start - GetMousePos();
         layerId = go.layer;
         go.layer = 0;
+    }
+
+    private void OnMouseUp()
+    {
+        click?.Invoke();
     }
 
     private void Update()
