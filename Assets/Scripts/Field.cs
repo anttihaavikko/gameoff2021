@@ -82,6 +82,7 @@ public class Field : MonoBehaviour
                 if (pip.isStar)
                 {
                     multi += 1;
+                    ShowTextAt($"x{multi}", pip.sprite.transform.position + Vector3.right * 0.3f);
                 }
                 total++;
                 pop.SetText((total * multi).ToString());
@@ -91,7 +92,7 @@ public class Field : MonoBehaviour
                 pt.position = sum / amount;
             }
 
-            yield return null;
+            yield return new WaitForSeconds(0.02f);
         }
 
         totalScore += total * multi;
@@ -102,9 +103,16 @@ public class Field : MonoBehaviour
         }
     }
 
-    private static IEnumerator DestroyAfter(GameObject pop)
+    private void ShowTextAt(string text, Vector3 pos)
     {
-        yield return new WaitForSeconds(0.5f);
+        var pop = Instantiate(scorePopPrefab, pos, Quaternion.identity);
+        pop.SetText(text);
+        StartCoroutine(DestroyAfter(pop.gameObject, 1f));
+    }
+
+    private static IEnumerator DestroyAfter(GameObject pop, float delay = 0.5f)
+    {
+        yield return new WaitForSeconds(delay);
         Destroy(pop);
     }
 
