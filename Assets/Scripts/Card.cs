@@ -15,28 +15,6 @@ public class Card : MonoBehaviour
 
     private List<Pip> pips;
 
-    private void Start()
-    {
-        // var rotates = Random.Range(0, 4);
-        // var pipIds = GetBasePips().Select(i => RotateIndex(i, rotates));
-        // pips = points.Where((_, i) => pipIds.Contains(i)).Select(p =>
-        // {
-        //     var i = points.IndexOf(p);
-        //     p.gameObject.SetActive(true);
-        //     
-        //     var isStar = Random.value < 0.1f;
-        //     if (isStar)
-        //     {
-        //         p.sprite = starSprite;
-        //         p.transform.Rotate(0, 0, Random.Range(0f, 360f));
-        //     }
-        //     
-        //     return new Pip(p, i % 3, i / 3, isStar);
-        // }).ToList();
-        
-        // Debug.Log($"Card has {pips.Count} pips");
-    }
-    
     public void Setup(CardData cardData)
     {
         pips = points.Where((_, i) => cardData.pips.Contains(i)).Select(p =>
@@ -53,33 +31,6 @@ public class Card : MonoBehaviour
             
             return new Pip(p, i % 3, i / 3, isStar);
         }).ToList();
-    }
-
-    private int RotateIndex(int index, int times)
-    {
-        for (var i = 0; i < times; i++)
-        {
-            index = RotateIndex(index);
-        }
-
-        return index;
-    }
-
-    private int RotateIndex(int index)
-    {
-        return index switch
-        {
-            0 => 2,
-            1 => 5,
-            2 => 8,
-            5 => 7,
-            8 => 6,
-            7 => 3,
-            6 => 0,
-            3 => 1,
-            4 => 4,
-            _ => throw new ArgumentOutOfRangeException(nameof(index), index, null)
-        };
     }
 
     public IEnumerable<Pip> GetPoints(bool addBase = false)

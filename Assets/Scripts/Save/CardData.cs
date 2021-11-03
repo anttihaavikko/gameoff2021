@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Extensions;
@@ -12,11 +13,15 @@ namespace Save
         
         public static CardData Starter()
         {
-            return new CardData
+            var data = new CardData
             {
                 pips = GetBase().ToList(),
                 stars = new List<int>()
             };
+            
+            data.RotateRandomly();
+
+            return data;
         }
 
         public static CardData Random()
@@ -58,6 +63,39 @@ namespace Save
                 new []{ 1, 2, 3, 4 },
                 new []{ 3, 4, 5, 7 }
             }.Random();
+        }
+
+        private void RotateRandomly()
+        {
+            var rotations = UnityEngine.Random.Range(0, 4);
+            pips = pips.Select(p => RotatePip(p, rotations)).ToList();
+        }
+        
+        private static int RotatePip(int index, int times)
+        {
+            for (var i = 0; i < times; i++)
+            {
+                index = RotatePip(index);
+            }
+
+            return index;
+        }
+
+        private static int RotatePip(int index)
+        {
+            return index switch
+            {
+                0 => 2,
+                1 => 5,
+                2 => 8,
+                5 => 7,
+                8 => 6,
+                7 => 3,
+                6 => 0,
+                3 => 1,
+                4 => 4,
+                _ => throw new ArgumentOutOfRangeException(nameof(index), index, null)
+            };
         }
 
         private void AddPip()
