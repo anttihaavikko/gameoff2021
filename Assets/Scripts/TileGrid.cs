@@ -56,4 +56,27 @@ public class TileGrid<T> {
 		if (x < 0 || y < 0 || x >= width || y >= height) return default;
 		return data[x, y];
 	}
+	
+	public string DataAsString() {
+		string str = "";
+
+		string[] values = {
+			".",
+			"X",
+			"<color=#ff0000>O</color>",
+			"<color=#00ff00>O</color>"
+		};
+
+		for (int iy = 0; iy < height; iy++) {
+			for (int ix = 0; ix < width; ix++) {
+				str += data [ix, iy] != null ? "X" : ".";
+			}
+
+			if (iy < height - 1) {
+				str += "\n";
+			}
+		}
+
+		return str;
+	}
 }

@@ -5,18 +5,25 @@ using AnttiStarterKit.Extensions;
 
 namespace Save
 {
-    [System.Serializable]
+    [Serializable]
     public class CardData
     {
         public List<int> pips;
         public List<int> stars;
+        public CardType type;
+        public List<int> directions;
+
+        public bool IsRotator => type == CardType.RotateLeft || type == CardType.RotateRight;
+        public bool RotatesClockwise => type == CardType.RotateRight;
         
         public static CardData Starter()
         {
             var data = new CardData
             {
                 pips = GetBase().ToList(),
-                stars = new List<int>()
+                stars = new List<int>(),
+                type = CardType.Normal,
+                directions = new List<int>()
             };
             
             data.RotateRandomly();
@@ -29,7 +36,9 @@ namespace Save
             return new CardData
             {
                 pips = pips.ToList(),
-                stars = stars.ToList()
+                stars = stars.ToList(),
+                type = type,
+                directions = directions.ToList()
             };
         }
 
@@ -55,6 +64,14 @@ namespace Save
             if (UnityEngine.Random.value < 0.2f)
             {
                 c.RemovePip();
+            }
+            
+            if (UnityEngine.Random.value < 0.2f)
+            {
+                c.pips.Clear();
+                c.stars.Clear();
+                c.type = CardType.RotateRight;
+                c.directions = new List<int> { UnityEngine.Random.Range(0, 4) };
             }
 
             return c;
@@ -84,6 +101,7 @@ namespace Save
         {
             var rotations = direction > 0 ? 1 : 3;
             pips = pips.Select(p => RotatePip(p, rotations)).ToList();
+            stars = stars.Select(p => RotatePip(p, rotations)).ToList();
         }
         
         private static int RotatePip(int index, int times)
@@ -138,5 +156,13 @@ namespace Save
                 stars.Add(index);
             }
         }
+    }
+
+    public enum CardType
+    {
+        Normal,
+        RotateRight,
+        RotateLeft,
+        Push
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using AnttiStarterKit.Animations;
 using TMPro;
 using UnityEngine;
+using AnttiStarterKit.Extensions;
 using Random = UnityEngine.Random;
 
 public class Field : MonoBehaviour
@@ -12,6 +13,8 @@ public class Field : MonoBehaviour
     [SerializeField] private TMP_Text output, totalScoreField;
     [SerializeField] private TextWithBackground scorePopPrefab;
     [SerializeField] private ConnectionLines connectionLines;
+    [SerializeField] private LayerMask cardLayer;
+    
 
     private TileGrid<Pip> grid;
     private int totalScore;
@@ -23,19 +26,18 @@ public class Field : MonoBehaviour
 
     public void Place(Card card)
     {
-        card.Rotate(true);
-        
         connectionLines.Hide();
-        
-        grid.All().Where(p => p != null).ToList().ForEach(p => p.sprite.color = Color.black);
-        
-        var pips = card.GetPoints(true).ToList();
-        pips.ForEach(pip =>
-        {
-            grid.Set(pip, pip.x, pip.y); 
-        });
 
+        PlacePipsToGrid(card);
+        Activate(card);
+
+        output.text = grid.DataAsString();
+    }
+
+    private void Activate(Card card)
+    {
         var allVisited = new List<Pip>();
+        var pips = card.GetPoints().ToList();
         
         pips.ForEach(pip =>
         {
@@ -47,6 +49,50 @@ public class Field : MonoBehaviour
             StartCoroutine(MarkCoroutine(visited));
             allVisited.AddRange(visited);
         });
+
+        if (card.IsRotator)
+        {
+            var neighbours = GetNeighboursFor(card);
+            neighbours.ToList().ForEach(n =>
+            {
+                Rotate(n, card.RotatesClockwise);
+                this.StartCoroutine(() => Activate(n), 0.4f);
+            });
+        }
+    }
+
+    private void PlacePipsToGrid(Card card)
+    {
+        var pips = card.GetPoints(true).ToList();
+        pips.ForEach(pip => { grid.Set(pip, pip.x, pip.y); });
+    }
+
+    private void ClearPipsFromGrid(Card card)
+    {
+        var pips = card.GetPoints(false).ToList();
+        pips.ForEach(pip =>
+        {
+            grid.Set(null, pip.x, pip.y); 
+        });
+    }
+
+    private IEnumerable<Card> GetNeighboursFor(Card card)
+    {
+        var pos = card.transform.position;
+        return card.GetDirections().Select(dir => GetNeighbourFor(pos, dir)).Where(c => c != null);
+    }
+    
+    private Card GetNeighbourFor(Vector3 pos, Vector3 dir)
+    {
+        var target = Physics2D.OverlapCircle(pos + dir, 0.2f, cardLayer);
+        return !target ? null : target.GetComponent<Card>();
+    }
+
+    private void Rotate(Card card, bool clockwise)
+    {
+        ClearPipsFromGrid(card);
+        card.Rotate(clockwise);
+        PlacePipsToGrid(card);
     }
 
     private IEnumerator MarkCoroutine(List<Pip> pips)

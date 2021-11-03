@@ -14,14 +14,35 @@ public class Card : MonoBehaviour
     [SerializeField] private List<SpriteRenderer> points;
     [SerializeField] private Sprite starSprite;
     [SerializeField] private Transform visualContents;
+    [SerializeField] private GameObject rotateIcon;
+    [SerializeField] private List<GameObject> directionIndicators;
 
     private List<Pip> pips;
     private CardData data;
     private float angle;
 
+    public bool IsRotator => data.IsRotator;
+    public bool RotatesClockwise => data.RotatesClockwise;
+
     public void Setup(CardData cardData)
     {
         data = cardData.Clone();
+
+        if (data.IsRotator)
+        {
+            rotateIcon.SetActive(true);
+            data.directions.ForEach(d =>
+            {
+                Debug.Log($"Activate arrow {d}");
+                directionIndicators[d].SetActive(true);
+            });
+        }
+        
+        if (data.type == CardType.RotateLeft)
+        {
+            rotateIcon.transform.Mirror();
+        }
+
         PositionPips();
     }
 
@@ -48,10 +69,21 @@ public class Card : MonoBehaviour
     public void Rotate(bool clockWise)
     {
         var dir = clockWise ? 1 : -1;
-        visualContents.rotation = Quaternion.Euler(0, 0, 90f * dir);
-        Tweener.RotateToBounceOut(visualContents, Quaternion.identity, 0.3f);
+        VisualRotate(dir);
         data.Rotate(dir);
         PositionPips();
+    }
+
+    private void VisualRotate(int dir)
+    {
+        if (pips.Any())
+        {
+            visualContents.rotation = Quaternion.Euler(0, 0, 90f * dir);
+            Tweener.RotateToBounceOut(visualContents, Quaternion.identity, 0.3f);
+            return;
+        }
+
+        Tweener.RotateToBounceOut(visualContents, Quaternion.Euler(0, 0, dir * -90f), 0.3f);
     }
 
     public IEnumerable<Pip> GetPoints(bool addBase = false)
@@ -79,6 +111,13 @@ public class Card : MonoBehaviour
     public IEnumerable<Transform> GetAllPips()
     {
         return points.Select(p => p.transform);
+    }
+
+    public IEnumerable<Vector3> GetDirections()
+    {
+        var q = visualContents.rotation;
+        var baseDirections = new List<Vector3> { Vector3.up, Vector3.right, Vector3.down, Vector3.left };
+        return data.directions.Select(i => q * baseDirections[i]);
     }
 }
 
