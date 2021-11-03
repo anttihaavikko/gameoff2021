@@ -27,6 +27,21 @@ namespace Save
             {
                 c.AddPip();
             }
+            
+            if (UnityEngine.Random.value < 0.2f)
+            {
+                c.AddPip();
+            }
+            
+            if (UnityEngine.Random.value < 0.1f)
+            {
+                c.AddStar();
+            }
+            
+            if (UnityEngine.Random.value < 0.2f)
+            {
+                c.RemovePip();
+            }
 
             return c;
         }
@@ -51,6 +66,23 @@ namespace Save
             if (!pips.Contains(index))
             {
                 pips.Add(index);
+            }
+        }
+
+        private void RemovePip()
+        {
+            if (!pips.Any()) return;
+            
+            var index = UnityEngine.Random.Range(0, pips.Count);
+            pips.RemoveAt(index);
+        }
+        
+        private void AddStar()
+        {
+            var index = UnityEngine.Random.Range(0, 9);
+            if (!stars.Contains(index))
+            {
+                stars.Add(index);
             }
         }
     }
