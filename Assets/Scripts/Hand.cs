@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Utils;
 using Save;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +12,8 @@ public class Hand : MonoBehaviour
     [SerializeField] private Card cardPrefab;
     [SerializeField] private Field field;
     [SerializeField] private Appearer cardPicks;
+    [SerializeField] private GameObject drawPile;
+    [SerializeField] private TMP_Text drawPileNumber;
 
     private Card card;
     private Deck deck;
@@ -19,7 +22,9 @@ public class Hand : MonoBehaviour
     {
         CreateDeck();
         deck.Shuffle();
-        AddCard();
+        UpdateDrawPile();
+        
+        Invoke(nameof(AddCard), 1.5f);
     }
 
     private void CreateDeck()
@@ -74,14 +79,28 @@ public class Hand : MonoBehaviour
             Invoke(nameof(CreateOptions), 1.5f);
             return;
         }
-        
+
         var cardData = deck.Draw();
+        UpdateDrawPile();
         
-        card = Instantiate(cardPrefab, transform.position, Quaternion.identity);
+        card = Instantiate(cardPrefab, drawPile.transform.position, Quaternion.identity);
         card.Setup(cardData);
         card.draggable.dropped += CardMoved;
         card.draggable.preview += ConnectionPreview;
         card.draggable.hidePreview += HidePreview;
+        
+        Tweener.MoveToBounceOut(card.transform, transform.position, 0.3f);
+    }
+
+    private void UpdateDrawPile()
+    {
+        var amount = deck.GetCount();
+        drawPileNumber.text = amount.ToString();
+
+        if (amount == 0)
+        {
+            drawPile.SetActive(false);
+        }
     }
 
     private void HidePreview()

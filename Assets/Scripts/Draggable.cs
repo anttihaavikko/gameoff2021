@@ -1,6 +1,7 @@
 using System;
 using AnttiStarterKit.Extensions;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Draggable : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Draggable : MonoBehaviour
     
     [SerializeField] private LayerMask dropMask, blockMask;
     [SerializeField] private bool lockAfterDrop = true;
+    [SerializeField] private int normalSortOrder, dragSortOrder;
 
     public bool CanDrag { get; set; } = true;
 
@@ -17,9 +19,11 @@ public class Draggable : MonoBehaviour
     private Vector3 offset;
     private Vector3 start;
     private int layerId;
+    private SortingGroup sortingGroup;
 
     private void Start()
     {
+        sortingGroup = GetComponent<SortingGroup>();
         cam = Camera.main;
     }
 
@@ -33,6 +37,16 @@ public class Draggable : MonoBehaviour
         offset = start - GetMousePos();
         layerId = go.layer;
         go.layer = 0;
+
+        SetSortOrder(dragSortOrder);
+    }
+
+    private void SetSortOrder(int order)
+    {
+        if (sortingGroup)
+        {
+            sortingGroup.sortingOrder = order;
+        }
     }
 
     private void OnMouseUp()
@@ -70,6 +84,7 @@ public class Draggable : MonoBehaviour
     {
         var rounded = GetRoundedPos();
         DropOn(rounded);
+        SetSortOrder(normalSortOrder);
     }
 
     private Vector2 GetRoundedPos()

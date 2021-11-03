@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5297497376896122554}
   - component: {fileID: 5297497376896122555}
+  - component: {fileID: 294406010267281200}
   m_Layer: 0
   m_Name: Flying Score
   m_TagString: Untagged
@@ -45,8 +46,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a470aee64093f44cf806ea783bf9a6da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sortingGroup: {fileID: 294406010267281200}
   textActual: {fileID: 5297497378774525618}
   textBg: {fileID: 5297497378497650467}
+--- !u!210 &294406010267281200
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5297497376896122556}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 10
 --- !u!1 &5297497378497650468
 GameObject:
   m_ObjectHideFlags: 0

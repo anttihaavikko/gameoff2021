@@ -1019,6 +1019,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   lockAfterDrop: 1
+  normalSortOrder: 0
+  dragSortOrder: 5
 --- !u!210 &1173737748684341285
 SortingGroup:
   m_ObjectHideFlags: 0

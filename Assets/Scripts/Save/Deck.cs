@@ -34,5 +34,10 @@ namespace Save
         {
             return pile.Dequeue();
         }
+
+        public int GetCount()
+        {
+            return pile.Count;
+        }
     }
 }

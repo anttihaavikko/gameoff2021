@@ -107,6 +107,7 @@ public class Field : MonoBehaviour
     {
         var pop = Instantiate(scorePopPrefab, pos, Quaternion.identity);
         pop.SetText(text);
+        pop.SetSortOrder(11);
         StartCoroutine(DestroyAfter(pop.gameObject, 1f));
     }
 
