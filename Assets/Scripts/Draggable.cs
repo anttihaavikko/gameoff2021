@@ -47,9 +47,10 @@ public class Draggable : MonoBehaviour
 
     private void InvokePreview()
     {
-        if (CanDrop(GetRoundedPos()))
+        var rounded = GetRoundedPos();
+        if (CanDrop(rounded))
         {
-            preview?.Invoke(GetRoundedPos());
+            preview?.Invoke(rounded);
             return;
         }
         

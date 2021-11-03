@@ -121,6 +121,7 @@ public class Field : MonoBehaviour
     public void Preview(Card card, Vector3 pos)
     {
         connectionLines.Hide();
+        connectionLines.MovePreview(pos);
         
         var pips = card.GetAllPips().ToList();
         
