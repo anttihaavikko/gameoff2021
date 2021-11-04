@@ -70,11 +70,26 @@ namespace Save
             {
                 c.pips.Clear();
                 c.stars.Clear();
-                c.type = CardType.RotateRight;
-                c.directions = new List<int> { UnityEngine.Random.Range(0, 4) };
+                c.type = UnityEngine.Random.value < 0.5f ?  CardType.RotateRight : CardType.RotateLeft;
+                c.directions = GetRandomDirections();
             }
 
             return c;
+        }
+
+        private static List<int> GetRandomDirections()
+        {
+            var all = new List<int> { 0, 1, 2, 3 }.OrderBy(_ => UnityEngine.Random.value);
+            return all.Take(GetDirectionCount()).ToList();
+        }
+
+        private static int GetDirectionCount()
+        {
+            var roll = UnityEngine.Random.value;
+            if (roll < 0.01f) return 4;
+            if (roll < 0.07f) return 3;
+            if (roll < 0.2f) return 2;
+            return 1;
         }
         
         private static int[] GetBase()
