@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function copyTexts() {
+            var txt = document.getElementById("inputText");
+            var shownCode = document.getElementById("shownCode");
+            var final = document.getElementById("final");
+
+            shownCode.innerHTML = txt.value;
+            final.value = txt.value.replace(/(\r\n|\n|\r)/gm, "\\n").replace(/(\t)/gm, "\\t");
+        }
+        
+        function colorWith(c, tag) {
+            var txt = document.getElementById("inputText");
+            var shownCode = document.getElementById("shownCode");
+            var final = document.getElementById("final");
+
+            var start = txt.selectionStart;
+            var finish = txt.selectionEnd;
+            var sel = txt.value.substring(start, finish);
+            
+            shownCode.innerHTML = shownCode.innerHTML.replace(sel, "<span style='color:" + c + "'>" + sel + "</span>");
+            final.value = final.value.replace(sel, "<" + tag + ">" + sel + "</c>");
+        }
+    </script>
+</head>
+<body>
+
+    <img src="codesample.png">
+
+    <textarea name="" id="inputText" cols="100" rows="10" style="background: black; color: white;" oninput="copyTexts()">
+void OnPlace(Card card)
+{
+	if(card.y == 4)
+	{
+		startMultiplier++;
+	}
+}
+    </textarea>
+
+    <br>
+
+    <button onclick="colorWith('violet', 'r')" style="background: black; color: violet; padding: 5px">Pink</button>
+    <button onclick="colorWith('greenyellow', 'g')" style="background: black; color: greenyellow; padding: 5px">Green</button>
+    <button onclick="colorWith('cyan', 'b')" style="background: black; color: cyan; padding: 5px">Cyan</button>
+    <button onclick="colorWith('orange', 'o')" style="background: black; color: orange; padding: 5px">Orange</button>
+    <button onclick="colorWith('yellow', 'y')" style="background: black; color: yellow; padding: 5px">Yellow</button>
+    <button onclick="colorWith('mediumslateblue', 'p')" style="background: black; color: mediumslateblue; padding: 5px">Purple</button>
+    <button onclick="colorWith('gray', 'c')" style="background: black; color: gray; padding: 5px">Comment</button>
+
+
+    <br><br><br><br><br><br><br>
+
+    <pre id="shownCode" style="background: black; color: white; padding: 20px;">
+        void test() {
+            // TODO: something
+        }
+    </pre>
+
+    <textarea name="" id="final" cols="30" rows="10" style="background: black; color: white;"></textarea>
+
+    <script>copyTexts()</script>
+</body>
+</html>

@@ -16,33 +16,20 @@ public class Hand : MonoBehaviour
     [SerializeField] private TMP_Text drawPileNumber;
 
     private Card card;
-    private Deck deck;
+    private SaveData save;
+    
+    public bool HasPassive(Passive passive) => save.HasPassive(passive);
+    public int GetPassiveLevel(Passive passive) => save.GetPassiveLevel(passive);
 
     private void Start()
     {
-        CreateDeck();
-        deck.Shuffle();
+        save = SaveData.LoadOrCreate();
+        save.deck.Shuffle();
         UpdateDrawPile();
         
         Invoke(nameof(AddCard), 1.5f);
-    }
-
-    private void CreateDeck()
-    {
-        if (Saver.Exists())
-        {
-            deck = Saver.Load<Deck>();
-            return;
-        }
         
-        deck = new Deck();
-        
-        for (var i = 0; i < 5; i++)
-        {
-            deck.Add(CardData.Starter());
-        }
-        
-        Saver.Save(deck);
+        print($"Current passives: {string.Join(", ", save.passives)}");
     }
 
     private void Update()
@@ -56,8 +43,8 @@ public class Hand : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.A))
         {
-            deck.Add(CardData.GetRandom());
-            Saver.Save(deck);
+            save.deck.Add(CardData.GetRandom());
+            save.Save();
         }
         
         if (Input.GetKeyDown(KeyCode.R))
@@ -70,17 +57,22 @@ public class Hand : MonoBehaviour
             Saver.Clear();
             SceneChanger.Instance.ChangeScene("Main");
         }
+        
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            SceneChanger.Instance.ChangeScene("Pick");
+        }
     }
 
     private void AddCard()
     {
-        if (deck.IsEmpty)
+        if (save.deck.IsEmpty)
         {
             Invoke(nameof(CreateOptions), 1.5f);
             return;
         }
 
-        var cardData = deck.Draw();
+        var cardData = save.deck.Draw();
         UpdateDrawPile();
         
         card = Instantiate(cardPrefab, drawPile.transform.position, Quaternion.identity);
@@ -94,7 +86,7 @@ public class Hand : MonoBehaviour
 
     private void UpdateDrawPile()
     {
-        var amount = deck.GetCount();
+        var amount = save.deck.GetCount();
         drawPileNumber.text = amount.ToString();
 
         if (amount == 0)
@@ -136,9 +128,9 @@ public class Hand : MonoBehaviour
             card.draggable.click += () =>
             {
                 card.draggable.click = null;
-                deck.Add(data);
-                Saver.Save(deck);
-                SceneChanger.Instance.ChangeScene("Main");
+                save.deck.Add(data);
+                save.Save();
+                SceneChanger.Instance.ChangeScene("Pick");
             };
         }
     }

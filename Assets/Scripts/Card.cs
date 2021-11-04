@@ -99,6 +99,13 @@ public class Card : MonoBehaviour
         return GetBasePositionFor(p);
     }
 
+    public IntPair GetCoordinates()
+    {
+        var p = transform.position;
+        var coords = GetBasePositionFor(p);
+        return new IntPair(coords.x / 3, coords.y / 3);
+    }
+
     public IntPair GetBasePositionFor(Vector3 p)
     {
         return new IntPair(((int)p.x + 2) * 3, (-(int)p.y + 2) * 3);

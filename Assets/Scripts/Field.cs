@@ -6,6 +6,7 @@ using AnttiStarterKit.Animations;
 using TMPro;
 using UnityEngine;
 using AnttiStarterKit.Extensions;
+using Save;
 using Random = UnityEngine.Random;
 
 public class Field : MonoBehaviour
@@ -14,7 +15,7 @@ public class Field : MonoBehaviour
     [SerializeField] private TextWithBackground scorePopPrefab;
     [SerializeField] private ConnectionLines connectionLines;
     [SerializeField] private LayerMask cardLayer;
-    
+    [SerializeField] private Hand hand;
 
     private TileGrid<Pip> grid;
     private int totalScore;
@@ -34,10 +35,28 @@ public class Field : MonoBehaviour
         output.text = grid.DataAsString();
     }
 
-    private void Activate(Card card)
+    private void Activate(Card card, int multi = 1)
     {
+        var pos = card.GetCoordinates();
+        print($"{pos.x},{pos.y}");
+        
         var allVisited = new List<Pip>();
         var pips = card.GetPoints().ToList();
+
+        if (pos.y == 4)
+        {
+            multi += hand.GetPassiveLevel(Passive.MultiOnBottom);
+        }
+        
+        if (pos.y == 0)
+        {
+            multi += hand.GetPassiveLevel(Passive.MultiOnTop);
+        }
+
+        if (multi > 1)
+        {
+            ShowTextAt($"x{multi}", card.transform.position + Vector3.right * 0.3f);
+        }
         
         pips.ForEach(pip =>
         {
@@ -46,7 +65,7 @@ public class Field : MonoBehaviour
             var visited = new List<Pip>();
             Fill(pip, visited);
             visited = visited.Distinct().OrderBy(p => p.GetDistanceTo(pip)).ToList();
-            StartCoroutine(MarkCoroutine(visited));
+            StartCoroutine(MarkCoroutine(visited, multi));
             allVisited.AddRange(visited);
         });
 
@@ -56,7 +75,7 @@ public class Field : MonoBehaviour
             neighbours.ToList().ForEach(n =>
             {
                 Rotate(n, card.RotatesClockwise);
-                this.StartCoroutine(() => Activate(n), 0.4f);
+                this.StartCoroutine(() => Activate(n, multi + 1), 0.4f);
             });
         }
     }
@@ -95,24 +114,24 @@ public class Field : MonoBehaviour
         PlacePipsToGrid(card);
     }
 
-    private IEnumerator MarkCoroutine(List<Pip> pips)
+    private IEnumerator MarkCoroutine(List<Pip> pips, int multi)
     {
-        yield return MarkPip(pips, true);
+        yield return MarkPip(pips, true, multi);
         yield return new WaitForSeconds(0.5f);
         totalScoreField.text = totalScore.ToString();
-        yield return MarkPip(pips, false);
+        yield return MarkPip(pips, false, 0);
     }
 
-    private IEnumerator MarkPip(List<Pip> pips, bool state)
+    private IEnumerator MarkPip(List<Pip> pips, bool state, int startMulti)
     {
         if (!pips.Any()) yield break;
         
         var total = 0;
         var sum = Vector3.zero;
         var amount = 0;
-        var multi = 1;
-
-        var pos = pips.First().sprite.transform.position + Vector3.right;
+        var multi = startMulti;
+        
+        var pos = pips.First().sprite.transform.position;
         var pop = state ? Instantiate(scorePopPrefab, pos, Quaternion.identity) : null;
 
         foreach (var pip in pips)

@@ -383,6 +383,7 @@ MonoBehaviour:
   cardLayer:
     serializedVersion: 2
     m_Bits: 64
+  hand: {fileID: 1286812420}
 --- !u!1001 &262260827
 PrefabInstance:
   m_ObjectHideFlags: 0
