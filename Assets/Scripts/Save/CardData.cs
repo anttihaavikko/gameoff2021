@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Extensions;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Save
 {
@@ -42,35 +44,35 @@ namespace Save
             };
         }
 
-        public static CardData Random()
+        public static CardData GetRandom()
         {
             var c = Starter();
 
-            if (UnityEngine.Random.value < 0.5f)
+            if (Random.value < 0.5f)
             {
                 c.AddPip();
             }
             
-            if (UnityEngine.Random.value < 0.2f)
+            if (Random.value < 0.2f)
             {
                 c.AddPip();
             }
             
-            if (UnityEngine.Random.value < 0.1f)
+            if (Random.value < 0.1f)
             {
                 c.AddStar();
             }
             
-            if (UnityEngine.Random.value < 0.2f)
+            if (Random.value < 0.2f)
             {
                 c.RemovePip();
             }
             
-            if (UnityEngine.Random.value < 0.2f)
+            if (Random.value < 0.2f)
             {
                 c.pips.Clear();
                 c.stars.Clear();
-                c.type = UnityEngine.Random.value < 0.5f ?  CardType.RotateRight : CardType.RotateLeft;
+                c.type = Random.value < 0.5f ?  CardType.RotateRight : CardType.RotateLeft;
                 c.directions = GetRandomDirections();
             }
 
@@ -79,13 +81,13 @@ namespace Save
 
         private static List<int> GetRandomDirections()
         {
-            var all = new List<int> { 0, 1, 2, 3 }.OrderBy(_ => UnityEngine.Random.value);
+            var all = new List<int> { 0, 1, 2, 3 }.OrderBy(_ => Random.value);
             return all.Take(GetDirectionCount()).ToList();
         }
 
         private static int GetDirectionCount()
         {
-            var roll = UnityEngine.Random.value;
+            var roll = Random.value;
             if (roll < 0.01f) return 4;
             if (roll < 0.07f) return 3;
             if (roll < 0.2f) return 2;
@@ -108,7 +110,7 @@ namespace Save
 
         private void RotateRandomly()
         {
-            var rotations = UnityEngine.Random.Range(0, 4);
+            var rotations = Random.Range(0, 4);
             pips = pips.Select(p => RotatePip(p, rotations)).ToList();
         }
 
@@ -148,7 +150,7 @@ namespace Save
 
         private void AddPip()
         {
-            var index = UnityEngine.Random.Range(0, 9);
+            var index = Random.Range(0, 9);
             if (!pips.Contains(index))
             {
                 pips.Add(index);
@@ -159,13 +161,13 @@ namespace Save
         {
             if (!pips.Any()) return;
             
-            var index = UnityEngine.Random.Range(0, pips.Count);
+            var index = Random.Range(0, pips.Count);
             pips.RemoveAt(index);
         }
         
         private void AddStar()
         {
-            var index = UnityEngine.Random.Range(0, 9);
+            var index = Random.Range(0, 9);
             if (!stars.Contains(index))
             {
                 stars.Add(index);
@@ -178,6 +180,7 @@ namespace Save
         Normal,
         RotateRight,
         RotateLeft,
-        Push
+        Push,
+        Pull
     }
 }

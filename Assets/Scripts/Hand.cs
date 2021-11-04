@@ -56,7 +56,7 @@ public class Hand : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.A))
         {
-            deck.Add(CardData.Random());
+            deck.Add(CardData.GetRandom());
             Saver.Save(deck);
         }
         
@@ -130,7 +130,7 @@ public class Hand : MonoBehaviour
         {
             var pos = cardPicks.transform.position + Vector3.left + Vector3.right * i;
             card = Instantiate(cardPrefab, pos, Quaternion.identity);
-            var data = CardData.Random();
+            var data = CardData.GetRandom();
             card.Setup(data);
             card.draggable.CanDrag = false;
             card.draggable.click += () =>
