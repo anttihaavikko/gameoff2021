@@ -12,6 +12,7 @@ namespace Save
     {
         public List<int> pips;
         public List<int> stars;
+        public List<int> bombs;
         public CardType type;
         public List<int> directions;
 
@@ -24,6 +25,7 @@ namespace Save
             {
                 pips = GetBase().ToList(),
                 stars = new List<int>(),
+                bombs = new List<int>(),
                 type = CardType.Normal,
                 directions = new List<int>()
             };
@@ -39,6 +41,7 @@ namespace Save
             {
                 pips = pips.ToList(),
                 stars = stars.ToList(),
+                bombs = bombs.ToList(),
                 type = type,
                 directions = directions.ToList()
             };
@@ -60,7 +63,7 @@ namespace Save
             
             if (Random.value < 0.1f)
             {
-                c.AddStar();
+                c.AddStarOrBomb();
             }
             
             if (Random.value < 0.2f)
@@ -72,11 +75,23 @@ namespace Save
             {
                 c.pips.Clear();
                 c.stars.Clear();
+                c.bombs.Clear();
                 c.type = Random.value < 0.5f ?  CardType.RotateRight : CardType.RotateLeft;
                 c.directions = GetRandomDirections();
             }
 
             return c;
+        }
+
+        private void AddStarOrBomb()
+        {
+            if (Random.value < 0.5f)
+            {
+                AddStar();
+                return;
+            }
+
+            AddBomb();
         }
 
         private static List<int> GetRandomDirections()
@@ -171,6 +186,15 @@ namespace Save
             if (!stars.Contains(index))
             {
                 stars.Add(index);
+            }
+        }
+        
+        private void AddBomb()
+        {
+            var index = Random.Range(0, 9);
+            if (!bombs.Contains(index))
+            {
+                bombs.Add(index);
             }
         }
     }

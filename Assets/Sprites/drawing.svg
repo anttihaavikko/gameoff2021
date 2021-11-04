@@ -26,9 +26,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.12374369"
-     inkscape:cx="2581.0314"
-     inkscape:cy="1226.0928"
+     inkscape:zoom="0.35000001"
+     inkscape:cx="2304.2742"
+     inkscape:cy="766.85637"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -54,7 +54,7 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="bg"
-     style="display:inline">
+     style="display:none">
     <rect
        style="fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:7.99999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:64.4937;paint-order:stroke fill markers"
        id="rect888"
@@ -95,6 +95,32 @@
        d="m 654.27579,368.83194 v 48.10853 l 24.3294,-22.8175 z"
        id="path890"
        sodipodi:nodetypes="cccc"
+       inkscape:export-xdpi="25"
+       inkscape:export-ydpi="25" />
+    <circle
+       style="fill:#ffffff;stroke:#ffffff;stroke-width:7.99999;stroke-linecap:round;stroke-linejoin:round;stroke-dashoffset:64.4937;paint-order:stroke fill markers"
+       id="path844"
+       cx="605.63275"
+       cy="209.00476"
+       r="46.504898"
+       inkscape:export-xdpi="25"
+       inkscape:export-ydpi="25" />
+    <rect
+       style="fill:#ffffff;stroke:#ffffff;stroke-width:7.99999;stroke-linecap:round;stroke-linejoin:round;stroke-dashoffset:64.4937;paint-order:stroke fill markers"
+       id="rect846"
+       width="49.177589"
+       height="21.381561"
+       x="581.57843"
+       y="152.87817"
+       ry="10.690781"
+       rx="0.37797618"
+       inkscape:export-xdpi="25"
+       inkscape:export-ydpi="25" />
+    <path
+       style="display:inline;fill:none;stroke:#ffffff;stroke-width:8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 606.65177,157.99404 c -4.08707,-13.65777 -7.29182,-28.78543 17.00892,-38.93154"
+       id="path848"
+       sodipodi:nodetypes="cc"
        inkscape:export-xdpi="25"
        inkscape:export-ydpi="25" />
   </g>

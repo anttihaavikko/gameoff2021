@@ -38,8 +38,7 @@ public class Field : MonoBehaviour
     private void Activate(Card card, int multi = 1)
     {
         var pos = card.GetCoordinates();
-        print($"{pos.x},{pos.y}");
-        
+
         var allVisited = new List<Pip>();
         var pips = card.GetPoints().ToList();
 
@@ -139,7 +138,7 @@ public class Field : MonoBehaviour
             if (pip == null) continue;
             
             var targetColor = state ? Color.red : Color.black;
-            var targetSize = Vector3.one * (state ? 0.21f : 0.17f);
+            var targetSize = Vector3.one * (state ? 0.18f : 0.15f);
             const float duration = 0.15f;
             Tweener.ColorToBounceOut(pip.sprite, targetColor, duration);
             Tweener.ScaleToBounceOut(pip.sprite.transform, targetSize, duration);

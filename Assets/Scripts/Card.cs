@@ -12,7 +12,7 @@ public class Card : MonoBehaviour
     public Draggable draggable;
     
     [SerializeField] private List<SpriteRenderer> points;
-    [SerializeField] private Sprite starSprite;
+    [SerializeField] private Sprite starSprite, bombSprite;
     [SerializeField] private Transform visualContents;
     [SerializeField] private GameObject rotateIcon;
     [SerializeField] private List<GameObject> directionIndicators;
@@ -57,7 +57,14 @@ public class Card : MonoBehaviour
                 p.transform.Rotate(0, 0, Random.Range(0f, 360f));
             }
 
-            return new Pip(p, i % 3, i / 3, isStar);
+            var isBomb = !isStar && data.bombs.Contains(i);
+            if (isBomb)
+            {
+                p.sprite = bombSprite;
+                p.transform.Rotate(0, 0, Random.Range(-40f, 40f));
+            }
+
+            return new Pip(p, i % 3, i / 3, isStar, isBomb);
         }).ToList();
     }
 
@@ -139,14 +146,15 @@ public class Pip
 {
     public SpriteRenderer sprite;
     public int x, y;
-    public bool isStar;
+    public bool isStar, isBomb;
 
-    public Pip(SpriteRenderer sprite, int x, int y, bool isStar)
+    public Pip(SpriteRenderer sprite, int x, int y, bool isStar, bool isBomb)
     {
         this.sprite = sprite;
         this.x = x;
         this.y = y;
         this.isStar = isStar;
+        this.isBomb = isBomb;
     }
 
     public float GetDistanceTo(Pip pip)

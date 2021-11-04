@@ -62,6 +62,11 @@ public class Hand : MonoBehaviour
         {
             SceneChanger.Instance.ChangeScene("Pick");
         }
+        
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            CreateOptions();
+        }
     }
 
     private void AddCard()
