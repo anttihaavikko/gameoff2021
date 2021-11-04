@@ -19,7 +19,6 @@ public class Card : MonoBehaviour
 
     private List<Pip> pips;
     private CardData data;
-    private float angle;
 
     public bool IsRotator => data.IsRotator;
     public bool RotatesClockwise => data.RotatesClockwise;
@@ -31,11 +30,7 @@ public class Card : MonoBehaviour
         if (data.IsRotator)
         {
             rotateIcon.SetActive(true);
-            data.directions.ForEach(d =>
-            {
-                Debug.Log($"Activate arrow {d}");
-                directionIndicators[d].SetActive(true);
-            });
+            data.directions.ForEach(d => directionIndicators[d].SetActive(true));
         }
         
         if (data.type == CardType.RotateLeft)
@@ -83,7 +78,8 @@ public class Card : MonoBehaviour
             return;
         }
 
-        Tweener.RotateToBounceOut(visualContents, Quaternion.Euler(0, 0, dir * -90f), 0.3f);
+        var angle = visualContents.rotation.eulerAngles.z - dir * 90f;
+        Tweener.RotateToBounceOut(visualContents, Quaternion.Euler(0, 0, angle), 0.3f);
     }
 
     public IEnumerable<Pip> GetPoints(bool addBase = false)
