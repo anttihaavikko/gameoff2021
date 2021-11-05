@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Utils;
 using Save;
@@ -15,20 +16,22 @@ public class Hand : MonoBehaviour
     [SerializeField] private GameObject drawPile;
     [SerializeField] private TMP_Text drawPileNumber;
 
-    private Card card;
+    private List<Card> cards;
     private SaveData save;
-    
+
     public bool HasPassive(Passive passive) => save.HasPassive(passive);
     public int GetPassiveLevel(Passive passive) => save.GetPassiveLevel(passive);
 
     private void Start()
     {
+        cards = new List<Card>();
+        
         save = SaveData.LoadOrCreate();
         save.deck.Shuffle();
         UpdateDrawPile();
         
         Invoke(nameof(AddCard), 1.5f);
-        
+
         print($"Current passives: {string.Join(", ", save.passives)}");
     }
 
@@ -69,24 +72,40 @@ public class Hand : MonoBehaviour
         }
     }
 
+    private void PositionCards()
+    {
+        var basePos = transform.position + (cards.Count - 1) * 0.5f * Vector3.left;
+        var index = 0;
+        foreach (var c in cards)
+        {
+            Tweener.MoveToBounceOut(c.transform, basePos + index * Vector3.right, 0.3f);
+            index++;
+        }
+    }
+
     public void AddCard()
     {
         if (save.deck.IsEmpty)
         {
-            Invoke(nameof(CreateOptions), 1.5f);
+            if (!cards.Any())
+            {
+                Invoke(nameof(CreateOptions), 1.5f);   
+            }
+            
             return;
         }
 
         var cardData = save.deck.Draw();
         UpdateDrawPile();
         
-        card = Instantiate(cardPrefab, drawPile.transform.position, Quaternion.identity);
-        card.Setup(cardData);
-        card.draggable.dropped += CardMoved;
-        card.draggable.preview += ConnectionPreview;
-        card.draggable.hidePreview += HidePreview;
+        var c = Instantiate(cardPrefab, drawPile.transform.position, Quaternion.identity);
+        c.Setup(cardData);
+        c.draggable.dropped += () => CardMoved(c);
+        c.draggable.preview += pos => ConnectionPreview(c, pos);
+        c.draggable.hidePreview += HidePreview;
         
-        Tweener.MoveToBounceOut(card.transform, transform.position, 0.3f);
+        cards.Insert(0, c);
+        PositionCards();
     }
 
     private void UpdateDrawPile()
@@ -105,17 +124,19 @@ public class Hand : MonoBehaviour
         field.HidePreview();
     }
 
-    private void ConnectionPreview(Vector2 pos)
+    private void ConnectionPreview(Card card, Vector2 pos)
     {
         field.Preview(card, pos);
     }
 
-    private void CardMoved()
+    private void CardMoved(Card card)
     {
-        card.draggable.dropped -= CardMoved;
-        card.draggable.preview -= ConnectionPreview;
+        card.draggable.dropped = null;
+        card.draggable.preview = null;
         card.draggable.hidePreview -= HidePreview;
         field.Place(card);
+        cards.Remove(card);
+        PositionCards();
     }
 
     private void CreateOptions()
@@ -125,7 +146,7 @@ public class Hand : MonoBehaviour
         for (var i = 0; i < 3; i++)
         {
             var pos = cardPicks.transform.position + Vector3.left + Vector3.right * i;
-            card = Instantiate(cardPrefab, pos, Quaternion.identity);
+            var card = Instantiate(cardPrefab, pos, Quaternion.identity);
             var data = CardData.GetRandom();
             card.Setup(data);
             card.draggable.CanDrag = false;

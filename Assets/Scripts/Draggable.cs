@@ -13,6 +13,7 @@ public class Draggable : MonoBehaviour
     [SerializeField] private int normalSortOrder, dragSortOrder;
 
     public bool CanDrag { get; set; } = true;
+    public bool DropLocked { get; set; }
 
     private Camera cam;
     private bool dragging;
@@ -20,6 +21,8 @@ public class Draggable : MonoBehaviour
     private Vector3 start;
     private int layerId;
     private SortingGroup sortingGroup;
+
+    public bool IsDragging => dragging;
 
     private void Start()
     {
@@ -113,6 +116,8 @@ public class Draggable : MonoBehaviour
 
     private bool CanDrop(Vector2 pos)
     {
+        if (DropLocked) return false;
+        
         var allowed = Physics2D.OverlapCircle(pos, 0.1f, dropMask);
         var blocked = Physics2D.OverlapCircle(pos, 0.1f, blockMask);
 

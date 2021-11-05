@@ -121,7 +121,7 @@ public class Field : MonoBehaviour
     
     private Card GetNeighbourFor(Vector3 pos, Vector3 dir)
     {
-        var target = Physics2D.OverlapCircle(pos + dir, 0.2f, cardLayer);
+        var target = Physics2D.OverlapCircle(pos + dir * 0.75f, 0.1f, cardLayer);
         return !target ? null : target.GetComponent<Card>();
     }
 
