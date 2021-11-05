@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Actions;
 using AnttiStarterKit.Animations;
 using TMPro;
 using UnityEngine;
@@ -19,9 +20,11 @@ public class Field : MonoBehaviour
 
     private TileGrid<Pip> grid;
     private int totalScore;
+    private ActionQueue actionQueue;
 
     private void Start()
     {
+        actionQueue = new ActionQueue();
         grid = new TileGrid<Pip>(15, 15);
     }
 
@@ -30,17 +33,22 @@ public class Field : MonoBehaviour
         connectionLines.Hide();
 
         PlacePipsToGrid(card);
-        Activate(card);
 
         output.text = grid.DataAsString();
+        
+        actionQueue.Add(new ActivateAction(card, 1));
+        StartCoroutine(ProcessQueue());
     }
 
-    private void Activate(Card card, int multi = 1)
+    private IEnumerator ProcessQueue()
+    {
+        yield return actionQueue.Process(this);
+        hand.AddCard();
+    }
+
+    public void Activate(Card card, int multi = 1)
     {
         var pos = card.GetCoordinates();
-
-        var allVisited = new List<Pip>();
-        var pips = card.GetPoints().ToList();
 
         if (pos.y == 4)
         {
@@ -57,26 +65,37 @@ public class Field : MonoBehaviour
             ShowTextAt($"x{multi}", card.transform.position + Vector3.right * 0.3f);
         }
         
-        pips.ForEach(pip =>
-        {
-            if (allVisited.Contains(pip)) return;
-            
-            var visited = new List<Pip>();
-            Fill(pip, visited);
-            visited = visited.Distinct().OrderBy(p => p.GetDistanceTo(pip)).ToList();
-            StartCoroutine(MarkCoroutine(visited, multi));
-            allVisited.AddRange(visited);
-        });
+        actionQueue.Add(new ScoreAction(card, multi));
 
         if (card.IsRotator)
         {
-            var neighbours = GetNeighboursFor(card);
-            neighbours.ToList().ForEach(n =>
-            {
-                Rotate(n, card.RotatesClockwise);
-                this.StartCoroutine(() => Activate(n, multi + 1), 0.4f);
-            });
+            var neighbours = GetNeighboursFor(card).ToList();
+            actionQueue.Add(new RotateAction(neighbours, multi, card.RotatesClockwise));
+            neighbours.ForEach(n => actionQueue.Add(new ActivateAction(n, multi + 1)));
         }
+    }
+
+    public IEnumerator ScoreCard(Card card, int multi)
+    {
+        var allVisited = new List<Pip>();
+        var pips = card.GetPoints().ToList();
+        foreach (var pip in pips)
+        {
+            if (allVisited.Contains(pip)) continue;
+
+            var visited = new List<Pip>();
+            Fill(pip, visited);
+            visited = visited.Distinct().OrderBy(p => p.GetDistanceTo(pip)).ToList();
+            yield return MarkCoroutine(visited, multi);
+            allVisited.AddRange(visited);
+        }
+    }
+
+    public void RemoveCard(Card card)
+    {
+        // TODO: explode
+        ClearPipsFromGrid(card);
+        Destroy(card.gameObject);
     }
 
     private void PlacePipsToGrid(Card card)
@@ -106,7 +125,7 @@ public class Field : MonoBehaviour
         return !target ? null : target.GetComponent<Card>();
     }
 
-    private void Rotate(Card card, bool clockwise)
+    public void Rotate(Card card, bool clockwise)
     {
         ClearPipsFromGrid(card);
         card.Rotate(clockwise);
@@ -155,7 +174,7 @@ public class Field : MonoBehaviour
                 {
                     if(pip.isShaking)
                     {
-                        // TODO: explode
+                        actionQueue.Add(new DestroyAction(pip.GetCard()));
                     }
                     else
                     {

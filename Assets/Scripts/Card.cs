@@ -198,4 +198,9 @@ public class Pip
     {
         sprite.transform.position = origin.RandomOffset(0.02f);
     }
+
+    public Card GetCard()
+    {
+        return card;
+    }
 }

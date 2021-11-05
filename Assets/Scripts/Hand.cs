@@ -69,7 +69,7 @@ public class Hand : MonoBehaviour
         }
     }
 
-    private void AddCard()
+    public void AddCard()
     {
         if (save.deck.IsEmpty)
         {
@@ -116,7 +116,6 @@ public class Hand : MonoBehaviour
         card.draggable.preview -= ConnectionPreview;
         card.draggable.hidePreview -= HidePreview;
         field.Place(card);
-        AddCard();
     }
 
     private void CreateOptions()
