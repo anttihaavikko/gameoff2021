@@ -145,10 +145,12 @@ public class Hand : MonoBehaviour
     private void CreateOptions()
     {
         cardPicks.Show();
+
+        var amount = 3 + GetPassiveLevel(Passive.CardPicks);
         
-        for (var i = 0; i < 3; i++)
+        for (var i = 0; i < amount; i++)
         {
-            var pos = cardPicks.transform.position + Vector3.left + Vector3.right * i;
+            var pos = cardPicks.transform.position + Vector3.left * (amount - 1) * 0.5f + Vector3.right * i;
             var card = Instantiate(cardPrefab, pos, Quaternion.identity);
             var data = CardData.GetRandom();
             card.Setup(data);

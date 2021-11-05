@@ -9,7 +9,8 @@ namespace Save
         MultiOnBottom,
         MultiOnTop,
         BiggerHand,
-        Options
+        Options,
+        CardPicks
     }
     
     public static class Passives
@@ -47,6 +48,15 @@ namespace Save
                 new PassiveDetails
                 {
                     name = "Options",
+                    description = "<r>void</r> <g>DoSomething</g>() {\n\t<c>// TODO: add implementation</c>\n}",
+                    repeatable = true
+                }
+            },
+            {
+                Passive.CardPicks,
+                new PassiveDetails
+                {
+                    name = "Variety",
                     description = "<r>void</r> <g>DoSomething</g>() {\n\t<c>// TODO: add implementation</c>\n}",
                     repeatable = true
                 }
