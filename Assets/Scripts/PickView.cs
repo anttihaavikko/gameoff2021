@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Save;
 using UnityEngine;
@@ -12,8 +13,9 @@ public class PickView : MonoBehaviour
     private void Start()
     {
         save = SaveData.LoadOrCreate();
-
-        Passives.GetRandom(save.passives, 2).ToList().ForEach(passive =>
+        var amount = 2 + save.GetPassiveLevel(Passive.Options);
+        
+        Passives.GetRandom(save.passives, amount).ToList().ForEach(passive =>
         {
             var details = Passives.GetDetails(passive);
             var panel = Instantiate(panelPrefab, container);
@@ -26,7 +28,20 @@ public class PickView : MonoBehaviour
                 SceneChanger.Instance.ChangeScene("Main");
             });
         });
+    }
+
+    private void Update()
+    {
+        DevKeys();
+    }
+
+    private static void DevKeys()
+    {
+        if (!Application.isEditor) return;
         
-        
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneChanger.Instance.ChangeScene("Pick");
+        }
     }
 }

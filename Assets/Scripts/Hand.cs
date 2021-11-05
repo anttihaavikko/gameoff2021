@@ -29,8 +29,11 @@ public class Hand : MonoBehaviour
         save = SaveData.LoadOrCreate();
         save.deck.Shuffle();
         UpdateDrawPile();
-        
-        Invoke(nameof(AddCard), 1.5f);
+
+        for (var i = 0; i < GetPassiveLevel(Passive.BiggerHand) + 1; i++)
+        {
+            Invoke(nameof(AddCard), 1.5f + i * 0.3f);
+        }
 
         print($"Current passives: {string.Join(", ", save.passives)}");
     }

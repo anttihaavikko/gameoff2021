@@ -7,7 +7,9 @@ namespace Save
     public enum Passive
     {
         MultiOnBottom,
-        MultiOnTop
+        MultiOnTop,
+        BiggerHand,
+        Options
     }
     
     public static class Passives
@@ -27,6 +29,24 @@ namespace Save
                 new PassiveDetails
                 {
                     name = "Top",
+                    description = "<r>void</r> <g>OnPlace</g>(<b>Component</b> <o>component</o>)\n{\n\t<r>if</r> (component.y <r>==</r> 0)\n\t{\n\t\tstartMultiplier<r>++</r>;\n\t}\n}",
+                    repeatable = true
+                }
+            },
+            {
+                Passive.BiggerHand,
+                new PassiveDetails
+                {
+                    name = "Bigger Hand",
+                    description = "<r>void</r> <g>DoSomething</g>() {\n\t<c>// TODO: add implementation</c>\n}",
+                    repeatable = true
+                }
+            },
+            {
+                Passive.Options,
+                new PassiveDetails
+                {
+                    name = "Options",
                     description = "<r>void</r> <g>DoSomething</g>() {\n\t<c>// TODO: add implementation</c>\n}",
                     repeatable = true
                 }
