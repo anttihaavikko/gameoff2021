@@ -150,6 +150,20 @@ public class Field : MonoBehaviour
                     multi += 1;
                     ShowTextAt($"x{multi}", pip.sprite.transform.position + Vector3.right * 0.3f);
                 }
+
+                if (pip.isBomb)
+                {
+                    if(pip.isShaking)
+                    {
+                        // TODO: explode
+                    }
+                    else
+                    {
+                        pip.StartShaking();
+                        pip.isShaking = true;
+                    }
+                }
+                
                 total++;
                 pop.SetText((total * multi).ToString());
                 var pt = pop.transform;
@@ -186,6 +200,8 @@ public class Field : MonoBehaviour
     private void Fill(Pip pip, List<Pip> visited)
     {
         visited.Add(pip);
+
+        if (pip.isBomb && pip.isShaking) return;
         
         grid.GetNeighbours(pip.x, pip.y)
             .Where(n => n != null && !visited.Contains(n))

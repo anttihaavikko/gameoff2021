@@ -19,12 +19,14 @@ public class Card : MonoBehaviour
 
     private List<Pip> pips;
     private CardData data;
+    private List<Pip> shakingPips;
 
     public bool IsRotator => data.IsRotator;
     public bool RotatesClockwise => data.RotatesClockwise;
 
     public void Setup(CardData cardData)
     {
+        shakingPips = new List<Pip>();
         data = cardData.Clone();
 
         if (data.IsRotator)
@@ -39,6 +41,19 @@ public class Card : MonoBehaviour
         }
 
         PositionPips();
+    }
+
+    private void Update()
+    {
+        if (shakingPips.Count > 0)
+        {
+            shakingPips.ForEach(p => p.Shake());
+        }
+    }
+
+    public void ShakePip(Pip pip)
+    {
+        shakingPips.Add(pip);
     }
 
     private void PositionPips()
@@ -64,7 +79,7 @@ public class Card : MonoBehaviour
                 p.transform.Rotate(0, 0, Random.Range(-40f, 40f));
             }
 
-            return new Pip(p, i % 3, i / 3, isStar, isBomb);
+            return new Pip(this, p, i % 3, i / 3, isStar, isBomb);
         }).ToList();
     }
 
@@ -147,14 +162,19 @@ public class Pip
     public SpriteRenderer sprite;
     public int x, y;
     public bool isStar, isBomb;
+    public bool isShaking;
 
-    public Pip(SpriteRenderer sprite, int x, int y, bool isStar, bool isBomb)
+    private Vector3 origin;
+    private Card card;
+
+    public Pip(Card card, SpriteRenderer sprite, int x, int y, bool isStar, bool isBomb)
     {
         this.sprite = sprite;
         this.x = x;
         this.y = y;
         this.isStar = isStar;
         this.isBomb = isBomb;
+        this.card = card;
     }
 
     public float GetDistanceTo(Pip pip)
@@ -166,5 +186,16 @@ public class Pip
     {
         x += offset.x;
         y += offset.y;
+    }
+
+    public void StartShaking()
+    {
+        origin = sprite.transform.position;
+        card.ShakePip(this);
+    }
+
+    public void Shake()
+    {
+        sprite.transform.position = origin.RandomOffset(0.02f);
     }
 }
