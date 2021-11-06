@@ -5,7 +5,7 @@ using UnityEngine.Rendering;
 
 public class Draggable : MonoBehaviour
 {
-    public Action dropped, hidePreview, click;
+    public Action dropped, hidePreview, click, dropCancelled;
     public Action<Vector2> preview;
     
     [SerializeField] private LayerMask dropMask, blockMask;
@@ -112,6 +112,7 @@ public class Draggable : MonoBehaviour
 
         transform.position = start;
         gameObject.layer = layerId;
+        dropCancelled?.Invoke();
     }
 
     private bool CanDrop(Vector2 pos)

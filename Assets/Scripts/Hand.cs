@@ -123,6 +123,7 @@ public class Hand : MonoBehaviour
         c.draggable.dropped += () => CardMoved(c);
         c.draggable.preview += pos => ConnectionPreview(c, pos);
         c.draggable.hidePreview += HidePreview;
+        c.draggable.dropCancelled += PositionCards;
         
         cards.Insert(0, c);
         PositionCards();
@@ -154,6 +155,7 @@ public class Hand : MonoBehaviour
         card.draggable.dropped = null;
         card.draggable.preview = null;
         card.draggable.hidePreview -= HidePreview;
+        card.draggable.dropCancelled -= PositionCards;
         field.Place(card);
         cards.Remove(card);
         PositionCards();
