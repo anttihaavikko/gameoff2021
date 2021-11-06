@@ -16,7 +16,7 @@ public class BoneToLine : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void LateUpdate () {
 
         line.SetPosition (0, new Vector3(transform.position.x, transform.position.y, lineZ));
 
