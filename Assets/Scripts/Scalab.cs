@@ -18,7 +18,7 @@ public class Scalab : MonoBehaviour
     {
         var t = transform;
         var p = t.position;
-        var target = Vector3.zero.RandomOffset(1.5f);
+        var target = Vector3.zero.RandomOffset(1.5f) + Vector3.down * 2;
         SetWalking(true, Vector3.Distance(p, target) * 0.9f);
         Tweener.MoveTo(t, target, 0.7f, TweenEasings.SineEaseInOut);
         this.StartCoroutine(() => SetWalking(false), 0.6f);
