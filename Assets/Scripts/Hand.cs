@@ -17,6 +17,7 @@ public class Hand : MonoBehaviour
     [SerializeField] private TMP_Text drawPileNumber;
     [SerializeField] private PassiveIcon passiveIconPrefab;
     [SerializeField] private Transform passiveIconContainer;
+    [SerializeField] private PassiveTooltip passiveTooltip;
 
     private List<Card> cards;
     private SaveData save;
@@ -50,7 +51,7 @@ public class Hand : MonoBehaviour
         save.passives.ForEach(p =>
         {
             var icon = Instantiate(passiveIconPrefab, passiveIconContainer);
-            icon.Setup(p);
+            icon.Setup(p, passiveTooltip);
         });
     }
 
