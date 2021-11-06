@@ -87,7 +87,7 @@ public class Draggable : MonoBehaviour
     {
         var rounded = GetRoundedPos();
         DropOn(rounded);
-        SetSortOrder(normalSortOrder);
+        SetSortOrder(normalSortOrder - Mathf.RoundToInt(transform.position.y));
     }
 
     private Vector2 GetRoundedPos()

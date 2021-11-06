@@ -47,37 +47,37 @@ namespace Save
             };
         }
 
-        public static CardData GetRandom()
+        public static CardData GetRandom(float luckFactor = 1f)
         {
             var c = Starter();
 
-            if (Random.value < 0.5f)
+            if (Random.value * luckFactor < 0.5f)
             {
                 c.AddPip();
             }
             
-            if (Random.value < 0.2f)
+            if (Random.value * luckFactor < 0.2f)
             {
                 c.AddPip();
             }
             
-            if (Random.value < 0.1f)
+            if (Random.value * luckFactor < 0.1f)
             {
                 c.AddStarOrBomb();
             }
             
-            if (Random.value < 0.2f)
+            if (Random.value * luckFactor < 0.2f)
             {
                 c.RemovePip();
             }
             
-            if (Random.value < 0.2f)
+            if (Random.value * luckFactor < 0.2f)
             {
                 c.pips.Clear();
                 c.stars.Clear();
                 c.bombs.Clear();
                 c.type = Random.value < 0.5f ?  CardType.RotateRight : CardType.RotateLeft;
-                c.directions = GetRandomDirections();
+                c.directions = GetRandomDirections(luckFactor);
             }
 
             return c;
@@ -94,15 +94,15 @@ namespace Save
             AddBomb();
         }
 
-        private static List<int> GetRandomDirections()
+        private static List<int> GetRandomDirections(float luckFactor = 1f)
         {
             var all = new List<int> { 0, 1, 2, 3 }.OrderBy(_ => Random.value);
-            return all.Take(GetDirectionCount()).ToList();
+            return all.Take(GetDirectionCount(luckFactor)).ToList();
         }
 
-        private static int GetDirectionCount()
+        private static int GetDirectionCount(float luckFactor = 1f)
         {
-            var roll = Random.value;
+            var roll = Random.value * luckFactor;
             if (roll < 0.01f) return 4;
             if (roll < 0.07f) return 3;
             if (roll < 0.2f) return 2;
