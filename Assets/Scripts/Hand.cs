@@ -15,18 +15,25 @@ public class Hand : MonoBehaviour
     [SerializeField] private Appearer cardPicks;
     [SerializeField] private GameObject drawPile;
     [SerializeField] private TMP_Text drawPileNumber;
+    [SerializeField] private PassiveIcon passiveIconPrefab;
+    [SerializeField] private Transform passiveIconContainer;
 
     private List<Card> cards;
     private SaveData save;
 
     public bool HasPassive(Passive passive) => save.HasPassive(passive);
     public int GetPassiveLevel(Passive passive) => save.GetPassiveLevel(passive);
+    public int Level => save.level + 1;
+
+    private void Awake()
+    {
+        save = SaveData.LoadOrCreate();
+    }
 
     private void Start()
     {
         cards = new List<Card>();
         
-        save = SaveData.LoadOrCreate();
         save.deck.Shuffle();
         UpdateDrawPile();
 
@@ -34,8 +41,17 @@ public class Hand : MonoBehaviour
         {
             Invoke(nameof(AddCard), 1.5f + i * 0.3f);
         }
+        
+        ShowPassives();
+    }
 
-        print($"Current passives: {string.Join(", ", save.passives)}");
+    private void ShowPassives()
+    {
+        save.passives.ForEach(p =>
+        {
+            var icon = Instantiate(passiveIconPrefab, passiveIconContainer);
+            icon.Setup(p);
+        });
     }
 
     private void Update()
@@ -160,9 +176,20 @@ public class Hand : MonoBehaviour
             {
                 card.draggable.click = null;
                 save.deck.Add(data);
+                save.level++;
                 save.Save();
                 SceneChanger.Instance.ChangeScene("Pick");
             };
         }
+    }
+
+    public int GetScore()
+    {
+        return save.score;
+    }
+
+    public void SetScore(int score)
+    {
+        save.score = score;
     }
 }

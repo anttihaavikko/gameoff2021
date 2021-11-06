@@ -10,6 +10,8 @@ namespace Save
     {
         public Deck deck;
         public List<Passive> passives;
+        public int score;
+        public int level;
 
         public SaveData()
         {

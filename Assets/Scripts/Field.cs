@@ -7,12 +7,13 @@ using AnttiStarterKit.Animations;
 using TMPro;
 using UnityEngine;
 using AnttiStarterKit.Extensions;
+using AnttiStarterKit.Utils;
 using Save;
 using Random = UnityEngine.Random;
 
 public class Field : MonoBehaviour
 {
-    [SerializeField] private TMP_Text output, totalScoreField;
+    [SerializeField] private TMP_Text output, totalScoreField, levelField, parField;
     [SerializeField] private TextWithBackground scorePopPrefab;
     [SerializeField] private ConnectionLines connectionLines;
     [SerializeField] private LayerMask cardLayer;
@@ -26,6 +27,15 @@ public class Field : MonoBehaviour
     {
         actionQueue = new ActionQueue();
         grid = new TileGrid<Pip>(15, 15);
+        totalScore = hand.GetScore();
+        UpdateScore();
+        levelField.text = $"STAGE {hand.Level}";
+        parField.text = $"PAR {hand.Level * 30}";
+    }
+
+    private void UpdateScore()
+    {
+        totalScoreField.text = hand.GetScore().ToString();
     }
 
     public void Place(Card card)
@@ -136,7 +146,6 @@ public class Field : MonoBehaviour
     {
         yield return MarkPip(pips, true, multi);
         yield return new WaitForSeconds(0.5f);
-        totalScoreField.text = totalScore.ToString();
         yield return MarkPip(pips, false, 0);
     }
 
@@ -193,13 +202,20 @@ public class Field : MonoBehaviour
 
             yield return new WaitForSeconds(0.02f);
         }
-
-        totalScore += total * multi;
+        
+        AddScore(total * multi);
 
         if (pop)
         {
             StartCoroutine(DestroyAfter(pop.gameObject));
         }
+    }
+
+    private void AddScore(int amount)
+    {
+        totalScore += amount;
+        hand.SetScore(totalScore);
+        UpdateScore();
     }
 
     private void ShowTextAt(string text, Vector3 pos)
