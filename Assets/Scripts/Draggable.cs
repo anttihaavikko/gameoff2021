@@ -1,4 +1,5 @@
 using System;
+using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -109,9 +110,9 @@ public class Draggable : MonoBehaviour
             
             return;
         }
-
-        transform.position = start;
-        gameObject.layer = layerId;
+        
+        Tweener.MoveToBounceOut(transform, start, 0.3f);
+        this.StartCoroutine(() => gameObject.layer = layerId, 0.3f);
         dropCancelled?.Invoke();
     }
 
