@@ -38,6 +38,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Bg
+    uniqueID: 1705399949
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Effects
+    uniqueID: 1411275355
+    locked: 0
+  - name: Scores
+    uniqueID: 1824539329
     locked: 0
