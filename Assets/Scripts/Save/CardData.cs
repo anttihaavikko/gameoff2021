@@ -134,6 +134,7 @@ namespace Save
             var rotations = direction > 0 ? 1 : 3;
             pips = pips.Select(p => RotatePip(p, rotations)).ToList();
             stars = stars.Select(p => RotatePip(p, rotations)).ToList();
+            bombs = bombs.Select(p => RotatePip(p, rotations)).ToList();
         }
         
         private static int RotatePip(int index, int times)
