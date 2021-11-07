@@ -156,7 +156,7 @@ public class Hand : MonoBehaviour
         var amount = save.deck.GetCount();
         drawPileNumber.text = amount.ToString();
         
-        Tweener.MoveToBounceOut(deckTop, deckContainer.position + amount * Vector3.up * deckCardHeight, 0.1f);
+        Tweener.MoveToBounceOut(deckTop, deckContainer.position + (amount - 1) * Vector3.up * deckCardHeight, 0.1f);
 
         if (amount == 0)
         {
