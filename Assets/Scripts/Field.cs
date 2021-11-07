@@ -19,6 +19,7 @@ public class Field : MonoBehaviour
     [SerializeField] private LayerMask cardLayer;
     [SerializeField] private Hand hand;
     [SerializeField] private Appearer spinner;
+    [SerializeField] private Color markColor;
 
     private TileGrid<Pip> grid;
     private int totalScore;
@@ -171,7 +172,7 @@ public class Field : MonoBehaviour
         {
             if (pip == null) continue;
             
-            var targetColor = state ? Color.red : Color.black;
+            var targetColor = state ? markColor : Color.black;
             var targetSize = Vector3.one * (state ? 0.18f : 0.15f);
             const float duration = 0.15f;
             Tweener.ColorToBounceOut(pip.sprite, targetColor, duration);
