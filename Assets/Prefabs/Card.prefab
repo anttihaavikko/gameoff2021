@@ -1595,6 +1595,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5809934311292390090}
   - component: {fileID: 5509445442856363882}
+  - component: {fileID: 8485445461978481859}
   m_Layer: 0
   m_Name: Shine
   m_TagString: Untagged
@@ -1610,7 +1611,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8173661696233709331}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.061, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.6158284, y: 0.6158284, z: 0.6158284}
   m_Children: []
   m_Father: {fileID: 2024160301425814448}
@@ -1668,6 +1669,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8485445461978481859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8173661696233709331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c053e21a426840df939e3fc09913921, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 0.1
+  mirrorParent: {fileID: 0}
+  checkRotation: 0
+  focus: {x: 0, y: 0, z: 0}
 --- !u!1 &8441192105384966414
 GameObject:
   m_ObjectHideFlags: 0
