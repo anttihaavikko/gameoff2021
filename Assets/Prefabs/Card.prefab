@@ -239,7 +239,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: ea9cc6de41349462c9d295887fa12df4, type: 3}
-  m_Color: {r: 0.69803923, g: 0.8509804, b: 0.8980392, a: 1}
+  m_Color: {r: 0.77254903, g: 0.8901961, b: 0.9254902, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1686,6 +1686,7 @@ MonoBehaviour:
   mirrorParent: {fileID: 0}
   checkRotation: 0
   focus: {x: 0, y: 0, z: 0}
+  reversed: 0
 --- !u!1 &8441192105384966414
 GameObject:
   m_ObjectHideFlags: 0
