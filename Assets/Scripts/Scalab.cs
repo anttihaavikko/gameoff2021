@@ -2,6 +2,7 @@ using System;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Scalab : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public class Scalab : MonoBehaviour
 
     private void Move()
     {
+        // if (Random.value < 0.2f)
+        // {
+        //     start = start.WhereX(-start.x);
+        // }
+        
         var t = transform;
         var p = t.position;
         var target = start.RandomOffset(1f);

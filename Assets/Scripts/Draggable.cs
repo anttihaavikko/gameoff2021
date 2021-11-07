@@ -6,8 +6,8 @@ using UnityEngine.Rendering;
 
 public class Draggable : MonoBehaviour
 {
-    public Action dropped, hidePreview, click, dropCancelled;
-    public Action<Vector2> preview;
+    public Action hidePreview, click, dropCancelled;
+    public Action<Draggable> preview, dropped;
     
     [SerializeField] private LayerMask dropMask, blockMask;
     [SerializeField] private bool lockAfterDrop = true;
@@ -77,7 +77,7 @@ public class Draggable : MonoBehaviour
         var rounded = GetRoundedPos();
         if (CanDrop(rounded))
         {
-            preview?.Invoke(rounded);
+            preview?.Invoke(this);
             return;
         }
         
@@ -91,7 +91,7 @@ public class Draggable : MonoBehaviour
         SetSortOrder(normalSortOrder - Mathf.RoundToInt(transform.position.y));
     }
 
-    private Vector2 GetRoundedPos()
+    public Vector2 GetRoundedPos()
     {
         var p = transform.position;
         return new Vector2(Mathf.Round(p.x), Mathf.Round(p.y));
@@ -104,7 +104,7 @@ public class Draggable : MonoBehaviour
         if (CanDrop(pos))
         {
             transform.position = pos;
-            dropped?.Invoke();
+            dropped?.Invoke(this);
             enabled = !lockAfterDrop;
             gameObject.layer = layerId;
             

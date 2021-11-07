@@ -46,6 +46,8 @@ public class Field : MonoBehaviour
 
         output.text = grid.DataAsString();
         
+        hand.LockCards(true);
+        
         actionQueue.Add(new ActivateAction(card, 1));
         StartCoroutine(ProcessQueue());
     }
@@ -54,6 +56,7 @@ public class Field : MonoBehaviour
     {
         yield return actionQueue.Process(this);
         hand.AddCard();
+        hand.LockCards(false);
     }
 
     public void Activate(Card card, int multi = 1)

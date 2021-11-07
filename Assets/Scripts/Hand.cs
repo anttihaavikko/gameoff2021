@@ -120,8 +120,8 @@ public class Hand : MonoBehaviour
         
         var c = Instantiate(cardPrefab, drawPile.transform.position, Quaternion.identity);
         c.Setup(cardData);
-        c.draggable.dropped += () => CardMoved(c);
-        c.draggable.preview += pos => ConnectionPreview(c, pos);
+        c.draggable.dropped += CardMoved;
+        c.draggable.preview += ConnectionPreview;
         c.draggable.hidePreview += HidePreview;
         c.draggable.dropCancelled += PositionCards;
         
@@ -145,15 +145,17 @@ public class Hand : MonoBehaviour
         field.HidePreview();
     }
 
-    private void ConnectionPreview(Card card, Vector2 pos)
+    private void ConnectionPreview(Draggable draggable)
     {
-        field.Preview(card, pos);
+        var card = cards.First(c => c.draggable == draggable);
+        field.Preview(card, draggable.GetRoundedPos());
     }
 
-    private void CardMoved(Card card)
+    private void CardMoved(Draggable draggable)
     {
-        card.draggable.dropped = null;
-        card.draggable.preview = null;
+        var card = cards.First(c => c.draggable == draggable);
+        card.draggable.dropped -= CardMoved;
+        card.draggable.preview -= ConnectionPreview;
         card.draggable.hidePreview -= HidePreview;
         card.draggable.dropCancelled -= PositionCards;
         field.Place(card);
@@ -194,5 +196,11 @@ public class Hand : MonoBehaviour
     public void SetScore(int score)
     {
         save.score = score;
+    }
+
+    public void LockCards(bool state)
+    {
+        print($"Locking all {cards.Count} cards");
+        cards.ForEach(c => c.draggable.DropLocked = state);
     }
 }
