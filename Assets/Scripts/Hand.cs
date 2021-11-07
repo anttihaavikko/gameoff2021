@@ -6,6 +6,7 @@ using AnttiStarterKit.Utils;
 using Save;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class Hand : MonoBehaviour
@@ -18,9 +19,13 @@ public class Hand : MonoBehaviour
     [SerializeField] private PassiveIcon passiveIconPrefab;
     [SerializeField] private Transform passiveIconContainer;
     [SerializeField] private PassiveTooltip passiveTooltip;
+    [SerializeField] private Transform deckContainer, deckTop;
+    [SerializeField] private SortingGroup deckStufferPrefab;
+    [SerializeField] private float deckCardHeight = 0.2f;
 
     private List<Card> cards;
     private SaveData save;
+    private Stack<GameObject> stuffers;
 
     public bool HasPassive(Passive passive) => save.HasPassive(passive);
     public int GetPassiveLevel(Passive passive) => save.GetPassiveLevel(passive);
@@ -36,6 +41,7 @@ public class Hand : MonoBehaviour
         cards = new List<Card>();
         
         save.deck.Shuffle();
+        CreateStuffers();
         UpdateDrawPile();
 
         for (var i = 0; i < GetPassiveLevel(Passive.BiggerHand) + 1; i++)
@@ -44,6 +50,21 @@ public class Hand : MonoBehaviour
         }
         
         ShowPassives();
+    }
+
+    private void CreateStuffers()
+    {
+        stuffers = new Stack<GameObject>();
+        var count = 0;
+        var amount = save.deck.cards.Count;
+        save.deck.cards.ForEach(c =>
+        {
+            var stuffer = Instantiate(deckStufferPrefab, deckContainer);
+            stuffer.sortingOrder = -amount - 2 + count;
+            stuffer.transform.position += Vector3.up * count * deckCardHeight;
+            count++;
+            stuffers.Push(stuffer.gameObject);
+        });
     }
 
     private void ShowPassives()
@@ -115,10 +136,12 @@ public class Hand : MonoBehaviour
             return;
         }
 
+        stuffers.Pop().SetActive(false);
+
         var cardData = save.deck.Draw();
         UpdateDrawPile();
         
-        var c = Instantiate(cardPrefab, drawPile.transform.position, Quaternion.identity);
+        var c = Instantiate(cardPrefab, deckTop.position, Quaternion.identity);
         c.Setup(cardData);
         c.draggable.dropped += CardMoved;
         c.draggable.preview += ConnectionPreview;
@@ -133,6 +156,8 @@ public class Hand : MonoBehaviour
     {
         var amount = save.deck.GetCount();
         drawPileNumber.text = amount.ToString();
+        
+        Tweener.MoveToBounceOut(deckTop, deckContainer.position + amount * Vector3.up * deckCardHeight, 0.1f);
 
         if (amount == 0)
         {

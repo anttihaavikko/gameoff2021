@@ -1682,6 +1682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0.1
+  maxEffectiveDistance: 5
   mirrorParent: {fileID: 0}
   checkRotation: 0
   focus: {x: 0, y: 0, z: 0}
