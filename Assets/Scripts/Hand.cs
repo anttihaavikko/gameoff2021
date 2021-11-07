@@ -200,7 +200,7 @@ public class Hand : MonoBehaviour
 
     public void LockCards(bool state)
     {
-        print($"Locking all {cards.Count} cards");
+        // print($"Locking all {cards.Count} cards");
         cards.ForEach(c => c.draggable.DropLocked = state);
     }
 }

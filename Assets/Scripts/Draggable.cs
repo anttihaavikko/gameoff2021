@@ -88,7 +88,10 @@ public class Draggable : MonoBehaviour
     {
         var rounded = GetRoundedPos();
         DropOn(rounded);
-        SetSortOrder(normalSortOrder - Mathf.RoundToInt(transform.position.y));
+        this.StartCoroutine(() =>
+        {
+            SetSortOrder(normalSortOrder - Mathf.RoundToInt(transform.position.y));
+        }, 0.3f);
     }
 
     public Vector2 GetRoundedPos()
@@ -112,7 +115,10 @@ public class Draggable : MonoBehaviour
         }
         
         Tweener.MoveToBounceOut(transform, start, 0.3f);
-        this.StartCoroutine(() => gameObject.layer = layerId, 0.3f);
+        this.StartCoroutine(() =>
+        {
+            gameObject.layer = layerId;
+        }, 0.3f);
         dropCancelled?.Invoke();
     }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AnttiStarterKit.Animations
@@ -6,6 +7,7 @@ namespace AnttiStarterKit.Animations
 	public class Tweener : MonoBehaviour {
 
 		public AnimationCurve[] customEasings;
+		public bool updateOnLate;
 		
 		private List<TweenAction> _actions;
 
@@ -25,10 +27,25 @@ namespace AnttiStarterKit.Animations
 			_actions = new List<TweenAction> ();
 		}
 
-		private void Update() {
-			for (var i = _actions.Count - 1; i >= 0; i--) {
-				if (_actions [i].Process ()) {
-					_actions.RemoveAt (i);
+		private void Update()
+		{
+			if (updateOnLate) return;
+			Process();
+		}
+
+		private void LateUpdate()
+		{
+			if (!updateOnLate) return;
+			Process();
+		}
+
+		private void Process()
+		{
+			for (var i = _actions.Count - 1; i >= 0; i--)
+			{
+				if (_actions[i].Process())
+				{
+					_actions.RemoveAt(i);
 				}
 			}
 		}

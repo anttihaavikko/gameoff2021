@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 public class Scalab : MonoBehaviour
 {
     [SerializeField] private Animator anim;
-    
+
     private static readonly int Walking = Animator.StringToHash("walking");
 
     private Vector3 start;
@@ -18,13 +18,18 @@ public class Scalab : MonoBehaviour
         Invoke(nameof(Move), 2f);
     }
 
+    private void Update()
+    {
+        if (!Application.isEditor) return;
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            start = start.WhereX(-start.x);
+        }
+    }
+
     private void Move()
     {
-        // if (Random.value < 0.2f)
-        // {
-        //     start = start.WhereX(-start.x);
-        // }
-        
         var t = transform;
         var p = t.position;
         var target = start.RandomOffset(1f);

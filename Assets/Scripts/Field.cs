@@ -18,6 +18,7 @@ public class Field : MonoBehaviour
     [SerializeField] private ConnectionLines connectionLines;
     [SerializeField] private LayerMask cardLayer;
     [SerializeField] private Hand hand;
+    [SerializeField] private Appearer spinner;
 
     private TileGrid<Pip> grid;
     private int totalScore;
@@ -40,6 +41,7 @@ public class Field : MonoBehaviour
 
     public void Place(Card card)
     {
+        spinner.Show();
         connectionLines.Hide();
 
         PlacePipsToGrid(card);
@@ -57,6 +59,7 @@ public class Field : MonoBehaviour
         yield return actionQueue.Process(this);
         hand.AddCard();
         hand.LockCards(false);
+        spinner.Hide();
     }
 
     public void Activate(Card card, int multi = 1)
