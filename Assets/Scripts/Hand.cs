@@ -14,7 +14,6 @@ public class Hand : MonoBehaviour
     [SerializeField] private Card cardPrefab;
     [SerializeField] private Field field;
     [SerializeField] private Appearer cardPicks;
-    [SerializeField] private GameObject drawPile;
     [SerializeField] private TMP_Text drawPileNumber;
     [SerializeField] private PassiveIcon passiveIconPrefab;
     [SerializeField] private Transform passiveIconContainer;
@@ -161,7 +160,7 @@ public class Hand : MonoBehaviour
 
         if (amount == 0)
         {
-            drawPile.SetActive(false);
+            deckTop.gameObject.SetActive(false);
         }
     }
 
