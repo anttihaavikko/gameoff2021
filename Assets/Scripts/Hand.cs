@@ -73,7 +73,7 @@ public class Hand : MonoBehaviour
         save.passives.ForEach(p =>
         {
             var icon = Instantiate(passiveIconPrefab, passiveIconContainer);
-            icon.Setup(p, passiveTooltip);
+            icon.Setup(p, passiveTooltip, save.GetPassiveLevel(p));
         });
     }
 

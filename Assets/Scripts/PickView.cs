@@ -20,7 +20,7 @@ public class PickView : MonoBehaviour
         {
             var details = Passives.GetDetails(passive);
             var panel = Instantiate(panelPrefab, container);
-            panel.SetDetails(details);
+            panel.SetDetails(details, save.GetPassiveLevel(passive) + 1);
             panel.pickButton.onClick.AddListener(() =>
             {
                 save.passives.Add(passive);

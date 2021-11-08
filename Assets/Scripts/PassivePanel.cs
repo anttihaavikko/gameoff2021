@@ -9,9 +9,9 @@ public class PassivePanel : MonoBehaviour
     
     public Button pickButton;
 
-    public void SetDetails(PassiveDetails details)
+    public void SetDetails(PassiveDetails details, int level)
     {
         title.text = details.name;
-        description.text = TextFormatter.DoColors(details.description);
+        description.text = TextFormatter.DoColors(details.description.Replace("[LEVEL]", level.ToString()));
     }
 }

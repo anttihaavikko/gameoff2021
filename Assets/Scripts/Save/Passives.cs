@@ -24,7 +24,7 @@ namespace Save
                 new PassiveDetails
                 {
                     name = "Bottom",
-                    description = "<r>void</r> <g>OnPlace</g>(<b>Card</b> <o>card</o>)\n{\n\t<r>if</r> (card.y <r>==</r> 4)\n\t{\n\t\tstartMultiplier<r>++</r>;\n\t}\n}",
+                    description = "<r>void</r> <g>OnPlace</g>(<b>Card</b> <o>card</o>)\n{\n\t<r>if</r> (<o>card</c>.y <r>==</r> <p>4</c>)\n\t{\n\t\tstartMultiplier = <p>1</c> + <p>[LEVEL]</c>;\n\t}\n}",
                     repeatable = true
                 }
             },
@@ -33,7 +33,7 @@ namespace Save
                 new PassiveDetails
                 {
                     name = "Top",
-                    description = "<r>void</r> <g>OnPlace</g>(<b>Card</b> <o>card</o>)\n{\n\t<r>if</r> (card.y <r>==</r> 0)\n\t{\n\t\tstartMultiplier<r>++</r>;\n\t}\n}",
+                    description = "<r>void</r> <g>OnPlace</g>(<b>Card</b> <o>card</o>)\n{\n\t<r>if</r> (<o>card</c>.y <r>==</r> <p>0</c>)\n\t{\n\t\tstartMultiplier = <p>1</c> + <p>[LEVEL]</c>;\n\t}\n}",
                     repeatable = true
                 }
             },
@@ -42,7 +42,7 @@ namespace Save
                 new PassiveDetails
                 {
                     name = "Bigger Hand",
-                    description = "<r>void</r> <g>DoSomething</g>() {\n\t<c>// TODO: add implementation</c>\n}",
+                    description = "<r>int</c> <g>GetHandSize</c>()\n{\n\t<r>return</c> DEFAULT_HAND_SIZE + <p>[LEVEL]</c>;\n}",
                     repeatable = true
                 }
             },
@@ -51,7 +51,7 @@ namespace Save
                 new PassiveDetails
                 {
                     name = "Options",
-                    description = "<r>void</r> <g>DoSomething</g>() {\n\t<c>// TODO: add implementation</c>\n}",
+                    description = "<r>void</c> <g>PresentCodeInjections</c>()\n{\n\t<r>for</c> (<r>var</c> i = 0; i<r> < </c><p>2</c> + <p>[LEVEL]</c>; i<r>++</c>)\n\t{\n\t\t<r>var</c> p = <r>new</c> <b>Passive</c>();\n\t\tp.<g><r>Present</c></c>();\n\t}\n}",
                     repeatable = true
                 }
             },
@@ -60,7 +60,7 @@ namespace Save
                 new PassiveDetails
                 {
                     name = "Variety",
-                    description = "<r>void</r> <g>DoSomething</g>() {\n\t<c>// TODO: add implementation</c>\n}",
+                    description = "<r>void</c> <g>PresentNewCards</c>()\n{\n\t<r>for</c> (<r>var</c> i = 0; i<r> < </c><p>3</c> + <p>[LEVEL]</c>; i<r>++</c>)\n\t{\n\t\t<r>var</c> c = <r>new</c> <b>Card</c>();\n\t\tc.<g><r>Present</c></c>();\n\t}\n}",
                     repeatable = true
                 }
             },
@@ -69,7 +69,7 @@ namespace Save
                 new PassiveDetails
                 {
                     name = "Lucky Rolls",
-                    description = "<r>bool</c> <g>GetRandomChance</c>(<r>float</c> <o>target</c>)\n{\n\treturn <b>Random</c>.value * <p>0.9f</c> < <o>target</c>;\n}",
+                    description = "<r>bool</c> <g>GetRandomChance</c>(<r>float</c> <o>target</c>)\n{\n\t<r>var</c> mod = <b>Mathf</c>.<g>Pow</c>(<p>0.9f</c>, <p>[LEVEL]</c>);\n\t<r>return</c> <b>Random</c>.value * mod <p><</c> <o>target</c>;\n}",
                     repeatable = true
                 }
             },
