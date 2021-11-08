@@ -62,8 +62,7 @@ public class Field : MonoBehaviour
     private IEnumerator ProcessQueue()
     {
         yield return actionQueue.Process(this);
-        hand.AddCard();
-        hand.LockCards(false);
+        hand.NextTurn();
         spinner.Hide();
     }
 

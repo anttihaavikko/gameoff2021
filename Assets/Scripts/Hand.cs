@@ -21,10 +21,12 @@ public class Hand : MonoBehaviour
     [SerializeField] private Transform deckContainer, deckTop;
     [SerializeField] private SortingGroup deckStufferPrefab;
     [SerializeField] private float deckCardHeight = 0.2f;
+    [SerializeField] private TMP_Text turnField;
 
     private List<Card> cards;
     private SaveData save;
     private Stack<GameObject> stuffers;
+    private int turnNumber = 1;
 
     public bool HasPassive(Passive passive) => save.HasPassive(passive);
     public int GetPassiveLevel(Passive passive) => save.GetPassiveLevel(passive);
@@ -166,6 +168,15 @@ public class Hand : MonoBehaviour
         {
             deckTop.gameObject.SetActive(false);
         }
+    }
+
+    public void NextTurn()
+    {
+        turnNumber++;
+        turnField.text = $"Turn {turnNumber}";
+        
+        AddCard();
+        LockCards(false);
     }
 
     private void HidePreview()
