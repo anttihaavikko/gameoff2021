@@ -118,7 +118,11 @@ public class Hand : MonoBehaviour
         var index = 0;
         foreach (var c in cards)
         {
-            Tweener.MoveToBounceOut(c.transform, basePos + index * Vector3.right, 0.3f);
+            if (!c.draggable.IsDragging)
+            {
+                Tweener.MoveToBounceOut(c.transform, basePos + index * Vector3.right, 0.3f);    
+            }
+            
             index++;
         }
     }
