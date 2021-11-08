@@ -7,6 +7,7 @@ public class PickView : MonoBehaviour
 {
     [SerializeField] private PassivePanel panelPrefab;
     [SerializeField] private Transform container;
+    [SerializeField] private RectTransform scrollContent;
 
     private SaveData save; 
 
@@ -28,6 +29,8 @@ public class PickView : MonoBehaviour
                 SceneChanger.Instance.ChangeScene("Main");
             });
         });
+        
+        scrollContent.sizeDelta = new Vector2 (245 * amount, 300);
     }
 
     private void Update()

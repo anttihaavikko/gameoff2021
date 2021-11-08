@@ -24,7 +24,7 @@ namespace Save
                 new PassiveDetails
                 {
                     name = "Bottom",
-                    description = "<r>void</r> <g>OnPlace</g>(<b>Component</b> <o>component</o>)\n{\n\t<r>if</r> (component.y <r>==</r> 4)\n\t{\n\t\tstartMultiplier<r>++</r>;\n\t}\n}",
+                    description = "<r>void</r> <g>OnPlace</g>(<b>Card</b> <o>card</o>)\n{\n\t<r>if</r> (card.y <r>==</r> 4)\n\t{\n\t\tstartMultiplier<r>++</r>;\n\t}\n}",
                     repeatable = true
                 }
             },
@@ -33,7 +33,7 @@ namespace Save
                 new PassiveDetails
                 {
                     name = "Top",
-                    description = "<r>void</r> <g>OnPlace</g>(<b>Component</b> <o>component</o>)\n{\n\t<r>if</r> (component.y <r>==</r> 0)\n\t{\n\t\tstartMultiplier<r>++</r>;\n\t}\n}",
+                    description = "<r>void</r> <g>OnPlace</g>(<b>Card</b> <o>card</o>)\n{\n\t<r>if</r> (card.y <r>==</r> 0)\n\t{\n\t\tstartMultiplier<r>++</r>;\n\t}\n}",
                     repeatable = true
                 }
             },

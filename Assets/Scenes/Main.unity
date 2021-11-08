@@ -11602,7 +11602,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pick a new component
+  m_text: Pick a new card
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4e56e0f7db5a541cc9ddb27276f03311, type: 2}
   m_sharedMaterial: {fileID: -8586260006136899823, guid: 4e56e0f7db5a541cc9ddb27276f03311, type: 2}
