@@ -194,6 +194,7 @@ public class Hand : MonoBehaviour
     private void CardMoved(Draggable draggable)
     {
         var card = cards.First(c => c.draggable == draggable);
+        card.hoverer.Disable();
         card.draggable.dropped -= CardMoved;
         card.draggable.preview -= ConnectionPreview;
         card.draggable.hidePreview -= HidePreview;

@@ -10,6 +10,7 @@ using Random = UnityEngine.Random;
 public class Card : MonoBehaviour
 {
     public Draggable draggable;
+    public CardHover hoverer;
     
     [SerializeField] private List<SpriteRenderer> points;
     [SerializeField] private Sprite starSprite, bombSprite, circleSprite;
