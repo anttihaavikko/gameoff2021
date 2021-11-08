@@ -68,6 +68,7 @@ public class Field : MonoBehaviour
 
     public void Activate(Card card, int multi = 1)
     {
+        if (!card) return;
         var pos = card.GetCoordinates();
 
         if (pos.y == 4)
@@ -97,6 +98,7 @@ public class Field : MonoBehaviour
 
     public IEnumerator ScoreCard(Card card, int multi)
     {
+        if (!card) yield break;
         var allVisited = new List<Pip>();
         var pips = card.GetPoints().ToList();
         foreach (var pip in pips)
@@ -113,6 +115,7 @@ public class Field : MonoBehaviour
 
     public void RemoveCard(Card card)
     {
+        if (!card) return;
         EffectManager.AddEffects(new []{ 0, 1}, card.transform.position);
         EffectManager.AddEffect(2, card.GetExplosionPosition());
         cam.BaseEffect(0.3f);
@@ -149,6 +152,7 @@ public class Field : MonoBehaviour
 
     public void Rotate(Card card, bool clockwise)
     {
+        if (!card) return;
         ClearPipsFromGrid(card);
         card.Rotate(clockwise);
         card.ResetBombs();
