@@ -7,7 +7,9 @@ using AnttiStarterKit.Animations;
 using TMPro;
 using UnityEngine;
 using AnttiStarterKit.Extensions;
+using AnttiStarterKit.Managers;
 using AnttiStarterKit.Utils;
+using AnttiStarterKit.Visuals;
 using Save;
 using Random = UnityEngine.Random;
 
@@ -20,6 +22,7 @@ public class Field : MonoBehaviour
     [SerializeField] private Hand hand;
     [SerializeField] private Appearer spinner;
     [SerializeField] private Color markColor;
+    [SerializeField] private EffectCamera cam;
 
     private TileGrid<Pip> grid;
     private int totalScore;
@@ -27,6 +30,7 @@ public class Field : MonoBehaviour
 
     private void Start()
     {
+        cam.BaseEffect(0.1f);
         actionQueue = new ActionQueue();
         grid = new TileGrid<Pip>(15, 15);
         totalScore = hand.GetScore();
@@ -110,7 +114,8 @@ public class Field : MonoBehaviour
 
     public void RemoveCard(Card card)
     {
-        // TODO: explode
+        EffectManager.AddEffects(new []{ 0, 1, 2 }, card.transform.position);
+        cam.BaseEffect(0.3f);
         ClearPipsFromGrid(card);
         Destroy(card.gameObject);
     }
