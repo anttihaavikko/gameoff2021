@@ -21,7 +21,7 @@ public class Hand : MonoBehaviour
     [SerializeField] private Transform deckContainer, deckTop;
     [SerializeField] private SortingGroup deckStufferPrefab;
     [SerializeField] private float deckCardHeight = 0.2f;
-    [SerializeField] private TMP_Text turnField;
+    [SerializeField] private TMP_Text turnField, turnFieldShadow;
 
     private List<Card> cards;
     private SaveData save;
@@ -174,6 +174,7 @@ public class Hand : MonoBehaviour
     {
         turnNumber++;
         turnField.text = $"Turn {turnNumber}";
+        turnFieldShadow.text = turnField.text;
         
         AddCard();
         LockCards(false);

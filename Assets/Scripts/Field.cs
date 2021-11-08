@@ -16,6 +16,7 @@ using Random = UnityEngine.Random;
 public class Field : MonoBehaviour
 {
     [SerializeField] private TMP_Text output, totalScoreField, levelField, parField;
+    [SerializeField] private TMP_Text totalScoreFieldShadow, levelFieldShadow, parFieldShadow;
     [SerializeField] private TextWithBackground scorePopPrefab;
     [SerializeField] private ConnectionLines connectionLines;
     [SerializeField] private LayerMask cardLayer;
@@ -36,12 +37,15 @@ public class Field : MonoBehaviour
         totalScore = hand.GetScore();
         UpdateScore();
         levelField.text = $"STAGE {hand.Level}";
+        levelFieldShadow.text = levelField.text;
         parField.text = $"PAR {hand.Level * 30}";
+        parFieldShadow.text = parField.text;
     }
 
     private void UpdateScore()
     {
         totalScoreField.text = hand.GetScore().ToString();
+        totalScoreFieldShadow.text = totalScoreField.text;
     }
 
     public void Place(Card card)
