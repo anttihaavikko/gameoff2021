@@ -20,6 +20,8 @@ public class Card : MonoBehaviour
     private List<Pip> pips;
     private CardData data;
     private List<Pip> shakingPips;
+    private bool shaking;
+    private Vector3 originalPos;
 
     public bool IsRotator => data.IsRotator;
     public bool RotatesClockwise => data.RotatesClockwise;
@@ -43,11 +45,27 @@ public class Card : MonoBehaviour
         PositionPips();
     }
 
+    public void Shake(bool state = true)
+    {
+        shaking = state;
+        originalPos = transform.position;
+
+        if (!state)
+        {
+            transform.position = originalPos;
+        }
+    }
+
     private void Update()
     {
         if (shakingPips.Count > 0)
         {
             shakingPips.ForEach(p => p.Shake());
+        }
+
+        if (shaking)
+        {
+            transform.position = originalPos.RandomOffset(0.02f);
         }
     }
 
@@ -184,7 +202,9 @@ public class Card : MonoBehaviour
 
     public Vector3 GetExplosionPosition()
     {
-        return pips.First(p => p.isBomb && p.isShaking).sprite.transform.position;
+        return pips.Any(p => p.isBomb && p.isShaking) ? 
+            pips.First(p => p.isBomb && p.isShaking).sprite.transform.position : 
+            transform.position;
     }
 }
 

@@ -201,6 +201,7 @@ public class Field : MonoBehaviour
                     if(pip.isShaking)
                     {
                         actionQueue.Add(new DestroyAction(pip.GetCard()));
+                        pip.GetCard().Shake();
                     }
                     else
                     {
