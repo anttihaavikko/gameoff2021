@@ -69,7 +69,7 @@ namespace Save
                 new PassiveDetails
                 {
                     name = "Lucky Rolls",
-                    description = "<r>void</r> <g>DoSomething</g>() {\n\t<c>// TODO: add implementation</c>\n}",
+                    description = "<r>bool</c> <g>GetRandomChance</c>(<r>float</c> <o>target</c>)\n{\n\treturn <b>Random</c>.value * <p>0.9f</c> < <o>target</c>;\n}",
                     repeatable = true
                 }
             },
