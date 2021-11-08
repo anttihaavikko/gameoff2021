@@ -24,8 +24,8 @@
             var finish = txt.selectionEnd;
             var sel = txt.value.substring(start, finish);
             
-            shownCode.innerHTML = shownCode.innerHTML.replace(sel, "<span style='color:" + c + "'>" + sel + "</span>");
-            final.value = final.value.replace(sel, "<" + tag + ">" + sel + "</c>");
+            shownCode.innerHTML = shownCode.innerHTML.replaceAll(sel, "<span style='color:" + c + "'>" + sel + "</span>");
+            final.value = final.value.replaceAll(sel, "<" + tag + ">" + sel + "</c>");
         }
     </script>
 </head>
