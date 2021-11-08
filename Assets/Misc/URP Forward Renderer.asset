@@ -15,7 +15,8 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: 9116010829303434753}
   - {fileID: 4882633878928365405}
-  m_RendererFeatureMap: 01ce3ef18c93827e5d17d0c1a499c243
+  - {fileID: 262940964117911823}
+  m_RendererFeatureMap: 01ce3ef18c93827e5d17d0c1a499c2430f9925eb6927a603
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
   shaders:
@@ -42,6 +43,25 @@ MonoBehaviour:
   m_ShadowTransparentReceive: 1
   m_RenderingMode: 0
   m_AccurateGbufferNormals: 0
+--- !u!114 &262940964117911823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e604b3fca557149568ba75e6a3086809, type: 3}
+  m_Name: Comicfy
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  settings:
+    Event: 500
+    blitMaterial: {fileID: 2100000, guid: bc08bbcf29092411db8cedce09cd66c7, type: 2}
+    blitMaterialPassIndex: -1
+    destination: 0
+    textureId: _BlitPassTexture
 --- !u!114 &4882633878928365405
 MonoBehaviour:
   m_ObjectHideFlags: 0
