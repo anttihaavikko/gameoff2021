@@ -12,7 +12,7 @@ public class Card : MonoBehaviour
     public Draggable draggable;
     
     [SerializeField] private List<SpriteRenderer> points;
-    [SerializeField] private Sprite starSprite, bombSprite;
+    [SerializeField] private Sprite starSprite, bombSprite, circleSprite;
     [SerializeField] private Transform visualContents;
     [SerializeField] private GameObject rotateIcon;
     [SerializeField] private List<GameObject> directionIndicators;
@@ -58,7 +58,7 @@ public class Card : MonoBehaviour
 
     private void PositionPips()
     {
-        points.ForEach(p => p.gameObject.SetActive(false));
+        points.ForEach(ResetPip);
         
         pips = points.Where((_, i) => data.pips.Contains(i)).Select(p =>
         {
@@ -81,6 +81,12 @@ public class Card : MonoBehaviour
 
             return new Pip(this, p, i % 3, i / 3, isStar, isBomb);
         }).ToList();
+    }
+
+    private void ResetPip(SpriteRenderer sr)
+    {
+        sr.gameObject.SetActive(false);
+        sr.sprite = circleSprite;
     }
 
     public void Rotate(bool clockWise)
@@ -143,6 +149,16 @@ public class Card : MonoBehaviour
         var q = visualContents.rotation;
         var baseDirections = new List<Vector3> { Vector3.up, Vector3.right, Vector3.down, Vector3.left };
         return data.directions.Select(i => q * baseDirections[i]);
+    }
+
+    public void Debug()
+    {
+        print(string.Join(",", data.bombs));
+    }
+
+    public void ResetBombs()
+    {
+        shakingPips.Clear();
     }
 }
 

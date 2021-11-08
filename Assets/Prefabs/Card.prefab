@@ -1086,6 +1086,7 @@ MonoBehaviour:
   - {fileID: 2024160301075873060}
   starSprite: {fileID: 21300000, guid: df8ef98d57e034c70b2989b74fb7ba15, type: 3}
   bombSprite: {fileID: 21300000, guid: 7146ee5d648e348f2b93163bbfe6e621, type: 3}
+  circleSprite: {fileID: 21300000, guid: 4844f34bdb54242f1a7bb5882ada20d9, type: 3}
   visualContents: {fileID: 2024160301851604901}
   rotateIcon: {fileID: 5353790205079175227}
   directionIndicators:

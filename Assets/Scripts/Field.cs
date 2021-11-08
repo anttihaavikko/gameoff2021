@@ -146,6 +146,7 @@ public class Field : MonoBehaviour
     {
         ClearPipsFromGrid(card);
         card.Rotate(clockwise);
+        card.ResetBombs();
         PlacePipsToGrid(card);
     }
 
