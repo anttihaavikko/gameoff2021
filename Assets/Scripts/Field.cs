@@ -114,7 +114,8 @@ public class Field : MonoBehaviour
 
     public void RemoveCard(Card card)
     {
-        EffectManager.AddEffects(new []{ 0, 1, 2 }, card.transform.position);
+        EffectManager.AddEffects(new []{ 0, 1}, card.transform.position);
+        EffectManager.AddEffect(2, card.GetExplosionPosition());
         cam.BaseEffect(0.3f);
         ClearPipsFromGrid(card);
         Destroy(card.gameObject);

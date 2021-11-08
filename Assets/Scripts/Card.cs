@@ -181,6 +181,11 @@ public class Card : MonoBehaviour
     {
         shakingPips.Clear();
     }
+
+    public Vector3 GetExplosionPosition()
+    {
+        return pips.First(p => p.isBomb && p.isShaking).sprite.transform.position;
+    }
 }
 
 public class IntPair
