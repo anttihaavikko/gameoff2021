@@ -11,7 +11,9 @@ namespace Save
         BiggerHand,
         Options,
         CardPicks,
-        LuckyRolls
+        LuckyRolls,
+        Starchild,
+        Bomberman
     }
     
     public static class Passives
@@ -69,6 +71,24 @@ namespace Save
                     name = "Lucky Rolls",
                     description = "<r>void</r> <g>DoSomething</g>() {\n\t<c>// TODO: add implementation</c>\n}",
                     repeatable = true
+                }
+            },
+            {
+                Passive.Starchild,
+                new PassiveDetails
+                {
+                    name = "Starchild",
+                    description = "<r>void</r> <g>DoSomething</g>() {\n\t<c>// TODO: add implementation</c>\n}",
+                    repeatable = false
+                }
+            },
+            {
+                Passive.Bomberman,
+                new PassiveDetails
+                {
+                    name = "Bomberman",
+                    description = "<r>void</r> <g>DoSomething</g>() {\n\t<c>// TODO: add implementation</c>\n}",
+                    repeatable = false
                 }
             }
         };

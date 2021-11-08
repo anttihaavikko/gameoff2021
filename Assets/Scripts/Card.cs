@@ -56,6 +56,27 @@ public class Card : MonoBehaviour
         shakingPips.Add(pip);
     }
 
+    public void StarPip(Pip pip)
+    {
+        data.stars.Add(pip.index);
+        pip.sprite.sprite = starSprite;
+        pip.isBomb = false;
+        pip.isStar = true;
+
+        if (pip.isShaking)
+        {
+            ResetBombs();
+        }
+    }
+    
+    public void BombPip(Pip pip)
+    {
+        data.bombs.Add(pip.index);
+        pip.sprite.sprite = bombSprite;
+        pip.isBomb = true;
+        pip.isStar = false;
+    }
+
     private void PositionPips()
     {
         points.ForEach(ResetPip);
@@ -79,7 +100,7 @@ public class Card : MonoBehaviour
                 p.transform.Rotate(0, 0, Random.Range(-40f, 40f));
             }
 
-            return new Pip(this, p, i % 3, i / 3, isStar, isBomb);
+            return new Pip(i, this, p, i % 3, i / 3, isStar, isBomb);
         }).ToList();
     }
 
@@ -179,12 +200,14 @@ public class Pip
     public int x, y;
     public bool isStar, isBomb;
     public bool isShaking;
+    public int index;
 
     private Vector3 origin;
     private Card card;
 
-    public Pip(Card card, SpriteRenderer sprite, int x, int y, bool isStar, bool isBomb)
+    public Pip(int index, Card card, SpriteRenderer sprite, int x, int y, bool isStar, bool isBomb)
     {
+        this.index = index;
         this.sprite = sprite;
         this.x = x;
         this.y = y;
@@ -218,5 +241,15 @@ public class Pip
     public Card GetCard()
     {
         return card;
+    }
+
+    public void MakeStar()
+    {
+        card.StarPip(this);
+    }
+
+    public void MakeBomb()
+    {
+        card.BombPip(this);
     }
 }

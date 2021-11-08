@@ -172,7 +172,7 @@ public class Field : MonoBehaviour
         foreach (var pip in pips)
         {
             if (pip == null) continue;
-            
+
             var targetColor = state ? markColor : Color.black;
             var targetSize = Vector3.one * (state ? 0.18f : 0.15f);
             const float duration = 0.15f;
@@ -208,6 +208,8 @@ public class Field : MonoBehaviour
                 pt.position = sum / amount;
             }
 
+            CheckPipTransforms(total, pip);
+
             yield return new WaitForSeconds(0.02f);
         }
         
@@ -216,6 +218,25 @@ public class Field : MonoBehaviour
         if (pop)
         {
             StartCoroutine(DestroyAfter(pop.gameObject));
+        }
+    }
+
+    private void CheckPipTransforms(int total, Pip pip)
+    {
+        if (hand.HasPassive(Passive.Bomberman))
+        {
+            if ((total + 1) % 20 == 0)
+            {
+                pip.MakeBomb();
+            }
+        }
+
+        if (hand.HasPassive(Passive.Starchild))
+        {
+            if ((total + 1) % 50 == 0)
+            {
+                pip.MakeStar();
+            }
         }
     }
 
