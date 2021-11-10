@@ -165,6 +165,15 @@ public class Field : MonoBehaviour
             var neighbours = GetNeighboursFor(card, 1, true).ToList();
             neighbours.ForEach(n => actionQueue.Add(new ActivateAction(n, multiplier)));
         }
+
+        if (hand.HasPassive(Passive.Replacement))
+        {
+            var next = hand.GetRandomCard(card.GetPositionBeforeShaking());
+            next.draggable.enabled = false;
+            PlacePipsToGrid(next);
+            actionQueue.Add(new ActivateAction(next, 1));
+            output.text = grid.DataAsString();
+        }
         
         Destroy(card.gameObject);
     }

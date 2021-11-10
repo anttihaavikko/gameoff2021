@@ -156,6 +156,15 @@ public class Hand : MonoBehaviour
         AddCard(cardData, deckTop.position);
     }
 
+    public Card GetRandomCard(Vector3 startPosition)
+    {
+        var luck = GetLuck();
+        var data = CardData.GetRandom(luck);
+        var card = Instantiate(cardPrefab, startPosition, Quaternion.identity);
+        card.Setup(data);
+        return card;
+    }
+
     private void AddCard(CardData cardData, Vector3 from)
     {
         UpdateDrawPile();

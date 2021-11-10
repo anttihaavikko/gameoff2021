@@ -78,6 +78,11 @@ public class Card : MonoBehaviour
         }
     }
 
+    public Vector3 GetPositionBeforeShaking()
+    {
+        return originalPos;
+    }
+
     private void Update()
     {
         if (shakingPips.Count > 0)

@@ -25,7 +25,8 @@ namespace Save
         BombTransformer,
         Tactician,
         Chaos,
-        StackSize
+        StackSize,
+        Replacement
     }
     
     public static class Passives
@@ -200,6 +201,15 @@ namespace Save
                     name = "Stack Size",
                     description = "<r>void</c> <g>OnProcess</c>(<b><g>Act</c>ionQueue</c> <o>queue</c>)\n{\n\tif (<o>queue</c>.Count >= <p>40</c> + <p>40</c> * <p>[LEVEL]</c>)\n\t{\n\t\t<g>Tilt</c>();\n\t\t<r>return</c>;\n\t}\n\n\t<o>queue</c>.<g>Pop</c>().<g>Act</c>();\n}",
                     repeatable = true
+                }
+            },
+            {
+                Passive.Replacement,
+                new PassiveDetails
+                {
+                    name = "Replacement",
+                    description = "<r>void</c> <g>OnDestroy</c>(<b>Card</c> <o>card</c>)\n{\n\t<r>var</c> next = <r>new</c> <g>Card</c>();\n\t<g>PlaceOn</c>(next, <o>card</c>.<g>GetPosition</c>());\n}",
+                    repeatable = false
                 }
             }
         };
