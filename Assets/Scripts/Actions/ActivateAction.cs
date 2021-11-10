@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Actions
@@ -19,6 +20,11 @@ namespace Actions
         {
             field.Activate(card, multiplier);
             yield break;
+        }
+
+        public override IEnumerable<Card> GetCards()
+        {
+            return new[] { card };
         }
     }
 }

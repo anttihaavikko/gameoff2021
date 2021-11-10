@@ -24,5 +24,10 @@ namespace Actions
             cards.ForEach(field.RemoveCard);
             yield return new WaitForSeconds(0.5f);
         }
+
+        public override IEnumerable<Card> GetCards()
+        {
+            return cards;
+        }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Actions
 {
@@ -16,6 +17,11 @@ namespace Actions
         public override IEnumerator Activate(Field field)
         {
             yield return field.ScoreCard(card, multiplier);
+        }
+
+        public override IEnumerable<Card> GetCards()
+        {
+            return new[] { card };
         }
     }
 }

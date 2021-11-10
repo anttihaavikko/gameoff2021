@@ -373,4 +373,11 @@ public class Field : MonoBehaviour
         PlacePipsToGrid(card);
         output.text = grid.DataAsString();
     }
+
+    public void Tilt()
+    {
+        ShowTextAt("TILT", Vector3.zero);
+        actionQueue.Clear();
+        cam.BaseEffect(0.3f);
+    }
 }

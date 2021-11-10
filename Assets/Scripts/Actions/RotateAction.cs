@@ -21,5 +21,10 @@ namespace Actions
             cards.ForEach(c => field.Rotate(c, clockwise));
             yield return new WaitForSeconds(0.35f);
         }
+
+        public override IEnumerable<Card> GetCards()
+        {
+            return cards;
+        }
     }
 }

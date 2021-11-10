@@ -21,5 +21,10 @@ namespace Actions
             cards.ForEach(c => field.Move(c, (target - c.transform.position).normalized));
             yield return new WaitForSeconds(0.35f);
         }
+
+        public override IEnumerable<Card> GetCards()
+        {
+            return cards;
+        }
     }
 }
