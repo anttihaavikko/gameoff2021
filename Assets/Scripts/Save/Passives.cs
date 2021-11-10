@@ -16,7 +16,8 @@ namespace Save
         Bomberman,
         Detonator,
         MultiOnLeft,
-        MultiOnRight
+        MultiOnRight,
+        StarOnRotate
     }
     
     public static class Passives
@@ -121,6 +122,15 @@ namespace Save
                     repeatable = true
                 }
             },
+            {
+                Passive.StarOnRotate,
+                new PassiveDetails
+                {
+                    name = "Roller",
+                    description = "<r>void</c> <g>OnRotate</c>(<b>Card</c> <o>card</c>)\n{\n\t<r>var</c> pip = <o>card</c>.<g>GetRandomPip</c>();\n\tpip.<g>TransformToStar</c>();\n}",
+                    repeatable = false
+                }
+            }
         };
 
         public static IEnumerable<Passive> GetRandom(List<Passive> exclude, int amount = 1)

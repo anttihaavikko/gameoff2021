@@ -239,6 +239,15 @@ public class Card : MonoBehaviour
             pips.First(p => p.isBomb && p.isShaking).sprite.transform.position : 
             transform.position;
     }
+
+    public void MakeRandomStar()
+    {
+        var options = pips.Where(p => !p.isStar).OrderBy(_ => Random.value).ToList();
+        if (options.Any())
+        {
+            options.Random().MakeStar();
+        }
+    }
 }
 
 public class IntPair

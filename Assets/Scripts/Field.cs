@@ -208,6 +208,11 @@ public class Field : MonoBehaviour
         card.Rotate(clockwise);
         card.ResetBombs();
         PlacePipsToGrid(card);
+
+        if (hand.HasPassive(Passive.StarOnRotate))
+        {
+            card.MakeRandomStar();
+        }
     }
 
     private IEnumerator MarkCoroutine(List<Pip> pips, int multi)
