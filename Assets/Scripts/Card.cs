@@ -15,7 +15,7 @@ public class Card : MonoBehaviour
     [SerializeField] private List<SpriteRenderer> points;
     [SerializeField] private Sprite starSprite, bombSprite, circleSprite;
     [SerializeField] private Transform visualContents;
-    [SerializeField] private GameObject rotateIcon;
+    [SerializeField] private GameObject rotateIcon, pushIcon, pullIcon;
     [SerializeField] private List<GameObject> directionIndicators;
 
     private List<Pip> pips;
@@ -26,6 +26,8 @@ public class Card : MonoBehaviour
 
     public bool IsRotator => data.IsRotator;
     public bool RotatesClockwise => data.RotatesClockwise;
+    public bool IsPusher => data.type == CardType.Push;
+    public bool IsPuller => data.type == CardType.Pull;
 
     public void Setup(CardData cardData)
     {
@@ -35,7 +37,7 @@ public class Card : MonoBehaviour
         if (data.IsRotator)
         {
             rotateIcon.SetActive(true);
-            data.directions.ForEach(d => directionIndicators[d].SetActive(true));
+            ActivateDirections();
         }
         
         if (data.type == CardType.RotateLeft)
@@ -43,7 +45,24 @@ public class Card : MonoBehaviour
             rotateIcon.transform.Mirror();
         }
 
+        if (data.type == CardType.Push)
+        {
+            pushIcon.SetActive(true);
+            ActivateDirections();
+        }
+        
+        if (data.type == CardType.Pull)
+        {
+            pullIcon.SetActive(true);
+            ActivateDirections();
+        }
+
         PositionPips();
+    }
+
+    private void ActivateDirections()
+    {
+        data.directions.ForEach(d => directionIndicators[d].SetActive(true));
     }
 
     public void Shake(bool state = true)
@@ -96,7 +115,7 @@ public class Card : MonoBehaviour
         pip.isStar = false;
     }
 
-    private void PositionPips()
+    public void PositionPips()
     {
         points.ForEach(ResetPip);
         

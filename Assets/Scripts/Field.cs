@@ -19,7 +19,7 @@ public class Field : MonoBehaviour
     [SerializeField] private TMP_Text totalScoreFieldShadow, levelFieldShadow, parFieldShadow;
     [SerializeField] private TextWithBackground scorePopPrefab;
     [SerializeField] private ConnectionLines connectionLines;
-    [SerializeField] private LayerMask cardLayer;
+    [SerializeField] private LayerMask cardLayer, fieldLayer;
     [SerializeField] private Hand hand;
     [SerializeField] private Appearer spinner;
     [SerializeField] private Color markColor;
@@ -95,7 +95,15 @@ public class Field : MonoBehaviour
         if (card.IsRotator)
         {
             var neighbours = GetNeighboursFor(card).ToList();
-            actionQueue.Add(new RotateAction(neighbours, multi, card.RotatesClockwise));
+            actionQueue.Add(new RotateAction(neighbours, card.RotatesClockwise));
+            neighbours.ForEach(n => actionQueue.Add(new ActivateAction(n, multi + 1)));
+        }
+
+        if (card.IsPusher)
+        {
+            var p = card.transform.position;
+            var neighbours = GetNeighboursFor(card).ToList();
+            actionQueue.Add(new PushAction(neighbours, p));
             neighbours.ForEach(n => actionQueue.Add(new ActivateAction(n, multi + 1)));
         }
     }
@@ -128,7 +136,7 @@ public class Field : MonoBehaviour
     }
 
     private void PlacePipsToGrid(Card card)
-    {
+    { 
         var pips = card.GetPoints(true).ToList();
         pips.ForEach(pip => { grid.Set(pip, pip.x, pip.y); });
     }
@@ -152,6 +160,11 @@ public class Field : MonoBehaviour
     {
         var target = Physics2D.OverlapCircle(pos + dir * 0.75f, 0.1f, cardLayer);
         return !target ? null : target.GetComponent<Card>();
+    }
+
+    private bool IsOnArea(Vector3 pos)
+    {
+        return Physics2D.OverlapCircle(pos, 0.1f, fieldLayer);
     }
 
     public void Rotate(Card card, bool clockwise)
@@ -326,5 +339,28 @@ public class Field : MonoBehaviour
     public void HidePreview()
     {
         connectionLines.Hide();
+    }
+
+    public void Move(Card card, Vector3 direction)
+    {
+        if (!card) return;
+        var p = card.transform.position;
+        var blocked = GetNeighbourFor(p, direction);
+        if (!blocked && IsOnArea(p))
+        {
+            StartCoroutine(MoveCoroutine(card, direction));
+        }
+    }
+
+    private IEnumerator MoveCoroutine(Card card, Vector3 direction)
+    {
+        ClearPipsFromGrid(card);
+        var t = card.transform;
+        Tweener.MoveToBounceOut(t, t.position + direction, 0.3f);
+        yield return new WaitForSeconds(0.35f);
+        card.PositionPips();
+        card.ResetBombs();
+        PlacePipsToGrid(card);
+        output.text = grid.DataAsString();
     }
 }

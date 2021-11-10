@@ -73,14 +73,20 @@ namespace Save
             
             if (Random.value * luckFactor < 0.2f)
             {
-                c.pips.Clear();
-                c.stars.Clear();
-                c.bombs.Clear();
-                c.type = Random.value < 0.5f ?  CardType.RotateRight : CardType.RotateLeft;
-                c.directions = GetRandomDirections(luckFactor);
+                MakeSpecial(luckFactor, c);
             }
 
             return c;
+        }
+
+        private static void MakeSpecial(float luckFactor, CardData c)
+        {
+            c.pips.Clear();
+            c.stars.Clear();
+            c.bombs.Clear();
+            c.type = new [] { CardType.RotateRight, CardType.RotateLeft, CardType.Push, CardType.Pull }.Random();
+            // c.type = new [] { CardType.RotateRight, CardType.RotateLeft }.Random();
+            c.directions = GetRandomDirections(luckFactor);
         }
 
         private void AddStarOrBomb()

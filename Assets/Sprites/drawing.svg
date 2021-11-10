@@ -20,6 +20,12 @@
    sodipodi:docname="drawing.svg">
   <defs
      id="defs2">
+    <rect
+       x="-549.50615"
+       y="799.67043"
+       width="282.23662"
+       height="333.55237"
+       id="rect3108" />
     <clipPath
        clipPathUnits="userSpaceOnUse"
        id="clipPath1001">
@@ -39,19 +45,19 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.24748737"
-     inkscape:cx="1053.077"
-     inkscape:cy="4867.715"
+     inkscape:zoom="0.175"
+     inkscape:cx="1735.0206"
+     inkscape:cy="1627.4013"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
      showgrid="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="964"
+     inkscape:window-width="1440"
+     inkscape:window-height="784"
      inkscape:window-x="0"
      inkscape:window-y="25"
-     inkscape:window-maximized="1"
-     inkscape:snap-global="false" />
+     inkscape:window-maximized="0"
+     inkscape:snap-global="true" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -895,6 +901,66 @@
        cy="1458.4321"
        rx="6.9463744"
        ry="4.9765062"
+       inkscape:export-xdpi="25"
+       inkscape:export-ydpi="25" />
+    <text
+       xml:space="preserve"
+       id="text3106"
+       style="line-height:1.25;font-family:'Upheaval TT (BRK)';font-size:10.58333333000000032px;letter-spacing:5.29166666999999968px;-inkscape-font-specification:'Upheaval TT (BRK)';white-space:pre;shape-inside:url(#rect3108);" />
+    <text
+       xml:space="preserve"
+       style="font-size:10.5833px;line-height:1.25;font-family:'Upheaval TT (BRK)';-inkscape-font-specification:'Upheaval TT (BRK)';letter-spacing:5.29167px;stroke-width:0.264583"
+       x="-431.90753"
+       y="934.37427"
+       id="text3114"><tspan
+         sodipodi:role="line"
+         id="tspan3112"
+         x="-431.90753"
+         y="934.37427"
+         style="stroke-width:0.264583">U</tspan></text>
+    <g
+       id="g3192"
+       transform="matrix(1,0,0,1.1015093,0,-56.144219)"
+       inkscape:export-xdpi="25"
+       inkscape:export-ydpi="25">
+      <path
+         id="path3116"
+         style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:56.6929;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:64.4937;paint-order:markers stroke fill"
+         d="m 1527.459,1226.1328 c -0.3375,7.1051 -0.5137,14.2528 -0.5137,21.4414 0,245.4724 -43.0365,846.8824 400.4258,842.8418 447.4843,-4.0773 408.5078,-597.3694 408.5078,-842.8418 0,-7.1886 -0.1781,-14.3363 -0.5156,-21.4414 h -118.6914 c -0.1687,218.668 32.4475,737.8965 -288.2168,741.3535 -317.7886,3.4259 -282.2619,-522.4136 -282.3106,-741.3535 z"
+         sodipodi:nodetypes="csssccscc"
+         transform="scale(0.26458333)" />
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:16.0795;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:64.4937;paint-order:markers stroke fill"
+         id="rect3145"
+         width="30.429632"
+         height="40.130905"
+         x="404.67996"
+         y="324.95407" />
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:16.0795;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:64.4937;paint-order:markers stroke fill"
+         id="rect3145-1"
+         width="30.429632"
+         height="40.130905"
+         x="587.46857"
+         y="324.41431" />
+    </g>
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:15;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:64.4937;paint-order:markers stroke fill"
+       id="rect3167"
+       width="72.697311"
+       height="17.105249"
+       x="474.71146"
+       y="366.79034"
+       inkscape:export-xdpi="25"
+       inkscape:export-ydpi="25" />
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:15;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:64.4937;paint-order:markers stroke fill"
+       id="rect3167-2"
+       width="72.697311"
+       height="17.105249"
+       x="-411.69162"
+       y="774.64984"
+       transform="rotate(-90)"
        inkscape:export-xdpi="25"
        inkscape:export-ydpi="25" />
   </g>

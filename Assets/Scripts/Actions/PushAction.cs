@@ -5,20 +5,20 @@ using UnityEngine;
 
 namespace Actions
 {
-    public class RotateAction : BaseAction
+    public class PushAction : BaseAction
     {
         private readonly List<Card> cards;
-        private readonly bool clockwise;
-        
-        public RotateAction(IEnumerable<Card> cards, bool clockwise)
+        private readonly Vector3 from;
+
+        public PushAction(IEnumerable<Card> cards, Vector3 from)
         {
             this.cards = cards.ToList();
-            this.clockwise = clockwise;
+            this.from = from;
         }
         
         public override IEnumerator Activate(Field field)
         {
-            cards.ForEach(c => field.Rotate(c, clockwise));
+            cards.ForEach(c => field.Move(c, c.transform.position - from));
             yield return new WaitForSeconds(0.35f);
         }
     }

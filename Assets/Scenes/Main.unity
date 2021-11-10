@@ -2037,6 +2037,9 @@ MonoBehaviour:
   cardLayer:
     serializedVersion: 2
     m_Bits: 64
+  fieldLayer:
+    serializedVersion: 2
+    m_Bits: 128
   hand: {fileID: 1286812420}
   spinner: {fileID: 1590150358}
   markColor: {r: 0.92941177, g: 0.27450982, b: 0.11372549, a: 1}
@@ -3057,7 +3060,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   content: {fileID: 2090792916}
-  offset: {x: -30, y: -30, z: 0}
+  offset: {x: -30, y: -80, z: 0}
 --- !u!1 &394586011
 GameObject:
   m_ObjectHideFlags: 0
