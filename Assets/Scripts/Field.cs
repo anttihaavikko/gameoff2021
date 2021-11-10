@@ -279,6 +279,11 @@ public class Field : MonoBehaviour
                         pip.MakeStar();
                     }
                 }
+
+                if (hand.HasPassive(Passive.Tactician))
+                {
+                    multi = hand.IsEvenTurn ? 3 : 0;
+                }
                 
                 total++;
                 pop.SetText((total * multi).ToString());

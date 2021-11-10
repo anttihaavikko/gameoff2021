@@ -22,7 +22,8 @@ namespace Save
         StarOnPush,
         StarOnPull,
         StarTransformer,
-        BombTransformer
+        BombTransformer,
+        Tactician
     }
     
     public static class Passives
@@ -169,6 +170,15 @@ namespace Save
                 {
                     name = "Danger Levels",
                     description = "<r>void</c> <g>OnActivate</c>(<b>Pip</c> <b><o>pip</c></c>)\n{\n\t<r>if</c> (<o>pip</c>.<g>IsStar</c>())\n\t{\n\t\t<o>pip</c>.<g>TransformToBomb</c>();\n\t}\n}",
+                    repeatable = false
+                }
+            },
+            {
+                Passive.Tactician,
+                new PassiveDetails
+                {
+                    name = "Tactician",
+                    description = "<r>void</c> <g>OnTurnStart</c>(<r>int</c> <o><o>turn</c></c>)\n{\n\tpostMultiplier = <o><o>turn</c></c> % <p>2</c> ? <p>3</c> : <p>0</c>;\n}",
                     repeatable = false
                 }
             }

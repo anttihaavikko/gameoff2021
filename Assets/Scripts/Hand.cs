@@ -31,6 +31,8 @@ public class Hand : MonoBehaviour
     public bool HasPassive(Passive passive) => save.HasPassive(passive);
     public int GetPassiveLevel(Passive passive) => save.GetPassiveLevel(passive);
     public int Level => save.level + 1;
+    public bool IsEvenTurn => turnNumber % 2 == 0;
+    public bool IsOddTurn => !IsEvenTurn;
 
     private void Awake()
     {
