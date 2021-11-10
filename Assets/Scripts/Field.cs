@@ -246,13 +246,21 @@ public class Field : MonoBehaviour
 
             if (state)
             {
+                var skipBombActivation = false;
+                
                 if (pip.isStar)
                 {
                     multi += 1;
                     ShowTextAt($"x{multi}", pip.sprite.transform.position + Vector3.right * 0.3f);
+
+                    if (hand.HasPassive(Passive.BombTransformer))
+                    {
+                        pip.MakeBomb();
+                        skipBombActivation = true;
+                    }
                 }
 
-                if (pip.isBomb)
+                if (pip.isBomb && !skipBombActivation)
                 {
                     if(pip.isShaking)
                     {
@@ -263,6 +271,12 @@ public class Field : MonoBehaviour
                     {
                         pip.StartShaking();
                         pip.isShaking = true;
+                    }
+                    
+                    if (hand.HasPassive(Passive.StarTransformer))
+                    {
+                        pip.GetCard().ResetBombs();
+                        pip.MakeStar();
                     }
                 }
                 

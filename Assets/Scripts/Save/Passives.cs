@@ -20,7 +20,9 @@ namespace Save
         MultiOnRight,
         StarOnRotate,
         StarOnPush,
-        StarOnPull
+        StarOnPull,
+        StarTransformer,
+        BombTransformer
     }
     
     public static class Passives
@@ -149,6 +151,24 @@ namespace Save
                 {
                     name = "Starpuller",
                     description = "<r>void</c> <g>OnPull</c>(<b>Card</c> <o>card</c>)\n{\n\t<r>var</c> pip = <o>card</c>.<g>GetRandomPip</c>();\n\tpip.<g>TransformToStar</c>();\n}",
+                    repeatable = false
+                }
+            },
+            {
+                Passive.StarTransformer,
+                new PassiveDetails
+                {
+                    name = "Defuse Kit",
+                    description = "<r>void</c> <g>OnActivate</c>(<b>Pip</c> <b><o>pip</c></c>)\n{\n\t<r>if</c> (<o>pip</c>.<g>IsBomb</c>())\n\t{\n\t\t<o>pip</c>.<g>TransformToStar</c>();\n\t}\n}",
+                    repeatable = false
+                }
+            },
+            {
+                Passive.BombTransformer,
+                new PassiveDetails
+                {
+                    name = "Danger Levels",
+                    description = "<r>void</c> <g>OnActivate</c>(<b>Pip</c> <b><o>pip</c></c>)\n{\n\t<r>if</c> (<o>pip</c>.<g>IsStar</c>())\n\t{\n\t\t<o>pip</c>.<g>TransformToBomb</c>();\n\t}\n}",
                     repeatable = false
                 }
             }
