@@ -25,7 +25,7 @@ namespace Actions
                 yield return action.Activate(field);
                 actions++;
 
-                if (actions > 20)
+                if (actions >= field.GetStackSize())
                 {
                     field.Tilt();
                     yield break;

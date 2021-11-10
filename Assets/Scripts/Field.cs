@@ -332,9 +332,10 @@ public class Field : MonoBehaviour
         UpdateScore();
     }
 
-    private void ShowTextAt(string text, Vector3 pos)
+    private void ShowTextAt(string text, Vector3 pos, float scale = 1f)
     {
         var pop = Instantiate(scorePopPrefab, pos, Quaternion.identity);
+        pop.transform.localScale *= scale;
         pop.SetText(text);
         pop.SetSortOrder(1);
         StartCoroutine(DestroyAfter(pop.gameObject, 1f));
@@ -430,8 +431,13 @@ public class Field : MonoBehaviour
 
     public void Tilt()
     {
-        ShowTextAt("TILT", Vector3.zero);
+        ShowTextAt("TILT", Vector3.zero, 2f);
         actionQueue.Clear();
         cam.BaseEffect(0.3f);
+    }
+
+    public int GetStackSize()
+    {
+        return 20 + 10 * hand.GetPassiveLevel(Passive.StackSize);
     }
 }

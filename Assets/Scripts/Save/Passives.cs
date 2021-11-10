@@ -24,7 +24,8 @@ namespace Save
         StarTransformer,
         BombTransformer,
         Tactician,
-        Chaos
+        Chaos,
+        StackSize
     }
     
     public static class Passives
@@ -192,6 +193,15 @@ namespace Save
                     repeatable = false
                 }
             },
+            {
+                Passive.StackSize,
+                new PassiveDetails
+                {
+                    name = "Stack Size",
+                    description = "<r>void</c> <g>OnProcess</c>(<b><g>Act</c>ionQueue</c> <o>queue</c>)\n{\n\tif (<o>queue</c>.Count >= <p>20</c> + <p>10</c> * <p>[LEVEL]</c>)\n\t{\n\t\t<g>Tilt</c>();\n\t\t<r>return</c>;\n\t}\n\n\t<o>queue</c>.<g>Pop</c>().<g>Act</c>();\n}",
+                    repeatable = true
+                }
+            }
         };
 
         public static IEnumerable<Passive> GetRandom(List<Passive> exclude, int amount = 1)
