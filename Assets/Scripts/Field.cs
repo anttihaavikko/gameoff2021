@@ -106,6 +106,14 @@ public class Field : MonoBehaviour
             actionQueue.Add(new PushAction(neighbours, p));
             neighbours.ForEach(n => actionQueue.Add(new ActivateAction(n, multi + 1)));
         }
+        
+        if (card.IsPuller)
+        {
+            var p = card.transform.position;
+            var neighbours = GetNeighboursFor(card, 2).ToList();
+            actionQueue.Add(new PullAction(neighbours, p));
+            neighbours.ForEach(n => actionQueue.Add(new ActivateAction(n, multi + 1)));
+        }
     }
 
     public IEnumerator ScoreCard(Card card, int multi)
@@ -150,10 +158,10 @@ public class Field : MonoBehaviour
         });
     }
 
-    private IEnumerable<Card> GetNeighboursFor(Card card)
+    private IEnumerable<Card> GetNeighboursFor(Card card, int distance = 1)
     {
         var pos = card.transform.position;
-        return card.GetDirections().Select(dir => GetNeighbourFor(pos, dir)).Where(c => c != null);
+        return card.GetDirections().Select(dir => GetNeighbourFor(pos, dir * distance)).Where(c => c != null);
     }
     
     private Card GetNeighbourFor(Vector3 pos, Vector3 dir)
