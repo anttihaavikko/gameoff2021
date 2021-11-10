@@ -38,8 +38,15 @@ public class Field : MonoBehaviour
         UpdateScore();
         levelField.text = $"STAGE {hand.Level}";
         levelFieldShadow.text = levelField.text;
-        parField.text = $"PAR {hand.Level * 30}";
+        parField.text = $"PAR {GetPar(hand.Level)}";
         parFieldShadow.text = parField.text;
+    }
+
+    private int GetPar(int level)
+    {
+        if (level == 1) return 30;
+        var mod = Mathf.FloorToInt(level / 5f) + 1;
+        return GetPar(level - 1) + level * 30 * mod;
     }
 
     private void UpdateScore()
