@@ -405,7 +405,7 @@ public class Field : MonoBehaviour
         if (!card) return;
         var p = card.transform.position;
         var blocked = GetNeighbourFor(p, direction);
-        if (!blocked && IsOnArea(p))
+        if (!blocked && IsOnArea(p + direction))
         {
             StartCoroutine(MoveCoroutine(card, direction, makeStarIf));
         }
@@ -431,13 +431,13 @@ public class Field : MonoBehaviour
 
     public void Tilt()
     {
-        ShowTextAt("TILT", Vector3.zero, 2f);
+        ShowTextAt("TILT", cam.cameraRig.position.WhereZ(0), 3f);
         actionQueue.Clear();
-        cam.BaseEffect(0.3f);
+        cam.BaseEffect(0.4f);
     }
 
     public int GetStackSize()
     {
-        return 20 + 10 * hand.GetPassiveLevel(Passive.StackSize);
+        return 40 + 40 * hand.GetPassiveLevel(Passive.StackSize);
     }
 }
