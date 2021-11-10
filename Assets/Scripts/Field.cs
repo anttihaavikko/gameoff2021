@@ -284,7 +284,7 @@ public class Field : MonoBehaviour
 
         if (hand.HasPassive(Passive.Starchild))
         {
-            if ((total + 1) % 50 == 0)
+            if ((total + 1) % 30 == 0)
             {
                 pip.MakeStar();
             }
