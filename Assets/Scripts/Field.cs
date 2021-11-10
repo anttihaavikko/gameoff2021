@@ -380,18 +380,18 @@ public class Field : MonoBehaviour
         connectionLines.Hide();
     }
 
-    public void Move(Card card, Vector3 direction)
+    public void Move(Card card, Vector3 direction, Passive makeStarIf = Passive.None)
     {
         if (!card) return;
         var p = card.transform.position;
         var blocked = GetNeighbourFor(p, direction);
         if (!blocked && IsOnArea(p))
         {
-            StartCoroutine(MoveCoroutine(card, direction));
+            StartCoroutine(MoveCoroutine(card, direction, makeStarIf));
         }
     }
 
-    private IEnumerator MoveCoroutine(Card card, Vector3 direction)
+    private IEnumerator MoveCoroutine(Card card, Vector3 direction, Passive makeStarIf = Passive.None)
     {
         ClearPipsFromGrid(card);
         var t = card.transform;
@@ -400,6 +400,12 @@ public class Field : MonoBehaviour
         card.PositionPips();
         card.ResetBombs();
         PlacePipsToGrid(card);
+
+        if (hand.HasPassive(makeStarIf))
+        {
+            card.MakeRandomStar();
+        }
+        
         output.text = grid.DataAsString();
     }
 

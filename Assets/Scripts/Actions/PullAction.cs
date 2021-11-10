@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Save;
 using UnityEngine;
 
 namespace Actions
@@ -18,7 +19,7 @@ namespace Actions
         
         public override IEnumerator Activate(Field field)
         {
-            cards.ForEach(c => field.Move(c, (target - c.transform.position).normalized));
+            cards.ForEach(c => field.Move(c, (target - c.transform.position).normalized, Passive.StarOnPull));
             yield return new WaitForSeconds(0.35f);
         }
 

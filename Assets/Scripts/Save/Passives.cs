@@ -6,6 +6,7 @@ namespace Save
 {
     public enum Passive
     {
+        None,
         MultiOnBottom,
         MultiOnTop,
         BiggerHand,
@@ -17,7 +18,9 @@ namespace Save
         Detonator,
         MultiOnLeft,
         MultiOnRight,
-        StarOnRotate
+        StarOnRotate,
+        StarOnPush,
+        StarOnPull
     }
     
     public static class Passives
@@ -128,6 +131,24 @@ namespace Save
                 {
                     name = "Roller",
                     description = "<r>void</c> <g>OnRotate</c>(<b>Card</c> <o>card</c>)\n{\n\t<r>var</c> pip = <o>card</c>.<g>GetRandomPip</c>();\n\tpip.<g>TransformToStar</c>();\n}",
+                    repeatable = false
+                }
+            },
+            {
+                Passive.StarOnPush,
+                new PassiveDetails
+                {
+                    name = "Starpusher",
+                    description = "<r>void</c> <g>OnPush</c>(<b>Card</c> <o>card</c>)\n{\n\t<r>var</c> pip = <o>card</c>.<g>GetRandomPip</c>();\n\tpip.<g>TransformToStar</c>();\n}",
+                    repeatable = false
+                }
+            },
+            {
+                Passive.StarOnPull,
+                new PassiveDetails
+                {
+                    name = "Starpuller",
+                    description = "<r>void</c> <g>OnPull</c>(<b>Card</c> <o>card</c>)\n{\n\t<r>var</c> pip = <o>card</c>.<g>GetRandomPip</c>();\n\tpip.<g>TransformToStar</c>();\n}",
                     repeatable = false
                 }
             }
