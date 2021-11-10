@@ -74,6 +74,8 @@ public class Field : MonoBehaviour
     {
         if (!card) return;
         var pos = card.GetCoordinates();
+        
+        card.SetBorderColorTo(Color.black);
 
         if (pos.y == 4)
         {

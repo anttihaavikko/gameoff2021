@@ -1098,6 +1098,8 @@ MonoBehaviour:
   - {fileID: 8441192105384966414}
   - {fileID: 2119957959443051056}
   - {fileID: 6160283775615218761}
+  borderSprite: {fileID: 2024160301425814415}
+  markColor: {r: 0.92941177, g: 0.27450982, b: 0.11372549, a: 1}
 --- !u!114 &-1639243591707058243
 MonoBehaviour:
   m_ObjectHideFlags: 0

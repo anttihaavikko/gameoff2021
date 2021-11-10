@@ -17,6 +17,8 @@ public class Card : MonoBehaviour
     [SerializeField] private Transform visualContents;
     [SerializeField] private GameObject rotateIcon, pushIcon, pullIcon;
     [SerializeField] private List<GameObject> directionIndicators;
+    [SerializeField] private SpriteRenderer borderSprite;
+    [SerializeField] private Color markColor;
 
     private List<Pip> pips;
     private CardData data;
@@ -178,6 +180,16 @@ public class Card : MonoBehaviour
         }
         
         return pips;
+    }
+
+    public void ShowQueuedActivation()
+    {
+        SetBorderColorTo(markColor);
+    }
+
+    public void SetBorderColorTo(Color color)
+    {
+        Tweener.ColorToQuad(borderSprite, color, 0.2f);
     }
 
     private IntPair GetBasePosition()

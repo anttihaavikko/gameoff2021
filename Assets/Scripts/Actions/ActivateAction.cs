@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEngine;
 
 namespace Actions
 {
@@ -11,6 +12,7 @@ namespace Actions
         {
             this.card = card;
             this.multiplier = multiplier;
+            card.ShowQueuedActivation();
         }
         
         public override IEnumerator Activate(Field field)
