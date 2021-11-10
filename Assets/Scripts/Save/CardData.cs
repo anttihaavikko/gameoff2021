@@ -51,16 +51,11 @@ namespace Save
         {
             var c = Starter();
 
-            if (Random.value * luckFactor < 0.5f)
+            for (var i = 0; i < GetExtraPipCount(); i++)
             {
-                c.AddPip();
+                c.AddPip(luckFactor);
             }
-            
-            if (Random.value * luckFactor < 0.2f)
-            {
-                c.AddPip();
-            }
-            
+
             if (Random.value * luckFactor < 0.1f)
             {
                 c.AddStarOrBomb();
@@ -113,6 +108,17 @@ namespace Save
             if (roll < 0.07f) return 3;
             if (roll < 0.2f) return 2;
             return 1;
+        }
+        
+        private static int GetExtraPipCount(float luckFactor = 1f)
+        {
+            var roll = Random.value * luckFactor;
+            if (roll < 0.01f) return 5;
+            if (roll < 0.05f) return 4;
+            if (roll < 0.2f) return 3;
+            if (roll < 0.4f) return 2;
+            if (roll < 0.6f) return 1;
+            return 0;
         }
         
         private static int[] GetBase()
@@ -170,12 +176,24 @@ namespace Save
             };
         }
 
-        private void AddPip()
+        private void AddPip(float luck)
         {
             var index = Random.Range(0, 9);
             if (!pips.Contains(index))
             {
                 pips.Add(index);
+
+                if (Random.value * luck < 0.1f)
+                {
+                    var makeStar = Random.value < 0.6f;
+                    if (makeStar)
+                    {
+                        stars.Add(index);
+                        return;
+                    }
+                    
+                    bombs.Add(index);
+                }
             }
         }
 
