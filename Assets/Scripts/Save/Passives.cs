@@ -23,7 +23,8 @@ namespace Save
         StarOnPull,
         StarTransformer,
         BombTransformer,
-        Tactician
+        Tactician,
+        Chaos
     }
     
     public static class Passives
@@ -181,7 +182,16 @@ namespace Save
                     description = "<r>void</c> <g>OnTurnStart</c>(<r>int</c> <o><o>turn</c></c>)\n{\n\tpostMultiplier = <o><o>turn</c></c> % <p>2</c> ? <p>3</c> : <p>0</c>;\n}",
                     repeatable = false
                 }
-            }
+            },
+            {
+                Passive.Chaos,
+                new PassiveDetails
+                {
+                    name = "Chaos",
+                    description = "<r>void</c> <g>OnTurnStart</c>(<r>int</c> <o><o>turn</c></c>)\n{\n\t<r>if</c> (<o><o>turn</c></c> % 5 <r>==</c> 0)\n\t{\n\t\t<g>AddRandomCard</c>();\n\t\t<r>return</c>;\n\t}\n\n\t<g>DrawCard</c>();\n}",
+                    repeatable = false
+                }
+            },
         };
 
         public static IEnumerable<Passive> GetRandom(List<Passive> exclude, int amount = 1)

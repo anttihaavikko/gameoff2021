@@ -133,6 +133,13 @@ public class Hand : MonoBehaviour
 
     public void AddCard()
     {
+        if (HasPassive(Passive.Chaos) && turnNumber % 5 == 0)
+        {
+            var luck = GetLuck();
+            AddCard(CardData.GetRandom(luck), Vector3.down * 5);
+            return;
+        }
+        
         if (save.deck.IsEmpty)
         {
             if (!cards.Any())
@@ -146,15 +153,20 @@ public class Hand : MonoBehaviour
         stuffers.Pop().SetActive(false);
 
         var cardData = save.deck.Draw();
+        AddCard(cardData, deckTop.position);
+    }
+
+    private void AddCard(CardData cardData, Vector3 from)
+    {
         UpdateDrawPile();
-        
-        var c = Instantiate(cardPrefab, deckTop.position, Quaternion.identity);
+
+        var c = Instantiate(cardPrefab, from, Quaternion.identity);
         c.Setup(cardData);
         c.draggable.dropped += CardMoved;
         c.draggable.preview += ConnectionPreview;
         c.draggable.hidePreview += HidePreview;
         c.draggable.dropCancelled += PositionCards;
-        
+
         cards.Insert(0, c);
         PositionCards();
     }
@@ -211,7 +223,7 @@ public class Hand : MonoBehaviour
         cardPicks.Show();
 
         var amount = 3 + GetPassiveLevel(Passive.CardPicks);
-        var luck = Mathf.Pow(0.9f, GetPassiveLevel(Passive.LuckyRolls));
+        var luck = GetLuck();
         
         for (var i = 0; i < amount; i++)
         {
@@ -229,6 +241,11 @@ public class Hand : MonoBehaviour
                 SceneChanger.Instance.ChangeScene("Pick");
             };
         }
+    }
+
+    private float GetLuck()
+    {
+        return Mathf.Pow(0.9f, GetPassiveLevel(Passive.LuckyRolls));
     }
 
     public int GetScore()
