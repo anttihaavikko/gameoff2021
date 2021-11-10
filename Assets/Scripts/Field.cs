@@ -93,6 +93,16 @@ public class Field : MonoBehaviour
         {
             multi += hand.GetPassiveLevel(Passive.MultiOnTop);
         }
+        
+        if (pos.x == 0)
+        {
+            multi += hand.GetPassiveLevel(Passive.MultiOnLeft);
+        }
+        
+        if (pos.x == 4)
+        {
+            multi += hand.GetPassiveLevel(Passive.MultiOnRight);
+        }
 
         if (multi > 1)
         {

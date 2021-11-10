@@ -14,7 +14,9 @@ namespace Save
         LuckyRolls,
         Starchild,
         Bomberman,
-        Detonator
+        Detonator,
+        MultiOnLeft,
+        MultiOnRight
     }
     
     public static class Passives
@@ -100,7 +102,25 @@ namespace Save
                     description = "<r>void</c> <g>OnExplode</c>(<b>Card</c> <o>card</c>)\n{\n\t<o>card</c>.<g>GetNeighbours</c>().<g>Activate</c>();\n}",
                     repeatable = false
                 }
-            }
+            },
+            {
+                Passive.MultiOnLeft,
+                new PassiveDetails
+                {
+                    name = "Left",
+                    description = "<r>void</r> <g>OnPlace</g>(<b>Card</b> <o>card</o>)\n{\n\t<r>if</r> (<o>card</c>.x <r>==</r> <p>0</c>)\n\t{\n\t\tstartMultiplier = <p>1</c> + <p>[LEVEL]</c>;\n\t}\n}",
+                    repeatable = true
+                }
+            },
+            {
+                Passive.MultiOnRight,
+                new PassiveDetails
+                {
+                    name = "Right",
+                    description = "<r>void</r> <g>OnPlace</g>(<b>Card</b> <o>card</o>)\n{\n\t<r>if</r> (<o>card</c>.x <r>==</r> <p>4</c>)\n\t{\n\t\tstartMultiplier = <p>1</c> + <p>[LEVEL]</c>;\n\t}\n}",
+                    repeatable = true
+                }
+            },
         };
 
         public static IEnumerable<Passive> GetRandom(List<Passive> exclude, int amount = 1)
