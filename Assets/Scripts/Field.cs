@@ -196,13 +196,22 @@ public class Field : MonoBehaviour
     private IEnumerable<Card> GetNeighboursFor(Card card, int distance = 1, bool all = false)
     {
         var pos = card.transform.position;
-        return card.GetDirections(all).Select(dir => GetNeighbourFor(pos, dir * distance)).Where(c => c != null);
+        return card.GetDirections(all).Select(dir => GetNeighbourFor(pos, dir, distance)).Where(c => c != null);
     }
     
-    private Card GetNeighbourFor(Vector3 pos, Vector3 dir)
+    private Card GetNeighbourFor(Vector3 pos, Vector3 dir, int maxSteps = 1)
     {
-        var target = Physics2D.OverlapCircle(pos + dir * 0.75f, 0.1f, cardLayer);
-        return !target ? null : target.GetComponent<Card>();
+        for (var i = 1; i <= maxSteps; i++)
+        {
+            var diff = (i - 0.25f) * dir;
+            var target = Physics2D.OverlapCircle(pos + diff, 0.1f, cardLayer);
+            if (target)
+            {
+                return target.GetComponent<Card>();
+            }
+        }
+
+        return null;
     }
 
     private bool IsOnArea(Vector3 pos)
