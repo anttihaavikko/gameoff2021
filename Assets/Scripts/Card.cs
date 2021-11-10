@@ -215,11 +215,12 @@ public class Card : MonoBehaviour
         return points.Select(p => p.transform);
     }
 
-    public IEnumerable<Vector3> GetDirections()
+    public IEnumerable<Vector3> GetDirections(bool all = false)
     {
         var q = visualContents.rotation;
         var baseDirections = new List<Vector3> { Vector3.up, Vector3.right, Vector3.down, Vector3.left };
-        return data.directions.Select(i => q * baseDirections[i]);
+
+        return all ? baseDirections : data.directions.Select(i => q * baseDirections[i]);
     }
 
     public void Debug()

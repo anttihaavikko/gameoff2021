@@ -135,13 +135,20 @@ public class Field : MonoBehaviour
         }
     }
 
-    public void RemoveCard(Card card)
+    public void RemoveCard(Card card, int multiplier)
     {
         if (!card) return;
         EffectManager.AddEffects(new []{ 0, 1}, card.transform.position);
         EffectManager.AddEffect(2, card.GetExplosionPosition());
         cam.BaseEffect(0.3f);
         ClearPipsFromGrid(card);
+
+        if (hand.HasPassive(Passive.Detonator))
+        {
+            var neighbours = GetNeighboursFor(card, 1, true).ToList();
+            neighbours.ForEach(n => actionQueue.Add(new ActivateAction(n, multiplier)));
+        }
+        
         Destroy(card.gameObject);
     }
 
@@ -160,10 +167,10 @@ public class Field : MonoBehaviour
         });
     }
 
-    private IEnumerable<Card> GetNeighboursFor(Card card, int distance = 1)
+    private IEnumerable<Card> GetNeighboursFor(Card card, int distance = 1, bool all = false)
     {
         var pos = card.transform.position;
-        return card.GetDirections().Select(dir => GetNeighbourFor(pos, dir * distance)).Where(c => c != null);
+        return card.GetDirections(all).Select(dir => GetNeighbourFor(pos, dir * distance)).Where(c => c != null);
     }
     
     private Card GetNeighbourFor(Vector3 pos, Vector3 dir)
@@ -227,7 +234,7 @@ public class Field : MonoBehaviour
                 {
                     if(pip.isShaking)
                     {
-                        actionQueue.Add(new DestroyAction(pip.GetCard()));
+                        actionQueue.Add(new DestroyAction(pip.GetCard(), multi));
                         pip.GetCard().Shake();
                     }
                     else

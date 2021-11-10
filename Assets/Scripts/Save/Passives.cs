@@ -13,7 +13,8 @@ namespace Save
         CardPicks,
         LuckyRolls,
         Starchild,
-        Bomberman
+        Bomberman,
+        Detonator
     }
     
     public static class Passives
@@ -88,6 +89,15 @@ namespace Save
                 {
                     name = "Bomberman",
                     description = "<r>void</c> <g>OnActivate</c>(<b>Pip</c> <b><o>pip</c></c>, <r>int</c> <o>number</c>)\n{\n\t<r>if</c> (<o>number</c> % <p>20</c> <r>==</c> <p>0</c>)\n\t{\n\t\t<b><o>pip</c></c>.<g>TransformToBomb</c>();\n\t}\n}",
+                    repeatable = false
+                }
+            },
+            {
+                Passive.Detonator,
+                new PassiveDetails
+                {
+                    name = "Detonator",
+                    description = "<r>void</c> <g>OnExplode</c>(<b>Card</c> <o>card</c>)\n{\n\t<o>card</c>.<g>GetNeighbours</c>().<g>Activate</c>();\n}",
                     repeatable = false
                 }
             }
