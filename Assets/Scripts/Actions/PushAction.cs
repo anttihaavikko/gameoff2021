@@ -23,7 +23,8 @@ namespace Actions
         
         public override IEnumerator Activate(Field field)
         {
-            var sorted = cards.OrderByDescending(c => (c.transform.position - from).magnitude).ToList();
+            var sorted = cards.Where(c => c != null)
+                .OrderByDescending(c => (c.transform.position - from).magnitude).ToList();
             sorted.ForEach(c => grid.AddToGrid(c));
             sorted.ForEach(c => PushSingle(field, c));
             yield return new WaitForSeconds(0.35f);
