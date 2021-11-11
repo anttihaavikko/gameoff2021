@@ -210,6 +210,12 @@ public class Card : MonoBehaviour
         return new IntPair(coords.x / 3, coords.y / 3);
     }
 
+    public IntPair GetMirroredCoordinates()
+    {
+        var coords = GetCoordinates();
+        return new IntPair(coords.x, Mathf.Abs(4 - coords.y));
+    }
+
     public IntPair GetBasePositionFor(Vector3 p)
     {
         return new IntPair(((int)p.x + 2) * 3, (-(int)p.y + 2) * 3);
@@ -253,6 +259,13 @@ public class Card : MonoBehaviour
             options.Random().MakeStar();
         }
     }
+
+    public bool IsOnSameAxisAs(IntPair center, IEnumerable<Vector3> dirs)
+    {
+        var p = GetMirroredCoordinates();
+        var diff = (Vector3)(p.ToVector() - center.ToVector()).normalized;
+        return (p.x == center.x || p.y == center.y) && dirs.Contains(diff);
+    }
 }
 
 public class IntPair
@@ -263,6 +276,11 @@ public class IntPair
     {
         this.x = x;
         this.y = y;
+    }
+
+    public Vector2 ToVector()
+    {
+        return new Vector2(x, y);
     }
 }
 

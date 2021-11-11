@@ -26,7 +26,8 @@ namespace Save
         Tactician,
         Chaos,
         StackSize,
-        Replacement
+        Replacement,
+        MegaPush
     }
     
     public static class Passives
@@ -209,6 +210,15 @@ namespace Save
                 {
                     name = "Replacement",
                     description = "<r>void</c> <g>OnDestroy</c>(<b>Card</c> <o>card</c>)\n{\n\t<r>var</c> next = <r>new</c> <g>Card</c>();\n\t<g>PlaceOn</c>(next, <o>card</c>.<g>GetPosition</c>());\n}",
+                    repeatable = false
+                }
+            },
+            {
+                Passive.MegaPush,
+                new PassiveDetails
+                {
+                    name = "Force",
+                    description = "<r>void</c> <g>OnPlace</c>(<b>Card</c> <o>card</c>)\n{\n\t<r>if</c> (<o>card</c>.<g>IsPusher</c>())\n\t{\n\t\t<o>card</c>.<g>PushAll</c>();\n\t}\n}",
                     repeatable = false
                 }
             }

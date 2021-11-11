@@ -28,9 +28,11 @@ public class Field : MonoBehaviour
     private TileGrid<Pip> grid;
     private int totalScore;
     private ActionQueue actionQueue;
+    private List<Card> cards;
 
     private void Start()
     {
+        cards = new List<Card>();
         cam.BaseEffect(0.1f);
         actionQueue = new ActionQueue();
         grid = new TileGrid<Pip>(15, 15);
@@ -57,6 +59,8 @@ public class Field : MonoBehaviour
 
     public void Place(Card card)
     {
+        cards.Add(card);
+        
         spinner.Show();
         connectionLines.Hide();
 
@@ -121,8 +125,9 @@ public class Field : MonoBehaviour
         if (card.IsPusher)
         {
             var p = card.transform.position;
-            var neighbours = GetNeighboursFor(card).ToList();
-            actionQueue.Add(new PushAction(neighbours, p));
+            var megaMode = hand.HasPassive(Passive.MegaPush);
+            var neighbours = megaMode ? GetAxisCards(card).ToList() : GetNeighboursFor(card).ToList();
+            actionQueue.Add(new PushAction(neighbours, p, megaMode));
             neighbours.ForEach(n => actionQueue.Add(new ActivateAction(n, multi + 1)));
         }
         
@@ -159,6 +164,7 @@ public class Field : MonoBehaviour
         EffectManager.AddEffect(2, card.GetExplosionPosition());
         cam.BaseEffect(0.3f);
         ClearPipsFromGrid(card);
+        cards.Remove(card);
 
         if (hand.HasPassive(Passive.Detonator))
         {
@@ -172,6 +178,7 @@ public class Field : MonoBehaviour
             next.draggable.enabled = false;
             PlacePipsToGrid(next);
             actionQueue.Add(new ActivateAction(next, 1));
+            cards.Add(next);
             output.text = grid.DataAsString();
         }
         
@@ -191,6 +198,13 @@ public class Field : MonoBehaviour
         {
             grid.Set(null, pip.x, pip.y); 
         });
+    }
+
+    private IEnumerable<Card> GetAxisCards(Card card)
+    {
+        var pos = card.GetMirroredCoordinates();
+        var dirs = card.GetDirections();
+        return cards.Where(c => c != card && c.IsOnSameAxisAs(pos, dirs));
     }
 
     private IEnumerable<Card> GetNeighboursFor(Card card, int distance = 1, bool all = false)
@@ -418,11 +432,11 @@ public class Field : MonoBehaviour
         connectionLines.Hide();
     }
 
-    public void Move(Card card, Vector3 direction, Passive makeStarIf = Passive.None)
+    public void Move(Card card, Vector3 direction, Passive makeStarIf = Passive.None, bool ignoreBlocks = false)
     {
         if (!card) return;
         var p = card.transform.position;
-        var blocked = GetNeighbourFor(p, direction);
+        var blocked = !ignoreBlocks && GetNeighbourFor(p, direction);
         if (!blocked && IsOnArea(p + direction))
         {
             StartCoroutine(MoveCoroutine(card, direction, makeStarIf));

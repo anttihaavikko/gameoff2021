@@ -37,9 +37,14 @@ public class TileGrid<T> {
 		return list;
 	}
 
+	public bool IsInBounds(int x, int y)
+	{
+		return x >= 0 && x < width && y >= 0 && y < height;
+	}
+
 	private void AddIfNotDefault(int x, int y, ICollection<T> list)
 	{
-		if (x >= 0 && x < width && y >= 0 && y < height)
+		if (IsInBounds(x, y))
 		{
 			// Debug.Log("Adding " + x + ", " + y);
 			list.Add(data[x, y]);
@@ -61,7 +66,7 @@ public class TileGrid<T> {
 		string str = "";
 
 		string[] values = {
-			".",
+			"_",
 			"X",
 			"<color=#ff0000>O</color>",
 			"<color=#00ff00>O</color>"
