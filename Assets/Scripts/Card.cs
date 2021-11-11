@@ -265,7 +265,12 @@ public class Card : MonoBehaviour
     {
         var p = GetMirroredCoordinates();
         var diff = (Vector3)(p.ToVector() - center.ToVector()).normalized;
-        return (p.x == center.x || p.y == center.y) && dirs.Contains(diff);
+        return (p.x == center.x || p.y == center.y) && dirs.Any(p => AreVectorsClose(p, diff));
+    }
+
+    private static bool AreVectorsClose(Vector3 a, Vector3 b)
+    {
+        return Mathf.RoundToInt(a.x) == Mathf.RoundToInt(b.x) && Mathf.RoundToInt(a.y) == Mathf.RoundToInt(b.y);
     }
 }
 
