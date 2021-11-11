@@ -133,9 +133,9 @@ public class Field : MonoBehaviour
         
         if (card.IsPuller)
         {
-            var p = card.transform.position;
-            var neighbours = GetNeighboursFor(card, 2).ToList();
-            actionQueue.Add(new PullAction(neighbours, p));
+            var megaMode = hand.HasPassive(Passive.MegaPull);
+            var neighbours = megaMode ? GetAxisCards(card).ToList() : GetNeighboursFor(card, 2).ToList();
+            actionQueue.Add(new PullAction(neighbours, card, true));
             neighbours.ForEach(n => actionQueue.Add(new ActivateAction(n, multi + 1)));
         }
     }

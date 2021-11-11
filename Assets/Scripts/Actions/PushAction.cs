@@ -11,10 +11,11 @@ namespace Actions
         private readonly List<Card> cards;
         private readonly Vector3 from;
         private readonly bool mega;
-        private GridChecker grid;
+        private readonly GridChecker grid;
 
         public PushAction(IEnumerable<Card> cards, Vector3 from, bool mega = false)
         {
+            grid = new GridChecker();
             this.cards = cards.ToList();
             this.from = from;
             this.mega = mega;
@@ -22,7 +23,6 @@ namespace Actions
         
         public override IEnumerator Activate(Field field)
         {
-            grid = new GridChecker();
             var sorted = cards.OrderByDescending(c => (c.transform.position - from).magnitude).ToList();
             sorted.ForEach(c => grid.AddToGrid(c));
             sorted.ForEach(c => PushSingle(field, c));

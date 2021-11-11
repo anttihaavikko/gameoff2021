@@ -27,7 +27,8 @@ namespace Save
         Chaos,
         StackSize,
         Replacement,
-        MegaPush
+        MegaPush,
+        MegaPull
     }
     
     public static class Passives
@@ -219,6 +220,15 @@ namespace Save
                 {
                     name = "Force",
                     description = "<r>void</c> <g>OnPlace</c>(<b>Card</c> <o>card</c>)\n{\n\t<r>if</c> (<o>card</c>.<g>IsPusher</c>())\n\t{\n\t\t<o>card</c>.<g>PushAll</c>();\n\t}\n}",
+                    repeatable = false
+                }
+            },
+            {
+                Passive.MegaPull,
+                new PassiveDetails
+                {
+                    name = "Vacuum",
+                    description = "<r>void</c> <g>OnPlace</c>(<b>Card</c> <o>card</c>)\n{\n\t<r>if</c> (<o>card</c>.<g>IsPuller</c>())\n\t{\n\t\t<o>card</c>.<g>PullAll</c>();\n\t}\n}",
                     repeatable = false
                 }
             }
