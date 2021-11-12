@@ -66,7 +66,7 @@ public class Field : MonoBehaviour
         }
     }
 
-    private static int GetPar(int level)
+    public static int GetPar(int level)
     {
         if (level == 1) return 30;
         var mod = Mathf.FloorToInt(level / 5f) + 1;
@@ -207,6 +207,7 @@ public class Field : MonoBehaviour
     private void PlaceCard(Card card)
     {
         card.draggable.enabled = false;
+        card.hoverer.enabled = false;
         PlacePipsToGrid(card);
         cards.Add(card);
         output.text = grid.DataAsString();

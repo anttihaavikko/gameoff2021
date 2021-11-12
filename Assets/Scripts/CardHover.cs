@@ -21,6 +21,7 @@ public class CardHover : MonoBehaviour
     
     private void ApplyScaling(float amount, Func<float, float> easing)
     {
+        if (!enabled) return;
         Tweener.Instance.ScaleTo(transform, originalScale * (1f + amount), 0.2f, 0f, easing);
     }
 

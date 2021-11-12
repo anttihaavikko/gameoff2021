@@ -28,6 +28,7 @@ public class Hand : MonoBehaviour
     private SaveData save;
     private Stack<GameObject> stuffers;
     private int turnNumber = 1;
+    private int previousScore;
 
     public bool HasPassive(Passive passive) => save.HasPassive(passive);
     public int GetPassiveLevel(Passive passive) => save.GetPassiveLevel(passive);
@@ -117,6 +118,16 @@ public class Hand : MonoBehaviour
             CreateOptions();
         }
     }
+    
+    public void TriggerTutorial(BaseTutorial tut)
+    {
+        scalab.TriggerTutorial(tut);
+    }
+
+    public void MarkTutorial(BaseTutorial tut)
+    {
+        scalab.MarkTutorial(tut);
+    }
 
     private void PositionCards()
     {
@@ -135,6 +146,13 @@ public class Hand : MonoBehaviour
 
     public void AddCard()
     {
+        if (turnNumber >= 2)
+        {
+            SecondTurnMessages();
+        }
+
+        previousScore = GetScore();
+        
         if (HasPassive(Passive.Chaos) && turnNumber % 5 == 0)
         {
             var luck = GetLuck();
@@ -156,6 +174,18 @@ public class Hand : MonoBehaviour
 
         var cardData = save.deck.Draw();
         AddCard(cardData, deckTop.position);
+    }
+
+    private void SecondTurnMessages()
+    {
+        if (GetScore() - previousScore >= 8)
+        {
+            TriggerTutorial(BaseTutorial.NiceKeepGoing);
+            MarkTutorial(BaseTutorial.NotQuite);
+            return;
+        }
+        
+        TriggerTutorial(BaseTutorial.NotQuite);
     }
 
     public Card GetRandomCard(Vector3 startPosition)

@@ -32,14 +32,26 @@ namespace AnttiStarterKit.Animations
             appearer = GetComponent<Appearer>();
         }
 
-        public void Show(string text)
+        public void Show(string text, bool force = false)
         {
-            if (!done && showing)
+            if (force)
+            {
+                queue.Clear();
+                ShowNext(text);
+                return;
+            }
+            
+            if (!done && showing || queue.Any())
             {
                 queue.Enqueue(text);
                 return;
             }
-            
+
+            ShowNext(text);
+        }
+
+        private void ShowNext(string text)
+        {
             done = false;
             CancelPrevious();
             message = text;
@@ -47,7 +59,7 @@ namespace AnttiStarterKit.Animations
             StartCoroutine(showHandle);
 
             if (showing) return;
-            
+
             appearer.Show();
             showing = true;
         }
@@ -73,7 +85,7 @@ namespace AnttiStarterKit.Animations
         {
             if (queue.Any())
             {
-                Show(queue.Dequeue());
+                ShowNext(queue.Dequeue());
                 return;
             }
 

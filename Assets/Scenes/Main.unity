@@ -11976,9 +11976,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speechBubble: {fileID: 1206935377}
   closedScale: {x: 0.1715675, y: 0, z: 0.1715675}
-  openSpeed: 0.15
-  closeSpeed: 0.1
-  closeDelay: 0.3
+  openSpeed: 0.025
+  closeSpeed: 0.02
+  closeDelay: 0.1
   hideOnOpen: {fileID: 690175892}
 --- !u!1 &1568028164
 GameObject:

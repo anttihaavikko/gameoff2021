@@ -28,6 +28,11 @@ namespace AnttiStarterKit.Utils
             if (data.seen.Contains(message)) return;
             
             onShow?.Invoke(message);
+            Mark(message);
+        }
+
+        public void Mark(T message)
+        {
             data.seen.Add(message);
             Saver.Save(data, key);
         }

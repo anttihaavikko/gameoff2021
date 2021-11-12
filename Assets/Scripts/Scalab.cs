@@ -25,10 +25,16 @@ public class Scalab : MonoBehaviour
         tutorial.onShow += ShowTutorial;
     }
 
+    public void TriggerTutorial(BaseTutorial tut)
+    {
+        tutorial.Show(tut);
+    }
+
     private void ShowTutorial(BaseTutorial tut)
     {
         var message = GetTutorialText(tut);
-        speechBubble.Show(message);
+        var force = tut == BaseTutorial.NiceKeepGoing || tut == BaseTutorial.NotQuite;
+        speechBubble.Show(message, force);
     }
 
     private string GetTutorialText(BaseTutorial tut)
@@ -37,6 +43,8 @@ public class Scalab : MonoBehaviour
         {
             BaseTutorial.Intro => "I'm (Scalab) and I'll help you get started with playing!",
             BaseTutorial.PlaceHelp => "Place cards on the field to (connect) as many (pips) as possible.",
+            BaseTutorial.NiceKeepGoing => "Nicely done! Keep going, the (par) for this stage is (30) points.",
+            BaseTutorial.NotQuite => "Not quite! Place the card so that the (pips connect) to others.",
             _ => throw new ArgumentOutOfRangeException(nameof(tut), tut, null)
         };
     }
@@ -78,10 +86,17 @@ public class Scalab : MonoBehaviour
     {
         tutorial.Clear();
     }
+
+    public void MarkTutorial(BaseTutorial tut)
+    {
+        tutorial.Mark(tut);
+    }
 }
 
 public enum BaseTutorial
 {
     Intro,
-    PlaceHelp
+    PlaceHelp,
+    NiceKeepGoing,
+    NotQuite
 }

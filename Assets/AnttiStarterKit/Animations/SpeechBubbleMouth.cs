@@ -7,7 +7,7 @@ namespace AnttiStarterKit.Animations
     {
         [SerializeField] private SpeechBubble speechBubble;
         [SerializeField] private Vector3 closedScale;
-        [SerializeField] private float openSpeed = 0.15f, closeSpeed = 0.1f, closeDelay = 0.3f;
+        [SerializeField] private float openSpeed = 0.025f, closeSpeed = 0.02f, closeDelay = 0.05f;
         [SerializeField] private GameObject hideOnOpen;
 
         private Vector3 openScale;

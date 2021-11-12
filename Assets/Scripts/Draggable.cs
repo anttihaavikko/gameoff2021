@@ -33,7 +33,7 @@ public class Draggable : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (!CanDrag) return;
+        if (!CanDrag || !enabled) return;
         
         var go = gameObject;
         dragging = true;
