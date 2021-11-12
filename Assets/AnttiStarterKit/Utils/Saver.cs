@@ -6,30 +6,30 @@ namespace AnttiStarterKit.Utils
     {
         private static string Key => Application.productName + " Save";
         
-        public static void Save(object data)
+        public static void Save(object data, string keySuffix = "")
         {
             var json = JsonUtility.ToJson(data, true);
-            PlayerPrefs.SetString(Key, json);
+            PlayerPrefs.SetString(Key + keySuffix, json);
         }
 
-        public static T Load<T>() where T : class
+        public static T Load<T>(string keySuffix = "") where T : class
         {
-            if (!PlayerPrefs.HasKey(Key)) return null;
+            if (!PlayerPrefs.HasKey(Key + keySuffix)) return null;
             
-            var json = PlayerPrefs.GetString(Key);
+            var json = PlayerPrefs.GetString(Key + keySuffix);
             return JsonUtility.FromJson<T>(json);
         }
 
-        public static bool Exists()
+        public static bool Exists(string keySuffix = "")
         {
-            return PlayerPrefs.HasKey(Key);
+            return PlayerPrefs.HasKey(Key + keySuffix);
         }
 
-        public static void Clear()
+        public static void Clear(string keySuffix = "")
         {
-            if (!PlayerPrefs.HasKey(Key)) return;
+            if (!PlayerPrefs.HasKey(Key + keySuffix)) return;
             
-            PlayerPrefs.DeleteKey(Key);
+            PlayerPrefs.DeleteKey(Key + keySuffix);
         }
     }
 }

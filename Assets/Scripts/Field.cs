@@ -66,7 +66,7 @@ public class Field : MonoBehaviour
         }
     }
 
-    private int GetPar(int level)
+    private static int GetPar(int level)
     {
         if (level == 1) return 30;
         var mod = Mathf.FloorToInt(level / 5f) + 1;
