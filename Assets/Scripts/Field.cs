@@ -42,6 +42,28 @@ public class Field : MonoBehaviour
         levelFieldShadow.text = levelField.text;
         parField.text = $"PAR {GetPar(hand.Level)}";
         parFieldShadow.text = parField.text;
+        
+        PlaceLevelCards();
+    }
+
+    private void PlaceLevelCards()
+    {
+        switch (hand.Level)
+        {
+            case 1:
+            {
+                PlaceCard(hand.CreateCard(Vector3.zero, CardData.Loop()));
+                break;
+            }
+            case 3:
+            {
+                PlaceCard(hand.CreateCard(new Vector3(-1, -1, 0), CardData.Empty()));
+                PlaceCard(hand.CreateCard(new Vector3(-1, 1, 0), CardData.Empty()));
+                PlaceCard(hand.CreateCard(new Vector3(1, -1, 0), CardData.Empty()));
+                PlaceCard(hand.CreateCard(new Vector3(1, 1, 0), CardData.Empty()));
+                break;
+            }
+        }
     }
 
     private int GetPar(int level)

@@ -160,6 +160,12 @@ public class Hand : MonoBehaviour
     {
         var luck = GetLuck();
         var data = CardData.GetRandom(luck);
+        var card = CreateCard(startPosition, data);
+        return card;
+    }
+
+    public Card CreateCard(Vector3 startPosition, CardData data)
+    {
         var card = Instantiate(cardPrefab, startPosition, Quaternion.identity);
         card.Setup(data);
         return card;

@@ -222,6 +222,20 @@ namespace Save
                 bombs.Add(index);
             }
         }
+
+        public static CardData Loop()
+        {
+            var card = Starter();
+            card.pips = new List<int> { 0, 1, 2, 3, 5, 6, 7, 8 };
+            return card;
+        }
+        
+        public static CardData Empty()
+        {
+            var card = Starter();
+            card.pips = new List<int>();
+            return card;
+        }
     }
 
     public enum CardType
