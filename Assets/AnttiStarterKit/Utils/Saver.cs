@@ -31,5 +31,10 @@ namespace AnttiStarterKit.Utils
             
             PlayerPrefs.DeleteKey(Key + keySuffix);
         }
+
+        public static void Debug(string keySuffix = "")
+        {
+            UnityEngine.Debug.Log(PlayerPrefs.GetString(Key + keySuffix, "No data"));
+        }
     }
 }

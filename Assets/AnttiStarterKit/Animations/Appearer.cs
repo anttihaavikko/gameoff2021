@@ -16,7 +16,7 @@ namespace AnttiStarterKit.Animations
         public TMP_Text text;
         private Vector3 size;
 
-        private void Start()
+        private void Awake()
         {
             var t = transform;
             size = t.localScale;

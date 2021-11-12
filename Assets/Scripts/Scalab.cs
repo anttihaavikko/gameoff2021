@@ -1,21 +1,50 @@
 using System;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
+using AnttiStarterKit.Utils;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Scalab : MonoBehaviour
 {
     [SerializeField] private Animator anim;
+    [SerializeField] private SpeechBubble speechBubble;
 
     private static readonly int Walking = Animator.StringToHash("walking");
 
     private Vector3 start;
+    private Tutorial<BaseTutorial> tutorial;
 
     private void Start()
     {
+        tutorial = new Tutorial<BaseTutorial>("Tutorial");
         start = transform.position;
         Invoke(nameof(Move), 2f);
+        Invoke(nameof(ShowIntro), 1.2f);
+
+        tutorial.onShow += ShowTutorial;
+    }
+
+    private void ShowTutorial(BaseTutorial tut)
+    {
+        var message = GetTutorialText(tut);
+        speechBubble.Show(message);
+    }
+
+    private string GetTutorialText(BaseTutorial tut)
+    {
+        return tut switch
+        {
+            BaseTutorial.Intro => "I'm (Scalab) and I'll help you get started with playing!",
+            BaseTutorial.PlaceHelp => "Place cards on the field to (connect) as many (pips) as possible.",
+            _ => throw new ArgumentOutOfRangeException(nameof(tut), tut, null)
+        };
+    }
+
+    private void ShowIntro()
+    {
+        tutorial.Show(BaseTutorial.Intro);
+        tutorial.Show(BaseTutorial.PlaceHelp);
     }
 
     private void Update()
@@ -44,4 +73,15 @@ public class Scalab : MonoBehaviour
         anim.speed = speed;
         anim.SetBool(Walking, state);
     }
+
+    public void ResetTutorials()
+    {
+        tutorial.Clear();
+    }
+}
+
+public enum BaseTutorial
+{
+    Intro,
+    PlaceHelp
 }

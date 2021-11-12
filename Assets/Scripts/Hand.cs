@@ -22,6 +22,7 @@ public class Hand : MonoBehaviour
     [SerializeField] private SortingGroup deckStufferPrefab;
     [SerializeField] private float deckCardHeight = 0.2f;
     [SerializeField] private TMP_Text turnField, turnFieldShadow;
+    [SerializeField] private Scalab scalab;
 
     private List<Card> cards;
     private SaveData save;
@@ -102,6 +103,7 @@ public class Hand : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D))
         {
             Saver.Clear();
+            scalab.ResetTutorials();
             SceneChanger.Instance.ChangeScene("Main");
         }
         
