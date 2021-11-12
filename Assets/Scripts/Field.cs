@@ -175,14 +175,19 @@ public class Field : MonoBehaviour
         if (hand.HasPassive(Passive.Replacement))
         {
             var next = hand.GetRandomCard(card.GetPositionBeforeShaking());
-            next.draggable.enabled = false;
-            PlacePipsToGrid(next);
+            PlaceCard(card);
             actionQueue.Add(new ActivateAction(next, 1));
-            cards.Add(next);
-            output.text = grid.DataAsString();
         }
         
         Destroy(card.gameObject);
+    }
+
+    private void PlaceCard(Card card)
+    {
+        card.draggable.enabled = false;
+        PlacePipsToGrid(card);
+        cards.Add(card);
+        output.text = grid.DataAsString();
     }
 
     private void PlacePipsToGrid(Card card)
