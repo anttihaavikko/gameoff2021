@@ -243,6 +243,11 @@ public class Hand : MonoBehaviour
         }
         
         TriggerTutorial(BaseTutorial.NotQuite);
+
+        if (Level >= 2 && turnNumber == 3)
+        {
+            TriggerTutorial(BaseTutorial.DeckPreview);
+        }
     }
 
     public Card GetRandomCard(Vector3 startPosition)

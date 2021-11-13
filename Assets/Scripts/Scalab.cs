@@ -75,6 +75,7 @@ public class Scalab : MonoBehaviour
             BaseTutorial.NiceKeepGoing => "Nicely done! Keep going, the (par) for this stage is (30) points.",
             BaseTutorial.NotQuite => "Not quite! Place the card so that the (pips connect) to others.",
             BaseTutorial.Tilt => "Wow! There was a (buffer overflow) and it caused the system to (tilt).",
+            BaseTutorial.DeckPreview => "You can (preview) the (draw pile) contents by clicking on it.",
             _ => throw new ArgumentOutOfRangeException(nameof(tut), tut, null)
         };
     }
@@ -130,5 +131,6 @@ public enum BaseTutorial
     PlaceHelp,
     NiceKeepGoing,
     NotQuite,
-    Tilt
+    Tilt,
+    DeckPreview
 }
