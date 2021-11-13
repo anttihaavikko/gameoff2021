@@ -339,6 +339,8 @@ public class Hand : MonoBehaviour
             return;
         }
         
+        TriggerTutorial(BaseTutorial.NewCard);
+        
         cardPicks.Show();
 
         var amount = 3 + GetPassiveLevel(Passive.CardPicks);
