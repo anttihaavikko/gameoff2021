@@ -117,7 +117,8 @@ namespace AnttiStarterKit.Animations
                 msg += ")";
             }
 
-            return msg;
+            var rest = message.Substring(pos).Replace("(", "").Replace(")", "");
+            return msg + "<color=#00000000>" + rest + "</color>";
         }
 
         private string ApplyColors(string text)
