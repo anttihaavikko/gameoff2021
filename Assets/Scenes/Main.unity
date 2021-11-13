@@ -10114,6 +10114,7 @@ MonoBehaviour:
   deckPreviewContainer: {fileID: 388252281}
   deckPreview: {fileID: 2878855994731323404}
   cardPreviewPrefab: {fileID: 4406266767258020939, guid: c4c54e1a2d55545c392078bbba4a7096, type: 3}
+  drawPileCollider: {fileID: 5255918210665200621}
 --- !u!1 &1306271442
 GameObject:
   m_ObjectHideFlags: 0
@@ -20296,6 +20297,7 @@ GameObject:
   - component: {fileID: 5255918210665200620}
   - component: {fileID: 5255918210665200621}
   - component: {fileID: 4949019010151358142}
+  - component: {fileID: 5255918210665200612}
   m_Layer: 6
   m_Name: Deck
   m_TagString: Untagged
@@ -20303,6 +20305,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5255918210665200612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5255918210665200611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91753d6974fb4b2eb4f8d87baa69e79e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hand: {fileID: 1286812420}
 --- !u!4 &5255918210665200620
 Transform:
   m_ObjectHideFlags: 0

@@ -27,6 +27,7 @@ public class Hand : MonoBehaviour
     [SerializeField] private Transform deckPreviewContainer;
     [SerializeField] private TransformState deckPreview;
     [SerializeField] private CardPreview cardPreviewPrefab;
+    [SerializeField] private BoxCollider2D drawPileCollider;
 
     private List<Card> cards;
     private SaveData save;
@@ -285,6 +286,10 @@ public class Hand : MonoBehaviour
         {
             deckTop.gameObject.SetActive(false);
         }
+
+        var addition = (amount - 1) * deckCardHeight;
+        drawPileCollider.size = new Vector2(1, 1 + addition);
+        drawPileCollider.offset = new Vector2(0, addition * 0.5f);
     }
 
     public void NextTurn()
