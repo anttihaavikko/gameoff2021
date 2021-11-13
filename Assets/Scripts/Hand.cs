@@ -159,6 +159,12 @@ public class Hand : MonoBehaviour
             AddCard(CardData.GetRandom(luck), Vector3.down * 5);
             return;
         }
+
+        if (field.IsFull())
+        {
+            Invoke(nameof(CreateOptions), 1.5f);
+            return;
+        }
         
         if (save.deck.IsEmpty)
         {
@@ -267,6 +273,12 @@ public class Hand : MonoBehaviour
 
     private void CreateOptions()
     {
+        if (LevelFailed())
+        {
+            // TODO: restart etc
+            return;
+        }
+        
         cardPicks.Show();
 
         var amount = 3 + GetPassiveLevel(Passive.CardPicks);
@@ -288,6 +300,20 @@ public class Hand : MonoBehaviour
                 SceneChanger.Instance.ChangeScene("Pick");
             };
         }
+    }
+
+    private bool LevelFailed()
+    {
+        var noPar = GetScore() < Field.GetPar(Level);
+        if(noPar) scalab.ShowMessage($"Too bad! You didn't reach the stage (par) of ({Field.GetPar(Level)}).", true);
+        return noPar || CardsLeft();
+    }
+
+    private bool CardsLeft()
+    {
+        var cardsLeft = cards.Any() || !save.deck.IsEmpty;
+        if(cardsLeft) scalab.ShowMessage("Too bad! You didn't manage to (play all) your (cards).", true);
+        return cardsLeft;
     }
 
     private float GetLuck()

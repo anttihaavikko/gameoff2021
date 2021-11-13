@@ -37,6 +37,11 @@ public class Scalab : MonoBehaviour
         speechBubble.Show(message, force);
     }
 
+    public void ShowMessage(string message, bool forced)
+    {
+        speechBubble.Show(message, forced);
+    }
+
     private string GetTutorialText(BaseTutorial tut)
     {
         return tut switch

@@ -194,8 +194,11 @@ public class Card : MonoBehaviour
 
     public void SetBorderColorTo(Color color)
     {
-        borderSprite.color = color;
-        // Tweener.ColorToQuad(borderSprite, color, 0.2f);
+        if (borderSprite)
+        {
+            borderSprite.color = color;
+            // Tweener.ColorToQuad(borderSprite, color, 0.2f);   
+        }
     }
 
     private IntPair GetBasePosition()

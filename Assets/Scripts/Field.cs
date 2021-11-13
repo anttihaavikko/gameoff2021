@@ -69,8 +69,10 @@ public class Field : MonoBehaviour
     public static int GetPar(int level)
     {
         if (level == 1) return 30;
-        var mod = Mathf.FloorToInt(level / 5f) + 1;
-        return GetPar(level - 1) + level * 30 * mod;
+        var mod5 = Mathf.FloorToInt(level / 5f) + 1;
+        var mod10 = Mathf.FloorToInt(level / 10f) * 2 + 1;
+        var mod15 = Mathf.FloorToInt(level / 15f) * 3 + 1;
+        return GetPar(level - 1) + level * 30 * mod5 * mod10 * mod15;
     }
 
     private void UpdateScore()
@@ -473,12 +475,12 @@ public class Field : MonoBehaviour
 
     private IEnumerator MoveCoroutine(Card card, Vector3 direction, Passive makeStarIf = Passive.None)
     {
+        card.ResetBombs();
         ClearPipsFromGrid(card);
         var t = card.transform;
         Tweener.MoveToBounceOut(t, t.position + direction, 0.3f);
         yield return new WaitForSeconds(0.35f);
         card.PositionPips();
-        card.ResetBombs();
         PlacePipsToGrid(card);
 
         if (hand.HasPassive(makeStarIf))
@@ -499,5 +501,10 @@ public class Field : MonoBehaviour
     public int GetStackSize()
     {
         return 40 + 40 * hand.GetPassiveLevel(Passive.StackSize);
+    }
+
+    public bool IsFull()
+    {
+        return cards.Count >= 25;
     }
 }
