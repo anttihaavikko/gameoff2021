@@ -494,6 +494,7 @@ public class Field : MonoBehaviour
 
     public void Tilt()
     {
+        hand.TriggerTutorial(BaseTutorial.Tilt);
         ShowTextAt("TILT", cam.cameraRig.position.WhereZ(0), 3f, 2);
         actionQueue.Clear();
         cam.BaseEffect(0.4f);

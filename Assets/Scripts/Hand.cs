@@ -117,6 +117,8 @@ public class Hand : MonoBehaviour
         {
             CreateOptions();
         }
+
+        Time.timeScale = Input.GetKey(KeyCode.Tab) ? 5 : 1;
     }
     
     public void TriggerTutorial(BaseTutorial tut)
