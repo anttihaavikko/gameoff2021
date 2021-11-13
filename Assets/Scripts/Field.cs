@@ -63,6 +63,14 @@ public class Field : MonoBehaviour
                 PlaceCard(hand.CreateCard(new Vector3(1, 1, 0), CardData.Empty()));
                 break;
             }
+            case 5:
+            {
+                PlaceCard(hand.CreateCard(new Vector3(-2, -2, 0), CardData.Empty()));
+                PlaceCard(hand.CreateCard(new Vector3(-2, 2, 0), CardData.Empty()));
+                PlaceCard(hand.CreateCard(new Vector3(2, -2, 0), CardData.Empty()));
+                PlaceCard(hand.CreateCard(new Vector3(2, 2, 0), CardData.Empty()));
+                break;
+            }
         }
     }
 
