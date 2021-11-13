@@ -311,6 +311,14 @@ public class Hand : MonoBehaviour
             var data = CardData.GetRandom(luck);
             card.Setup(data);
             card.draggable.CanDrag = false;
+            card.hoverer.onHover += () =>
+            {
+                var message = card.GetInfo();
+                if (message != null)
+                {
+                    scalab.ShowMessage(message, true);   
+                }
+            };
             card.draggable.click += () =>
             {
                 card.draggable.click = null;

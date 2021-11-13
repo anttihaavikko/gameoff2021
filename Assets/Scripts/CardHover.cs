@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class CardHover : MonoBehaviour
 {
+    public Action onHover;
+    
     private Vector3 originalScale;
     private float scaleAmount = 0.1f;
     
@@ -17,6 +19,7 @@ public class CardHover : MonoBehaviour
     private void OnMouseEnter()
     {
         ApplyScaling(scaleAmount, TweenEasings.BounceEaseOut);
+        onHover?.Invoke();
     }
     
     private void ApplyScaling(float amount, Func<float, float> easing)

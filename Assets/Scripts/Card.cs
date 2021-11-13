@@ -276,6 +276,44 @@ public class Card : MonoBehaviour
     {
         return Mathf.RoundToInt(a.x) == Mathf.RoundToInt(b.x) && Mathf.RoundToInt(a.y) == Mathf.RoundToInt(b.y);
     }
+
+    public string GetInfo()
+    {
+        if (IsRotator)
+        {
+            return "That card (rotates) and (activates) the cards in the (marked) direction.";
+        }
+        
+        if (IsPusher)
+        {
+            return "That card (pushes) and activates the cards in the (marked) direction.";
+        }
+        
+        if (IsPuller)
+        {
+            return "That card (pulls) and (activates) the cards in the (marked) direction.";
+        }
+
+        var hasStars = pips.Any(p => p.isStar);
+        var hasBombs = pips.Any(p => p.isBomb);
+
+        if (hasStars && hasBombs)
+        {
+            return "Those (star) pips increase (multiplier) on activation. The (bomb) pips (explode) and destroy the card.";
+        }
+
+        if (hasStars)
+        {
+            return "Those (star) pips increase (multiplier) on activation.";
+        }
+
+        if (hasBombs)
+        {
+            return "Those (bomb) pips (explode) after two activations (destroying) the card.";
+        }
+
+        return null;
+    }
 }
 
 public class IntPair
