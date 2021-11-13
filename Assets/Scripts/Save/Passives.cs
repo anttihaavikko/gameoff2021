@@ -40,7 +40,8 @@ namespace Save
                 {
                     name = "Bottom",
                     description = "<r>void</r> <g>OnPlace</g>(<b>Card</b> <o>card</o>)\n{\n\t<r>if</r> (<o>card</c>.y <r>==</r> <p>4</c>)\n\t{\n\t\tstartMultiplier = <p>1</c> + <p>[LEVEL]</c>;\n\t}\n}",
-                    repeatable = true
+                    repeatable = true,
+                    tutorial = "causes the cards placed on the (bottom edge) to start with (+1) multiplier."
                 }
             },
             {
@@ -49,7 +50,8 @@ namespace Save
                 {
                     name = "Top",
                     description = "<r>void</r> <g>OnPlace</g>(<b>Card</b> <o>card</o>)\n{\n\t<r>if</r> (<o>card</c>.y <r>==</r> <p>0</c>)\n\t{\n\t\tstartMultiplier = <p>1</c> + <p>[LEVEL]</c>;\n\t}\n}",
-                    repeatable = true
+                    repeatable = true,
+                    tutorial = "causes the cards placed on the (top edge) to start with (+1) multiplier."
                 }
             },
             {
@@ -58,7 +60,8 @@ namespace Save
                 {
                     name = "Bigger Hand",
                     description = "<r>int</c> <g>GetHandSize</c>()\n{\n\t<r>return</c> DEFAULT_HAND_SIZE + <p>[LEVEL]</c>;\n}",
-                    repeatable = true
+                    repeatable = true,
+                    tutorial = "(increases) your maximum (hand size)."
                 }
             },
             {
@@ -67,7 +70,8 @@ namespace Save
                 {
                     name = "Options",
                     description = "<r>void</c> <g>PresentCodeInjections</c>()\n{\n\t<r>for</c> (<r>var</c> i = 0; i<r> < </c><p>2</c> + <p>[LEVEL]</c>; i<r>++</c>)\n\t{\n\t\t<r>var</c> p = <r>new</c> <b>Passive</c>();\n\t\tp.<g><r>Present</c></c>();\n\t}\n}",
-                    repeatable = true
+                    repeatable = true,
+                    tutorial = "makes you get (more options) for future (code injections)."
                 }
             },
             {
@@ -76,7 +80,8 @@ namespace Save
                 {
                     name = "Variety",
                     description = "<r>void</c> <g>PresentNewCards</c>()\n{\n\t<r>for</c> (<r>var</c> i = 0; i<r> < </c><p>3</c> + <p>[LEVEL]</c>; i<r>++</c>)\n\t{\n\t\t<r>var</c> c = <r>new</c> <b>Card</c>();\n\t\tc.<g><r>Present</c></c>();\n\t}\n}",
-                    repeatable = true
+                    repeatable = true,
+                    tutorial = "makes you get (more options) on future (cards selections)."
                 }
             },
             {
@@ -85,7 +90,8 @@ namespace Save
                 {
                     name = "Lucky Rolls",
                     description = "<r>bool</c> <g>GetRandomChance</c>(<r>float</c> <o>target</c>)\n{\n\t<r>var</c> mod = <b>Mathf</c>.<g>Pow</c>(<p>0.9f</c>, <p>[LEVEL]</c>);\n\t<r>return</c> <b>Random</c>.value * mod <p><</c> <o>target</c>;\n}",
-                    repeatable = true
+                    repeatable = true,
+                    tutorial = "affects your (luck) and makes you get (better cards)."
                 }
             },
             {
@@ -94,7 +100,8 @@ namespace Save
                 {
                     name = "Starchild",
                     description = "<r>void</c> <g>OnActivate</c>(<b>Pip</c> <b><o>pip</c></c>, <r>int</c> <o>number</c>)\n{\n\t<r>if</c> (<o>number</c> % <p>30</c> <r>==</c> <p>0</c>)\n\t{\n\t\t<b><o>pip</c></c>.<g>TransformToStar</c>();\n\t}\n}",
-                    repeatable = false
+                    repeatable = false,
+                    tutorial = "makes every (30th) activated (pip) turn to a (star)."
                 }
             },
             {
@@ -103,7 +110,8 @@ namespace Save
                 {
                     name = "Bomberman",
                     description = "<r>void</c> <g>OnActivate</c>(<b>Pip</c> <b><o>pip</c></c>, <r>int</c> <o>number</c>)\n{\n\t<r>if</c> (<o>number</c> % <p>20</c> <r>==</c> <p>0</c>)\n\t{\n\t\t<b><o>pip</c></c>.<g>TransformToBomb</c>();\n\t}\n}",
-                    repeatable = false
+                    repeatable = false,
+                    tutorial = "makes every (20th) activated (pip) turn to a (bomb)."
                 }
             },
             {
@@ -112,7 +120,8 @@ namespace Save
                 {
                     name = "Detonator",
                     description = "<r>void</c> <g>OnExplode</c>(<b>Card</c> <o>card</c>)\n{\n\t<o>card</c>.<g>GetNeighbours</c>().<g>Activate</c>();\n}",
-                    repeatable = false
+                    repeatable = false,
+                    tutorial = "causes (exploding cards) to (activate) it's (neighbour) cards."
                 }
             },
             {
@@ -121,7 +130,8 @@ namespace Save
                 {
                     name = "Left",
                     description = "<r>void</r> <g>OnPlace</g>(<b>Card</b> <o>card</o>)\n{\n\t<r>if</r> (<o>card</c>.x <r>==</r> <p>0</c>)\n\t{\n\t\tstartMultiplier = <p>1</c> + <p>[LEVEL]</c>;\n\t}\n}",
-                    repeatable = true
+                    repeatable = true,
+                    tutorial = "causes the cards placed on the (left edge) to start with (+1) multiplier."
                 }
             },
             {
@@ -130,7 +140,8 @@ namespace Save
                 {
                     name = "Right",
                     description = "<r>void</r> <g>OnPlace</g>(<b>Card</b> <o>card</o>)\n{\n\t<r>if</r> (<o>card</c>.x <r>==</r> <p>4</c>)\n\t{\n\t\tstartMultiplier = <p>1</c> + <p>[LEVEL]</c>;\n\t}\n}",
-                    repeatable = true
+                    repeatable = true,
+                    tutorial = "causes the cards placed on the (right edge) to start with (+1) multiplier."
                 }
             },
             {
@@ -139,7 +150,8 @@ namespace Save
                 {
                     name = "Roller",
                     description = "<r>void</c> <g>OnRotate</c>(<b>Card</c> <o>card</c>)\n{\n\t<r>var</c> pip = <o>card</c>.<g>GetRandomPip</c>();\n\tpip.<g>TransformToStar</c>();\n}",
-                    repeatable = false
+                    repeatable = false,
+                    tutorial = "enhances your (rotator cards) to also (add a new random star) to the rotated cards."
                 }
             },
             {
@@ -148,7 +160,8 @@ namespace Save
                 {
                     name = "Starpusher",
                     description = "<r>void</c> <g>OnPush</c>(<b>Card</c> <o>card</c>)\n{\n\t<r>var</c> pip = <o>card</c>.<g>GetRandomPip</c>();\n\tpip.<g>TransformToStar</c>();\n}",
-                    repeatable = false
+                    repeatable = false,
+                    tutorial = "enhances your (pusher cards) to also (add a new random star) to the pushed cards."
                 }
             },
             {
@@ -157,7 +170,8 @@ namespace Save
                 {
                     name = "Starpuller",
                     description = "<r>void</c> <g>OnPull</c>(<b>Card</c> <o>card</c>)\n{\n\t<r>var</c> pip = <o>card</c>.<g>GetRandomPip</c>();\n\tpip.<g>TransformToStar</c>();\n}",
-                    repeatable = false
+                    repeatable = false,
+                    tutorial = "enhances your (puller cards) to also (add a new random star) to the pulled cards."
                 }
             },
             {
@@ -166,7 +180,8 @@ namespace Save
                 {
                     name = "Defuse Kit",
                     description = "<r>void</c> <g>OnActivate</c>(<b>Pip</c> <b><o>pip</c></c>)\n{\n\t<r>if</c> (<o>pip</c>.<g>IsBomb</c>())\n\t{\n\t\t<o>pip</c>.<g>TransformToStar</c>();\n\t}\n}",
-                    repeatable = false
+                    repeatable = false,
+                    tutorial = "saves you from (destruction) by replacing activated (bombs) with (stars)."
                 }
             },
             {
@@ -175,7 +190,8 @@ namespace Save
                 {
                     name = "Danger Levels",
                     description = "<r>void</c> <g>OnActivate</c>(<b>Pip</c> <b><o>pip</c></c>)\n{\n\t<r>if</c> (<o>pip</c>.<g>IsStar</c>())\n\t{\n\t\t<o>pip</c>.<g>TransformToBomb</c>();\n\t}\n}",
-                    repeatable = false
+                    repeatable = false,
+                    tutorial = "wreaks some (havoc) by replacing activated (stars) with (bombs)."
                 }
             },
             {
@@ -184,7 +200,8 @@ namespace Save
                 {
                     name = "Tactician",
                     description = "<r>void</c> <g>OnTurnStart</c>(<r>int</c> <o><o>turn</c></c>)\n{\n\tpostMultiplier = <o><o>turn</c></c> % <p>2</c> ? <p>3</c> : <p>0</c>;\n}",
-                    repeatable = false
+                    repeatable = false,
+                    tutorial = "makes your (even numbered turns) gain (triple) the points but (none) on (odd) ones."
                 }
             },
             {
@@ -193,7 +210,8 @@ namespace Save
                 {
                     name = "Chaos",
                     description = "<r>void</c> <g>OnTurnStart</c>(<r>int</c> <o><o>turn</c></c>)\n{\n\t<r>if</c> (<o><o>turn</c></c> % 5 <r>==</c> 0)\n\t{\n\t\t<g>AddRandomCard</c>();\n\t\t<r>return</c>;\n\t}\n\n\t<g>DrawCard</c>();\n}",
-                    repeatable = false
+                    repeatable = false,
+                    tutorial = "gives you a (random card) instead of (drawing) one every (5 turns)."
                 }
             },
             {
@@ -202,7 +220,8 @@ namespace Save
                 {
                     name = "Stack Size",
                     description = "<r>void</c> <g>OnProcess</c>(<b><g>Act</c>ionQueue</c> <o>queue</c>)\n{\n\tif (<o>queue</c>.Count >= <p>40</c> + <p>40</c> * <p>[LEVEL]</c>)\n\t{\n\t\t<g>Tilt</c>();\n\t\t<r>return</c>;\n\t}\n\n\t<o>queue</c>.<g>Pop</c>().<g>Act</c>();\n}",
-                    repeatable = true
+                    repeatable = true,
+                    tutorial = "increases the (maximum action stack size) giving you more (combo) chances."
                 }
             },
             {
@@ -211,7 +230,8 @@ namespace Save
                 {
                     name = "Replacement",
                     description = "<r>void</c> <g>OnDestroy</c>(<b>Card</c> <o>card</c>)\n{\n\t<r>var</c> next = <r>new</c> <g>Card</c>();\n\t<g>PlaceOn</c>(next, <o>card</c>.<g>GetPosition</c>());\n}",
-                    repeatable = false
+                    repeatable = false,
+                    tutorial = "causes (exploding cards) to be replaced with a new (random card)."
                 }
             },
             {
@@ -220,7 +240,8 @@ namespace Save
                 {
                     name = "Force",
                     description = "<r>void</c> <g>OnPlace</c>(<b>Card</c> <o>card</c>)\n{\n\t<r>if</c> (<o>card</c>.<g>IsPusher</c>())\n\t{\n\t\t<o>card</c>.<g>PushAll</c>();\n\t}\n}",
-                    repeatable = false
+                    repeatable = false,
+                    tutorial = "enhances your (push cards) to affect (every) other card in marked directions and also (extends) its range."
                 }
             },
             {
@@ -229,7 +250,8 @@ namespace Save
                 {
                     name = "Vacuum",
                     description = "<r>void</c> <g>OnPlace</c>(<b>Card</c> <o>card</c>)\n{\n\t<r>if</c> (<o>card</c>.<g>IsPuller</c>())\n\t{\n\t\t<o>card</c>.<g>PullAll</c>();\n\t}\n}",
-                    repeatable = false
+                    repeatable = false,
+                    tutorial = "enhances your (pull cards) to affect (every) other card in marked directions and also (extends) its range."
                 }
             }
         };
@@ -254,5 +276,6 @@ namespace Save
         public string name;
         public string description;
         public bool repeatable;
+        public string tutorial;
     }
 }

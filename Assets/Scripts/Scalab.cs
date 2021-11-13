@@ -2,6 +2,7 @@ using System;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
 using AnttiStarterKit.Utils;
+using Save;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,20 +15,36 @@ public class Scalab : MonoBehaviour
 
     private Vector3 start;
     private Tutorial<BaseTutorial> tutorial;
+    private Tutorial<Passive> skillTutorials;
+    
+    private readonly string[] skillStarters =
+    {
+        "The (code) you just picked up",
+        "That piece of (code)",
+        "That there (code)",
+        "That new (code)"
+    };
 
     private void Start()
     {
         tutorial = new Tutorial<BaseTutorial>("Tutorial");
+        skillTutorials = new Tutorial<Passive>("SkillTutorial");
         start = transform.position;
         Invoke(nameof(Move), 2f);
         Invoke(nameof(ShowIntro), 1.2f);
 
         tutorial.onShow += ShowTutorial;
+        skillTutorials.onShow += ShowTutorial;
     }
 
     public void TriggerTutorial(BaseTutorial tut)
     {
         tutorial.Show(tut);
+    }
+    
+    public void TriggerTutorial(Passive passive)
+    {
+        skillTutorials.Show(passive);
     }
 
     private void ShowTutorial(BaseTutorial tut)
@@ -35,6 +52,13 @@ public class Scalab : MonoBehaviour
         var message = GetTutorialText(tut);
         var force = tut == BaseTutorial.NiceKeepGoing || tut == BaseTutorial.NotQuite;
         speechBubble.Show(message, force);
+    }
+    
+    private void ShowTutorial(Passive passive)
+    {
+        var details = Passives.GetDetails(passive);
+        var start = skillStarters.Random();
+        speechBubble.Show($"{start} {details.tutorial}", false);
     }
 
     public void ShowMessage(string message, bool forced)
@@ -91,6 +115,7 @@ public class Scalab : MonoBehaviour
     public void ResetTutorials()
     {
         tutorial.Clear();
+        skillTutorials.Clear();
     }
 
     public void MarkTutorial(BaseTutorial tut)

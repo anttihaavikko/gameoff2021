@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Animations;
+using AnttiStarterKit.Extensions;
 using AnttiStarterKit.Utils;
 using Save;
 using TMPro;
@@ -29,6 +30,16 @@ public class Hand : MonoBehaviour
     private Stack<GameObject> stuffers;
     private int turnNumber = 1;
     private int previousScore;
+    
+    private readonly string[] badIntros =
+    {
+        "Too bad!",
+        "Oh no!",
+        "Oh noes!",
+        "Uh oh!",
+        "Darn!",
+        "Not quite!"
+    };
 
     public bool HasPassive(Passive passive) => save.HasPassive(passive);
     public int GetPassiveLevel(Passive passive) => save.GetPassiveLevel(passive);
@@ -55,6 +66,13 @@ public class Hand : MonoBehaviour
         }
         
         ShowPassives();
+        Invoke(nameof(ShowPassiveTutorial), 1.2f);
+    }
+
+    private void ShowPassiveTutorial()
+    {
+        if (!save.passives.Any()) return;
+        scalab.TriggerTutorial(save.passives.Last());
     }
 
     private void CreateStuffers()
@@ -307,14 +325,14 @@ public class Hand : MonoBehaviour
     private bool LevelFailed()
     {
         var noPar = GetScore() < Field.GetPar(Level);
-        if(noPar) scalab.ShowMessage($"Too bad! You didn't reach the stage (par) of ({Field.GetPar(Level)}).", true);
+        if(noPar) scalab.ShowMessage($"{badIntros.Random()} You didn't reach the stage (par) of ({Field.GetPar(Level)}) points.", true);
         return noPar || CardsLeft();
     }
 
     private bool CardsLeft()
     {
         var cardsLeft = cards.Any() || !save.deck.IsEmpty;
-        if(cardsLeft) scalab.ShowMessage("Too bad! You didn't manage to (play all) your (cards).", true);
+        if(cardsLeft) scalab.ShowMessage($"{badIntros.Random()} You didn't manage to (play all) your (cards).", true);
         return cardsLeft;
     }
 
