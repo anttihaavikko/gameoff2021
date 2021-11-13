@@ -151,7 +151,7 @@ namespace Save
                     name = "Roller",
                     description = "<r>void</c> <g>OnRotate</c>(<b>Card</c> <o>card</c>)\n{\n\t<r>var</c> pip = <o>card</c>.<g>GetRandomPip</c>();\n\tpip.<g>TransformToStar</c>();\n}",
                     repeatable = false,
-                    tutorial = "enhances your (rotator cards) to also (add a new random star) to the rotated cards."
+                    tutorial = "enhances your (rotator cards) to also add a new (random star) to the rotated cards."
                 }
             },
             {
@@ -161,7 +161,7 @@ namespace Save
                     name = "Starpusher",
                     description = "<r>void</c> <g>OnPush</c>(<b>Card</c> <o>card</c>)\n{\n\t<r>var</c> pip = <o>card</c>.<g>GetRandomPip</c>();\n\tpip.<g>TransformToStar</c>();\n}",
                     repeatable = false,
-                    tutorial = "enhances your (pusher cards) to also (add a new random star) to the pushed cards."
+                    tutorial = "enhances your (pusher cards) to also add a new (random star) to the pushed cards."
                 }
             },
             {
@@ -171,7 +171,7 @@ namespace Save
                     name = "Starpuller",
                     description = "<r>void</c> <g>OnPull</c>(<b>Card</c> <o>card</c>)\n{\n\t<r>var</c> pip = <o>card</c>.<g>GetRandomPip</c>();\n\tpip.<g>TransformToStar</c>();\n}",
                     repeatable = false,
-                    tutorial = "enhances your (puller cards) to also (add a new random star) to the pulled cards."
+                    tutorial = "enhances your (puller cards) to also add a new (random star) to the pulled cards."
                 }
             },
             {
