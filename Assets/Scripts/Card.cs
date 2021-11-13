@@ -245,6 +245,7 @@ public class Card : MonoBehaviour
 
     public void ResetBombs()
     {
+        pips.ForEach(p => p.isShaking = false);
         shakingPips.Clear();
     }
 
