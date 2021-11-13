@@ -24,12 +24,16 @@ public class Hand : MonoBehaviour
     [SerializeField] private float deckCardHeight = 0.2f;
     [SerializeField] private TMP_Text turnField, turnFieldShadow;
     [SerializeField] private Scalab scalab;
+    [SerializeField] private Transform deckPreviewContainer;
+    [SerializeField] private TransformState deckPreview;
+    [SerializeField] private CardPreview cardPreviewPrefab;
 
     private List<Card> cards;
     private SaveData save;
     private Stack<GameObject> stuffers;
     private int turnNumber = 1;
     private int previousScore;
+    private bool previewShown;
     
     private readonly string[] badIntros =
     {
@@ -136,9 +140,35 @@ public class Hand : MonoBehaviour
             CreateOptions();
         }
 
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            ToggleDeckPreview();
+        }
+
         Time.timeScale = Input.GetKey(KeyCode.Tab) ? 5 : 1;
     }
-    
+
+    public void ToggleDeckPreview()
+    {
+        previewShown = !previewShown;
+        var target = previewShown ? deckPreview.Position.WhereY(480) : deckPreview.Position;
+        Tweener.MoveToBounceOut(deckPreview.transform, target, 0.5f);
+
+        if (previewShown)
+        {
+            foreach (Transform child in deckPreviewContainer) {
+                Destroy(child.gameObject);
+            }
+            
+            var pile = save.deck.Preview;
+            pile.ForEach(c =>
+            {
+                var preview = Instantiate(cardPreviewPrefab, deckPreviewContainer);
+                preview.Setup(c);
+            });
+        }
+    }
+
     public void TriggerTutorial(BaseTutorial tut)
     {
         scalab.TriggerTutorial(tut);
