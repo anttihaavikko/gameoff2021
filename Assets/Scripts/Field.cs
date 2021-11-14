@@ -10,6 +10,7 @@ using AnttiStarterKit.Extensions;
 using AnttiStarterKit.Managers;
 using AnttiStarterKit.Utils;
 using AnttiStarterKit.Visuals;
+using Curses;
 using Save;
 using Tasks;
 using Random = UnityEngine.Random;
@@ -25,6 +26,7 @@ public class Field : MonoBehaviour
     [SerializeField] private Appearer spinner;
     [SerializeField] private Color markColor;
     [SerializeField] private EffectCamera cam;
+    [SerializeField] private Meanie meanie;
 
     private TileGrid<Pip> grid;
     private int totalScore;
@@ -32,6 +34,9 @@ public class Field : MonoBehaviour
     private List<Card> cards;
     private List<Card> turnActivatedCards;
     private StageTask stageTask;
+    private Curse curse;
+
+    public bool HasCurse => curse != null;
 
     private void Start()
     {
@@ -49,11 +54,16 @@ public class Field : MonoBehaviour
         levelFieldShadow.text = levelField.text;
         
         ShowTaskOrPar();
-        Invoke(nameof(ShowTaskTutorial), 1.1f);
+        Invoke(nameof(ShowTaskAndCurseTutorial), 1.1f);
     }
 
-    public void ShowTaskTutorial()
+    public void ShowTaskAndCurseTutorial()
     {
+        if (HasCurse)
+        {
+            hand.ShowMessage(curse.GetTutorial(), false);
+        }
+        
         if (stageTask == null) return;
         Invoke(nameof(ShowTaskLabel), 0.5f);
         hand.ShowMessage(stageTask.GetTutorial(), false);
@@ -105,6 +115,68 @@ public class Field : MonoBehaviour
                 });
                 break;
             }
+            case 8:
+            {
+                curse = new PusherCurse(meanie);
+                break;
+            }
+            case 10:
+            {
+                stageTask = new ConnectTask(this, new[]
+                {
+                    new Vector3(-2, 0, 0),
+                    new Vector3(2, 0, 0)
+                });
+                break;
+            }
+            case 12:
+            {
+                curse = new PusherCurse(meanie);
+                
+                stageTask = new ConnectTask(this, new[]
+                {
+                    new Vector3(-2, 0, 0),
+                    new Vector3(2, 0, 0),
+                    new Vector3(0, 0, 0)
+                });
+                break;
+            }
+            case 14:
+            {
+                curse = new PusherCurse(meanie);
+                
+                stageTask = new ConnectTask(this, new[]
+                {
+                    new Vector3(0, -2, 0),
+                    new Vector3(0, 0, 0),
+                    new Vector3(0, 2, 0)
+                });
+                break;
+            }
+            case 16:
+            {
+                stageTask = new ConnectTask(this, new[]
+                {
+                    new Vector3(-1, -1, 0),
+                    new Vector3(1, 1, 0),
+                    new Vector3(-1, 1, 0),
+                    new Vector3(1, -1, 0)
+                });
+                break;
+            }
+            case 18:
+            {
+                curse = new PusherCurse(meanie);
+                
+                stageTask = new ConnectTask(this, new[]
+                {
+                    new Vector3(-1, -1, 0),
+                    new Vector3(1, 1, 0),
+                    new Vector3(-1, 1, 0),
+                    new Vector3(1, -1, 0)
+                });
+                break;
+            }
         }
     }
 
@@ -144,6 +216,12 @@ public class Field : MonoBehaviour
     private IEnumerator ProcessQueue()
     {
         yield return actionQueue.Process(this);
+
+        if (HasCurse)
+        {
+            yield return curse.Apply(this);
+        }
+        
         hand.NextTurn();
         spinner.Hide();
     }
@@ -307,6 +385,16 @@ public class Field : MonoBehaviour
         var pos = card.GetMirroredCoordinates();
         var dirs = card.GetDirections();
         return cards.Where(c => c != card && c.IsOnSameAxisAs(pos, dirs));
+    }
+
+    public IEnumerable<Card> GetCardsOnAxisY(int y)
+    {
+        return cards.Where(c => c.IsOnSameAxisY(y));
+    }
+    
+    public IEnumerable<Card> GetCardsOnAxisX(int x)
+    {
+        return cards.Where(c => c.IsOnSameAxisX(x));
     }
 
     private IEnumerable<Card> GetNeighboursFor(Card card, int distance = 1, bool all = false)

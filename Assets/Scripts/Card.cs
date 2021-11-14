@@ -5,6 +5,7 @@ using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
 using Save;
 using UnityEngine;
+using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 public class Card : MonoBehaviour
@@ -313,6 +314,16 @@ public class Card : MonoBehaviour
         }
 
         return null;
+    }
+
+    public bool IsOnSameAxisY(int y)
+    {
+        return GetMirroredCoordinates().y == y;
+    }
+
+    public bool IsOnSameAxisX(int x)
+    {
+        return GetMirroredCoordinates().x == x;
     }
 }
 
