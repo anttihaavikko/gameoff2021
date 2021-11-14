@@ -155,23 +155,28 @@ public class Hand : MonoBehaviour
     public void ToggleDeckPreview()
     {
         previewShown = !previewShown;
+        drawPileCollider.enabled = !previewShown;
         var target = deckPreview.Position +  Vector3.down * (previewShown ? 0 : Screen.height);
         var t = deckPreview.transform;
         Tweener.MoveToBounceOut(t, target.WhereX(t.position.x), 0.5f);
+        UpdateDeckPreviewContents();
+    }
 
-        if (previewShown)
+    private void UpdateDeckPreviewContents()
+    {
+        if (!previewShown) return;
+        
+        foreach (Transform child in deckPreviewContainer)
         {
-            foreach (Transform child in deckPreviewContainer) {
-                Destroy(child.gameObject);
-            }
-            
-            var pile = save.deck.Preview;
-            pile.ForEach(c =>
-            {
-                var preview = Instantiate(cardPreviewPrefab, deckPreviewContainer);
-                preview.Setup(c);
-            });
+            Destroy(child.gameObject);
         }
+
+        var pile = save.deck.Preview;
+        pile.ForEach(c =>
+        {
+            var preview = Instantiate(cardPreviewPrefab, deckPreviewContainer);
+            preview.Setup(c);
+        });
     }
 
     public void TriggerTutorial(BaseTutorial tut)
@@ -237,6 +242,7 @@ public class Hand : MonoBehaviour
 
         var cardData = save.deck.Draw();
         AddCard(cardData, deckTop.position);
+        UpdateDeckPreviewContents();
     }
 
     private void SecondTurnMessages()
@@ -339,6 +345,11 @@ public class Hand : MonoBehaviour
 
     private void CreateOptions()
     {
+        if (previewShown)
+        {
+            ToggleDeckPreview();    
+        }
+        
         if (LevelFailed())
         {
             // TODO: restart etc

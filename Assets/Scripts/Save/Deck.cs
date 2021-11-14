@@ -12,7 +12,7 @@ namespace Save
         private Queue<CardData> pile;
         
         public bool IsEmpty => !pile.Any();
-        public List<CardData> Preview => pile.OrderBy(_ => Random.value).ToList();
+        public List<CardData> Preview => pile.OrderByDescending(c => c.SortValue()).ToList();
 
         public Deck()
         {

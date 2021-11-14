@@ -236,6 +236,21 @@ namespace Save
             card.pips = new List<int>();
             return card;
         }
+
+        public int SortValue()
+        {
+            var value = 0;
+
+            if (IsRotator) value += 10000 * directions.Count;
+            if (type == CardType.Push || type == CardType.Pull) value += 1000 * directions.Count;
+
+            value += stars.Count * 100;
+            value += bombs.Count * 10;
+
+            value += pips.Count;
+
+            return value;
+        }
     }
 
     public enum CardType
