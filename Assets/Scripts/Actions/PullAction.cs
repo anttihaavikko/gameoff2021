@@ -25,6 +25,7 @@ namespace Actions
         
         public override IEnumerator Activate(Field field)
         {
+            puller.SetBorderColorTo(Color.black);
             var sorted = cards.Where(c => c != null)
                 .OrderBy(c => (c.transform.position - puller.transform.position).magnitude).ToList();
             sorted.ForEach(c => grid.AddToGrid(c));

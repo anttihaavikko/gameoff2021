@@ -12,17 +12,20 @@ namespace Actions
         private readonly Vector3 from;
         private readonly bool mega;
         private readonly GridChecker grid;
+        private readonly Card card;
 
-        public PushAction(IEnumerable<Card> cards, Vector3 from, bool mega = false)
+        public PushAction(IEnumerable<Card> cards, Vector3 from, Card card, bool mega = false)
         {
             grid = new GridChecker();
             this.cards = cards.ToList();
             this.from = from;
             this.mega = mega;
+            this.card = card;
         }
         
         public override IEnumerator Activate(Field field)
         {
+            card.SetBorderColorTo(Color.black);
             var sorted = cards.Where(c => c != null)
                 .OrderByDescending(c => (c.transform.position - from).magnitude).ToList();
             sorted.ForEach(c => grid.AddToGrid(c));

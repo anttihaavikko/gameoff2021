@@ -232,8 +232,6 @@ public class Field : MonoBehaviour
         var pos = card.GetCoordinates();
 
         MarkCardActivated(card);
-        
-        card.SetBorderColorTo(Color.black);
 
         if (pos.y == 4)
         {
@@ -265,7 +263,7 @@ public class Field : MonoBehaviour
         if (card.IsRotator)
         {
             var neighbours = GetNeighboursFor(card).ToList();
-            actionQueue.Add(new RotateAction(neighbours, card.RotatesClockwise));
+            actionQueue.Add(new RotateAction(neighbours, card.RotatesClockwise, card));
             neighbours.ForEach(n => actionQueue.Add(new ActivateAction(n, multi + 1)));
         }
 
@@ -274,7 +272,7 @@ public class Field : MonoBehaviour
             var p = card.transform.position;
             var megaMode = hand.HasPassive(Passive.MegaPush);
             var neighbours = megaMode ? GetAxisCards(card).ToList() : GetNeighboursFor(card).ToList();
-            actionQueue.Add(new PushAction(neighbours, p, megaMode));
+            actionQueue.Add(new PushAction(neighbours, p, card, megaMode));
             neighbours.ForEach(n => actionQueue.Add(new ActivateAction(n, multi + 1)));
         }
         

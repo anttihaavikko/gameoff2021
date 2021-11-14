@@ -9,15 +9,18 @@ namespace Actions
     {
         private readonly List<Card> cards;
         private readonly bool clockwise;
+        private readonly Card card;
         
-        public RotateAction(IEnumerable<Card> cards, bool clockwise)
+        public RotateAction(IEnumerable<Card> cards, bool clockwise, Card card)
         {
             this.cards = cards.ToList();
             this.clockwise = clockwise;
+            this.card = card;
         }
         
         public override IEnumerator Activate(Field field)
         {
+            card.SetBorderColorTo(Color.black);
             cards.ForEach(c => field.Rotate(c, clockwise));
             yield return new WaitForSeconds(0.35f);
         }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Actions
 {
@@ -16,6 +17,7 @@ namespace Actions
         
         public override IEnumerator Activate(Field field)
         {
+            card.SetBorderColorTo(Color.black);
             yield return field.ScoreCard(card, multiplier);
         }
 
