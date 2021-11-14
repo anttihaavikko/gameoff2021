@@ -25,7 +25,7 @@ namespace Actions
         
         public override IEnumerator Activate(Field field)
         {
-            card.SetBorderColorTo(Color.black);
+            field.OnCardActivation(card);
             var sorted = cards.Where(c => c != null)
                 .OrderByDescending(c => (c.transform.position - from).magnitude).ToList();
             sorted.ForEach(c => grid.AddToGrid(c));

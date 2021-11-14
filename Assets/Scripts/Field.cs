@@ -208,8 +208,9 @@ public class Field : MonoBehaviour
         output.text = grid.DataAsString();
         
         hand.LockCards(true);
-        
+
         actionQueue.Add(new ActivateAction(card, 1));
+
         StartCoroutine(ProcessQueue());
     }
 
@@ -315,6 +316,9 @@ public class Field : MonoBehaviour
     public IEnumerator ScoreCard(Card card, int multi)
     {
         if (!card) yield break;
+
+        OnCardActivation(card);
+        
         var allVisited = new List<Pip>();
         var pips = card.GetPoints().ToList();
         foreach (var pip in pips)
@@ -326,6 +330,18 @@ public class Field : MonoBehaviour
             visited = visited.Distinct().OrderBy(p => p.GetDistanceTo(pip)).ToList();
             yield return MarkCoroutine(visited, multi);
             allVisited.AddRange(visited);
+        }
+    }
+
+    public void OnCardActivation(Card card)
+    {
+        if (!card) return;
+        
+        card.SetBorderColorTo(Color.black);
+        
+        if (!hand.IsFirstTurn && hand.HasPassive(Passive.Orphanizer) && !GetNeighboursFor(card, 1, true).Any())
+        {
+            actionQueue.Add(new DestroyAction(card, 1));
         }
     }
 

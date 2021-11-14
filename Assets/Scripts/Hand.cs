@@ -53,6 +53,7 @@ public class Hand : MonoBehaviour
     public int Level => save.level + 1;
     public bool IsEvenTurn => turnNumber % 2 == 0;
     public bool IsOddTurn => !IsEvenTurn;
+    public bool IsFirstTurn => turnNumber == 1;
 
     private void Awake()
     {

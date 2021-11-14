@@ -28,7 +28,8 @@ namespace Save
         StackSize,
         Replacement,
         MegaPush,
-        MegaPull
+        MegaPull,
+        Orphanizer
     }
     
     public static class Passives
@@ -252,6 +253,16 @@ namespace Save
                     description = "<r>void</c> <g>OnPlace</c>(<b>Card</c> <o>card</c>)\n{\n\t<r>if</c> (<o>card</c>.<g>IsPuller</c>())\n\t{\n\t\t<o>card</c>.<g>PullAll</c>();\n\t}\n}",
                     repeatable = false,
                     tutorial = "enhances your (pull cards) to affect (every) other card in marked directions and also (extends) its range."
+                }
+            },
+            {
+                Passive.Orphanizer,
+                new PassiveDetails
+                {
+                    name = "Orphanizer",
+                    description = "<r>void</c> <g>OnPlace</c>(<b>Card</c> <o>card</c>)\n{\n\t<r>var</c> amt = <o>card</c>.<g>GetNeighbourCount</c>();\n\t<r>if</c> (<g>NotFirstTurn</c>() && amt <r>==</c> <p>0</c>)\n\t{\n\t\t<o>card</c>.<g>Explode</c>();\n\t}\n}",
+                    repeatable = false,
+                    tutorial = "allows you to (discard) bad cards by placing them on (their own) so they'll get (destroyed)."
                 }
             }
         };

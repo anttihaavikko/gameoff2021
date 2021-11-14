@@ -20,7 +20,7 @@ namespace Actions
         
         public override IEnumerator Activate(Field field)
         {
-            card.SetBorderColorTo(Color.black);
+            field.OnCardActivation(card);
             cards.ForEach(c => field.Rotate(c, clockwise));
             yield return new WaitForSeconds(0.35f);
         }
