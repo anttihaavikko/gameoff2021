@@ -394,7 +394,7 @@ public class Hand : MonoBehaviour
         if (field.HasTask())
         {
             var failure = !field.TaskComplete();
-            if(failure) scalab.ShowMessage($"{badIntros.Random()} You not manage to complete the (special task)!", true);
+            if(failure) scalab.ShowMessage($"{badIntros.Random()} You (not) manage to complete the (special task)!", true);
             return failure;
         }
         
