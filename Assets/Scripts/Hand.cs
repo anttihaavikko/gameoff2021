@@ -36,6 +36,8 @@ public class Hand : MonoBehaviour
     private int previousScore;
     private bool previewShown;
     
+    private const float PreviewWindowOffset = 650f;
+
     private readonly string[] badIntros =
     {
         "Too bad!",
@@ -60,6 +62,7 @@ public class Hand : MonoBehaviour
     private void Start()
     {
         cards = new List<Card>();
+        deckPreview.transform.position += Vector3.down * Screen.height;
         
         save.deck.Shuffle();
         CreateStuffers();
@@ -152,8 +155,9 @@ public class Hand : MonoBehaviour
     public void ToggleDeckPreview()
     {
         previewShown = !previewShown;
-        var target = previewShown ? deckPreview.Position.WhereY(480) : deckPreview.Position;
-        Tweener.MoveToBounceOut(deckPreview.transform, target, 0.5f);
+        var target = deckPreview.Position +  Vector3.down * (previewShown ? 0 : Screen.height);
+        var t = deckPreview.transform;
+        Tweener.MoveToBounceOut(t, target.WhereX(t.position.x), 0.5f);
 
         if (previewShown)
         {

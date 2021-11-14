@@ -9,7 +9,7 @@ namespace AnttiStarterKit.Utils
         public Vector3 LocalPosition { get; private set; }
         public Vector3 Scale { get; private set; }
 
-        private void Start()
+        private void Awake()
         {
             SaveState();
         }
