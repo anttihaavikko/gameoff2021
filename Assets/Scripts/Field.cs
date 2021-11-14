@@ -356,10 +356,11 @@ public class Field : MonoBehaviour
         Destroy(card.gameObject);
     }
 
-    private void PlaceCard(Card card)
+    private void PlaceCard(Card card, bool mark = false)
     {
         card.draggable.enabled = false;
         card.hoverer.enabled = false;
+        card.SetMarking(mark);
         PlacePipsToGrid(card);
         cards.Add(card);
         output.text = grid.DataAsString();
@@ -675,6 +676,7 @@ public class Field : MonoBehaviour
     {
         var card = hand.CreateCard(pos, data);
         PlaceCard(card);
+        card.SetMarking(true);
         return card;
     }
 

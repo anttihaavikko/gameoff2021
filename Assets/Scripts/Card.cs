@@ -20,6 +20,7 @@ public class Card : MonoBehaviour
     [SerializeField] private List<GameObject> directionIndicators;
     [SerializeField] private SpriteRenderer borderSprite;
     [SerializeField] private Color markColor;
+    [SerializeField] private GameObject marking;
 
     private List<Pip> pips;
     private CardData data;
@@ -31,7 +32,7 @@ public class Card : MonoBehaviour
     public bool RotatesClockwise => data.RotatesClockwise;
     public bool IsPusher => data.type == CardType.Push;
     public bool IsPuller => data.type == CardType.Pull;
-
+    
     public void Setup(CardData cardData)
     {
         shakingPips = new List<Pip>();
@@ -324,6 +325,11 @@ public class Card : MonoBehaviour
     public bool IsOnSameAxisX(int x)
     {
         return GetMirroredCoordinates().x == x;
+    }
+    
+    public void SetMarking(bool state)
+    {
+        marking.SetActive(state);
     }
 }
 
