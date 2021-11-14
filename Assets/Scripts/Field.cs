@@ -11,6 +11,7 @@ using AnttiStarterKit.Managers;
 using AnttiStarterKit.Utils;
 using AnttiStarterKit.Visuals;
 using Save;
+using Tasks;
 using Random = UnityEngine.Random;
 
 public class Field : MonoBehaviour
@@ -29,21 +30,45 @@ public class Field : MonoBehaviour
     private int totalScore;
     private ActionQueue actionQueue;
     private List<Card> cards;
+    private List<Card> turnActivatedCards;
+    private StageTask stageTask;
 
     private void Start()
     {
         cards = new List<Card>();
+        turnActivatedCards = new List<Card>();
         cam.BaseEffect(0.1f);
         actionQueue = new ActionQueue();
         grid = new TileGrid<Pip>(15, 15);
         totalScore = hand.GetScore();
         UpdateScore();
-        levelField.text = $"STAGE {hand.Level}";
-        levelFieldShadow.text = levelField.text;
-        parField.text = $"PAR {GetPar(hand.Level)}";
-        parFieldShadow.text = parField.text;
         
         PlaceLevelCards();
+        
+        levelField.text = $"STAGE {hand.Level}";
+        levelFieldShadow.text = levelField.text;
+        
+        ShowTaskOrPar();
+        Invoke(nameof(ShowTaskTutorial), 1.1f);
+    }
+
+    public void ShowTaskTutorial()
+    {
+        if (stageTask == null) return;
+        Invoke(nameof(ShowTaskLabel), 0.5f);
+        hand.ShowMessage(stageTask.GetTutorial(), false);
+    }
+
+    private void ShowTaskLabel()
+    {
+        ShowTextAt("SPECIAL TASK", cam.cameraRig.position.WhereZ(0), 2.25f, 3, 2.5f);
+    }
+
+    private void ShowTaskOrPar()
+    {
+        var text = stageTask != null ? stageTask.GetText() : $"PAR {GetPar(hand.Level)}";
+        parField.text = text;
+        parFieldShadow.text = text;
     }
 
     private void PlaceLevelCards()
@@ -69,6 +94,15 @@ public class Field : MonoBehaviour
                 PlaceCard(hand.CreateCard(new Vector3(-2, 2, 0), CardData.Empty()));
                 PlaceCard(hand.CreateCard(new Vector3(2, -2, 0), CardData.Empty()));
                 PlaceCard(hand.CreateCard(new Vector3(2, 2, 0), CardData.Empty()));
+                break;
+            }
+            case 6:
+            {
+                stageTask = new ConnectTask(this, new[]
+                {
+                    new Vector3(-1, 0, 0),
+                    new Vector3(1, 0, 0)
+                });
                 break;
             }
         }
@@ -118,6 +152,8 @@ public class Field : MonoBehaviour
     {
         if (!card) return;
         var pos = card.GetCoordinates();
+
+        MarkCardActivated(card);
         
         card.SetBorderColorTo(Color.black);
 
@@ -172,6 +208,33 @@ public class Field : MonoBehaviour
             neighbours.ForEach(n => actionQueue.Add(new ActivateAction(n, multi + 1)));
         }
     }
+
+    public void TurnStart()
+    {
+        if (HasTask() && !TaskComplete())
+        {
+            var done = stageTask.Update(this);
+            if (done)
+            {
+                hand.ShowMessage("Nice! You just (completed) the (special task) for this (stage).", true);
+            }
+        }
+        
+        turnActivatedCards.Clear();
+    }
+
+    private void MarkCardActivated(Card card)
+    {
+        if (!turnActivatedCards.Contains(card))
+        {
+            turnActivatedCards.Add(card);
+        }
+    }
+
+    public bool WasCardActivated(Card card)
+    {
+        return turnActivatedCards.Contains(card);
+    } 
 
     public IEnumerator ScoreCard(Card card, int multi)
     {
@@ -319,6 +382,8 @@ public class Field : MonoBehaviour
             {
                 var skipBombActivation = false;
                 
+                MarkCardActivated(pip.GetCard());
+                
                 if (pip.isStar)
                 {
                     multi += 1;
@@ -403,13 +468,13 @@ public class Field : MonoBehaviour
         UpdateScore();
     }
 
-    private void ShowTextAt(string text, Vector3 pos, float scale = 1f, int sortOrder = 1)
+    private void ShowTextAt(string text, Vector3 pos, float scale = 1f, int sortOrder = 1, float hideAfter = 1f)
     {
         var pop = Instantiate(scorePopPrefab, pos, Quaternion.identity);
         pop.transform.localScale *= scale;
         pop.SetText(text);
         pop.SetSortOrder(sortOrder);
-        StartCoroutine(DestroyAfter(pop.gameObject, 1f));
+        StartCoroutine(DestroyAfter(pop.gameObject, hideAfter));
     }
 
     private static IEnumerator DestroyAfter(GameObject pop, float delay = 0.5f)
@@ -516,5 +581,22 @@ public class Field : MonoBehaviour
     public bool IsFull()
     {
         return cards.Count >= 25;
+    }
+
+    public Card CreateAndPlaceCard(Vector3 pos, CardData data)
+    {
+        var card = hand.CreateCard(pos, data);
+        PlaceCard(card);
+        return card;
+    }
+
+    public bool HasTask()
+    {
+        return stageTask != null;
+    }
+
+    public bool TaskComplete()
+    {
+        return stageTask.IsCompleted;
     }
 }

@@ -201,6 +201,8 @@ public class Hand : MonoBehaviour
 
     public void AddCard()
     {
+        field.TurnStart();
+        
         if (turnNumber >= 2)
         {
             SecondTurnMessages();
@@ -378,6 +380,13 @@ public class Hand : MonoBehaviour
 
     private bool LevelFailed()
     {
+        if (field.HasTask())
+        {
+            var failure = !field.TaskComplete();
+            if(failure) scalab.ShowMessage($"{badIntros.Random()} You not manage to complete the (special task)!", true);
+            return failure;
+        }
+        
         var noPar = GetScore() < Field.GetPar(Level);
         if(noPar) scalab.ShowMessage($"{badIntros.Random()} You didn't reach the stage (par) of ({Field.GetPar(Level)}) points.", true);
         return noPar || CardsLeft();
@@ -409,5 +418,10 @@ public class Hand : MonoBehaviour
     {
         // print($"Locking all {cards.Count} cards");
         cards.ForEach(c => c.draggable.DropLocked = state);
+    }
+
+    public void ShowMessage(string message, bool force)
+    {
+        scalab.ShowMessage(message, force);
     }
 }
