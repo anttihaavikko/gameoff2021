@@ -1080,8 +1080,8 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1411275355
+  m_SortingLayer: 1
   m_SortingOrder: 200
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -2594,8 +2594,8 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1411275355
+  m_SortingLayer: 1
   m_SortingOrder: 200
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -3900,8 +3900,8 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1411275355
+  m_SortingLayer: 1
   m_SortingOrder: 200
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -5249,8 +5249,8 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1411275355
+  m_SortingLayer: 1
   m_SortingOrder: 200
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -9194,8 +9194,8 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1411275355
+  m_SortingLayer: 1
   m_SortingOrder: 200
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -9895,8 +9895,8 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1411275355
+  m_SortingLayer: 1
   m_SortingOrder: 200
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -11864,7 +11864,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2119121680}
   m_Direction: 0
   m_Value: 1
-  m_Size: 1
+  m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -12045,8 +12045,8 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1411275355
+  m_SortingLayer: 1
   m_SortingOrder: 200
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -12308,8 +12308,8 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1411275355
+  m_SortingLayer: 1
   m_SortingOrder: 200
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -13338,8 +13338,8 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1411275355
+  m_SortingLayer: 1
   m_SortingOrder: 200
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -15227,8 +15227,8 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1411275355
+  m_SortingLayer: 1
   m_SortingOrder: 200
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -16423,8 +16423,8 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1411275355
+  m_SortingLayer: 1
   m_SortingOrder: 200
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -18700,8 +18700,8 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1411275355
+  m_SortingLayer: 1
   m_SortingOrder: 200
   m_Positions:
   - {x: 0, y: 0, z: 0}
