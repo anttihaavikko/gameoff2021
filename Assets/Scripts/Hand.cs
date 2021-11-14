@@ -394,19 +394,19 @@ public class Hand : MonoBehaviour
         if (field.HasTask())
         {
             var failure = !field.TaskComplete();
-            if(failure) scalab.ShowMessage($"{badIntros.Random()} You (not) manage to complete the (special task)!", true);
+            if(failure) scalab.ShowMessage($"{badIntros.Random()} You did (not) manage to complete the (special task)!", true);
             return failure;
         }
         
         var noPar = GetScore() < Field.GetPar(Level);
-        if(noPar) scalab.ShowMessage($"{badIntros.Random()} You didn't reach the stage (par) of ({Field.GetPar(Level)}) points.", true);
+        if(noPar) scalab.ShowMessage($"{badIntros.Random()} You did (not) reach the stage (par) of ({Field.GetPar(Level)}) points.", true);
         return noPar || CardsLeft();
     }
 
     private bool CardsLeft()
     {
         var cardsLeft = cards.Any() || !save.deck.IsEmpty;
-        if(cardsLeft) scalab.ShowMessage($"{badIntros.Random()} You didn't manage to (play all) your (cards).", true);
+        if(cardsLeft) scalab.ShowMessage($"{badIntros.Random()} You did (not) manage to (play all) your (cards).", true);
         return cardsLeft;
     }
 
