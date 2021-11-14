@@ -363,7 +363,7 @@ public class Field : MonoBehaviour
         if (hand.HasPassive(Passive.Replacement))
         {
             var next = hand.GetRandomCard(card.GetPositionBeforeShaking());
-            PlaceCard(card);
+            PlaceCard(next);
             actionQueue.Add(new ActivateAction(next, 1));
         }
         
@@ -383,7 +383,7 @@ public class Field : MonoBehaviour
     private void PlacePipsToGrid(Card card)
     { 
         var pips = card.GetPoints(true).ToList();
-        pips.ForEach(pip => { grid.Set(pip, pip.x, pip.y); });
+        pips.ForEach(pip => grid.Set(pip, pip.x, pip.y));
     }
 
     private void ClearPipsFromGrid(Card card)
