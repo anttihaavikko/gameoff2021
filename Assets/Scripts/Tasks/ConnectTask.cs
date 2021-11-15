@@ -16,7 +16,7 @@ namespace Tasks
 
         public override string GetTutorial()
         {
-            return "This level has (no par) but you need to (connect) the already placed (cards)!";
+            return "This stage has (no par) but you need to (connect) the already placed (cards)!";
         }
 
         public override string GetText()
