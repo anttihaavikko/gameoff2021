@@ -326,8 +326,8 @@ public class Field : MonoBehaviour
             if (allVisited.Contains(pip)) continue;
 
             var visited = new List<Pip>();
-            Fill(pip, visited);
-            visited = visited.Distinct().OrderBy(p => p.GetDistanceTo(pip)).ToList();
+            Fill(pip, visited, 0);
+            visited = visited.Distinct().OrderBy(p => p.pathIndex).ToList();
             yield return MarkCoroutine(visited, multi);
             allVisited.AddRange(visited);
         }
@@ -586,11 +586,13 @@ public class Field : MonoBehaviour
         Destroy(pop);
     }
 
-    private void Fill(Pip pip, List<Pip> visited)
+    private void Fill(Pip pip, List<Pip> visited, int index)
     {
         visited.Add(pip);
 
         if (pip.isBomb && pip.isShaking) return;
+
+        pip.pathIndex = index;
         
         grid.GetNeighbours(pip.x, pip.y)
             .Where(n => n != null && !visited.Contains(n))
@@ -598,7 +600,7 @@ public class Field : MonoBehaviour
             .ToList()
             .ForEach(n =>
         {
-            Fill(n, visited); 
+            Fill(n, visited, index + 1); 
         });
     }
 

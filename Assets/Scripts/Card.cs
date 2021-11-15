@@ -356,6 +356,7 @@ public class Pip
     public bool isStar, isBomb;
     public bool isShaking;
     public int index;
+    public int pathIndex;
 
     private Vector3 origin;
     private Card card;
