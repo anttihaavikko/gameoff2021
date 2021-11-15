@@ -27,6 +27,7 @@ public class Field : MonoBehaviour
     [SerializeField] private Color markColor;
     [SerializeField] private EffectCamera cam;
     [SerializeField] private Meanie meanie;
+    [SerializeField] private Cloud cloudPrefab;
 
     private TileGrid<Pip> grid;
     private int totalScore;
@@ -55,6 +56,11 @@ public class Field : MonoBehaviour
         
         ShowTaskOrPar();
         Invoke(nameof(ShowTaskAndCurseTutorial), 1.1f);
+    }
+
+    public Cloud CreateCloud()
+    {
+        return Instantiate(cloudPrefab, Vector3.zero, Quaternion.identity);
     }
 
     public void ShowTaskAndCurseTutorial()
@@ -117,7 +123,7 @@ public class Field : MonoBehaviour
             }
             case 8:
             {
-                curse = new PusherCurse(meanie);
+                curse = GetCurse(0);
                 break;
             }
             case 10:
@@ -131,7 +137,7 @@ public class Field : MonoBehaviour
             }
             case 12:
             {
-                curse = new PusherCurse(meanie);
+                curse = GetCurse(1);
                 
                 stageTask = new ConnectTask(this, new[]
                 {
@@ -143,7 +149,7 @@ public class Field : MonoBehaviour
             }
             case 14:
             {
-                curse = new PusherCurse(meanie);
+                curse = GetCurse(2);
                 
                 stageTask = new ConnectTask(this, new[]
                 {
@@ -166,7 +172,7 @@ public class Field : MonoBehaviour
             }
             case 18:
             {
-                curse = new PusherCurse(meanie);
+                curse = GetCurse(3);
                 
                 stageTask = new ConnectTask(this, new[]
                 {
@@ -178,6 +184,49 @@ public class Field : MonoBehaviour
                 break;
             }
         }
+
+        if (hand.Level > 20)
+        {
+            curse = GetCurse(4);
+        }
+    }
+
+    private Curse GetCurse(int difficulty)
+    {
+        var curseCreator = GetCurses(difficulty).Random();
+        return curseCreator();
+    }
+
+    private List<Func<Curse>> GetCurses(int difficulty)
+    {
+        return difficulty switch
+        {
+            0 => new List<Func<Curse>>
+            {
+                () => new PusherCurse(meanie),
+                () => new BlindnessCurse(this, 1)
+            },
+            1 => new List<Func<Curse>>
+            {
+                () => new PusherCurse(meanie),
+                () => new BlindnessCurse(this, 2)
+            },
+            2 => new List<Func<Curse>>
+            {
+                () => new PusherCurse(meanie),
+                () => new BlindnessCurse(this, 3)
+            },
+            3 => new List<Func<Curse>>
+            {
+                () => new PusherCurse(meanie),
+                () => new BlindnessCurse(this, 4)
+            },
+            _ => new List<Func<Curse>>
+            {
+                () => new PusherCurse(meanie),
+                () => new BlindnessCurse(this, 5)
+            }
+        };
     }
 
     public static int GetPar(int level)

@@ -3189,6 +3189,7 @@ MonoBehaviour:
   markColor: {r: 0.92941177, g: 0.27450982, b: 0.11372549, a: 1}
   cam: {fileID: 519420034}
   meanie: {fileID: 1122637467}
+  cloudPrefab: {fileID: 3875278661202147452, guid: 808980ae98b3b43608279d8261008b3d, type: 3}
 --- !u!1001 &262260827
 PrefabInstance:
   m_ObjectHideFlags: 0
