@@ -211,31 +211,33 @@ public class Field : MonoBehaviour
             {
                 () => new PusherCurse(meanie),
                 () => new BlindnessCurse(this, 1),
-                () => new DoublerCurse()
+                () => new DoublerCurse(CardData.Starter(), "cards")
             },
             1 => new List<Func<Curse>>
             {
                 () => new PusherCurse(meanie),
                 () => new BlindnessCurse(this, 2),
-                () => new DoublerCurse()
+                () => new DoublerCurse(CardData.Empty(), "blank cards"),
+                () => new DoublerCurse(CardData.Starter(), "cards")
+                
             },
             2 => new List<Func<Curse>>
             {
                 () => new PusherCurse(meanie),
                 () => new BlindnessCurse(this, 3),
-                () => new DoublerCurse()
+                () => new DoublerCurse(CardData.Empty(), "blank cards")
             },
             3 => new List<Func<Curse>>
             {
                 () => new PusherCurse(meanie),
                 () => new BlindnessCurse(this, 4),
-                () => new DoublerCurse()
+                () => new DoublerCurse(CardData.Empty(), "blank cards")
             },
             _ => new List<Func<Curse>>
             {
                 () => new PusherCurse(meanie),
                 () => new BlindnessCurse(this, 5),
-                () => new DoublerCurse()
+                () => new DoublerCurse(CardData.Empty(), "blank cards")
             }
         };
     }
@@ -275,7 +277,7 @@ public class Field : MonoBehaviour
             if (neighbours.Any())
             {
                 var p = card.transform.position + neighbours.Random();
-                var c = hand.CreateCard(p, CardData.Empty());
+                var c = hand.CreateCard(p, ((DoublerCurse)curse).CardType);
                 PlaceCard(c);   
             }
         }
