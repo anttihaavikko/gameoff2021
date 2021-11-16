@@ -31,7 +31,9 @@ namespace Save
         MegaPush,
         MegaPull,
         Orphanizer,
-        DoubleRotations
+        DoubleRotations,
+        DoublePicks,
+        SmallerPars
     }
     
     public static class Passives
@@ -271,10 +273,30 @@ namespace Save
                 Passive.DoubleRotations,
                 new PassiveDetails
                 {
-                    name = "180",
+                    name = "One Eighty",
                     description = "<r>void</c> <g>OnPlace</c>(<b>Card</c> <o>card</c>)\n{\n\t<r>if</c> (<o>card</c>.<g>IsRotator</c>())\n\t{\n\t\t<o>card</c>.<g>RotateNeighbours</c>();\n\t\t<o>card</c>.<g>RotateNeighbours</c>();\n\t}\n}",
                     repeatable = false,
                     tutorial = "makes your (rotator cards) trigger twice."
+                }
+            },
+            {
+                Passive.DoublePicks,
+                new PassiveDetails
+                {
+                    name = "Greed",
+                    description = "<r>int</c> <g>GetCardPickCount</c>()\n{\n\t<r>return</c> DEFAULT_PICK_COUNT + <p>1</c>;\n}",
+                    repeatable = false,
+                    tutorial = "allows you to pick (two cards) after each stage."
+                }
+            },
+            {
+                Passive.SmallerPars,
+                new PassiveDetails
+                {
+                    name = "Underachiever",
+                    description = "<r>override</c> <r>int</c> <g>GetStagePar</c>()\n{\n\t<r>var</c> mod = <b>Mathf</c>.<g>Pow</c>(<p>0.80f</c>, <p>[LEVEL]</c>);\n\t<r>return</c> <o>base</c>.<g>GetStagePar</c>() * mod;\n}",
+                    repeatable = true,
+                    tutorial = "makes the (pars) of stages more easily (reachable)."
                 }
             }
         };

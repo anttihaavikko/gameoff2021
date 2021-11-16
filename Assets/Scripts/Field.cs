@@ -242,14 +242,15 @@ public class Field : MonoBehaviour
         };
     }
 
-    public static int GetPar(int level)
+    public int GetPar(int level)
     {
         if (level == 1) return 30;
+        var mod = Mathf.Pow(0.8f, hand.GetPassiveLevel(Passive.SmallerPars));
         var mod5 = Mathf.FloorToInt(level / 5f) + 1;
         var mod10 = Mathf.FloorToInt(level / 10f) * 2 + 1;
         var mod15 = Mathf.FloorToInt(level / 15f) * 8 + 1;
         var mod20 = Mathf.FloorToInt(level / 20f) * 5 + 1;
-        return GetPar(level - 1) + level * 30 * mod5 * mod10 * mod15 * mod20;
+        return Mathf.RoundToInt(GetPar(level - 1) + level * 30 * mod5 * mod10 * mod15 * mod20 * mod);
     }
 
     private void UpdateScore()

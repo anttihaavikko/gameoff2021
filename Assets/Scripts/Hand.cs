@@ -35,6 +35,7 @@ public class Hand : MonoBehaviour
     private int turnNumber = 1;
     private int previousScore;
     private bool previewShown;
+    private bool firstPicked;
     
     private const float PreviewWindowOffset = 650f;
 
@@ -372,7 +373,7 @@ public class Hand : MonoBehaviour
         for (var i = 0; i < amount; i++)
         {
             var pos = cardPicks.transform.position + Vector3.left * (amount - 1) * 0.5f + Vector3.right * i;
-            var card = Instantiate(cardPrefab, new Vector3(0, -5f, 0), Quaternion.identity);
+            var card = Instantiate(cardPrefab, new Vector3(0, -10f, 0), Quaternion.identity);
             Tweener.MoveToBounceOut(card.transform, pos, 0.2f + 0.05f * i);
             var data = CardData.GetRandom(luck);
             card.Setup(data);
@@ -389,9 +390,16 @@ public class Hand : MonoBehaviour
             {
                 card.draggable.click = null;
                 save.deck.Add(data);
-                save.level++;
-                save.Save();
-                SceneChanger.Instance.ChangeScene("Pick");
+                Tweener.MoveToBounceOut(card.transform, Vector3.down * 10f, 0.3f);
+
+                if (firstPicked || !HasPassive(Passive.DoublePicks))
+                {
+                    save.level++;
+                    save.Save();
+                    SceneChanger.Instance.ChangeScene("Pick");   
+                }
+
+                firstPicked = true;
             };
         }
     }
@@ -404,9 +412,10 @@ public class Hand : MonoBehaviour
             if(failure) scalab.ShowMessage($"{badIntros.Random()} You did (not) manage to complete the (special task)!", true);
             return failure;
         }
-        
-        var noPar = GetScore() < Field.GetPar(Level);
-        if(noPar) scalab.ShowMessage($"{badIntros.Random()} You did (not) reach the stage (par) of ({Field.GetPar(Level)}) points.", true);
+
+        var par = field.GetPar(Level);
+        var noPar = GetScore() < par;
+        if(noPar) scalab.ShowMessage($"{badIntros.Random()} You did (not) reach the stage (par) of ({par}) points.", true);
         return noPar || CardsLeft();
     }
 
