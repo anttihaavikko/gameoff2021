@@ -156,8 +156,6 @@ public class Hand : MonoBehaviour
             save.Save();
             SceneChanger.Instance.ChangeScene("Main");
         }
-
-        Time.timeScale = Input.GetKey(KeyCode.Tab) ? 5 : 1;
     }
 
     public void ToggleDeckPreview()

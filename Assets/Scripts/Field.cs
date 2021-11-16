@@ -36,6 +36,7 @@ public class Field : MonoBehaviour
     private List<Card> turnActivatedCards;
     private StageTask stageTask;
     private Curse curse;
+    private bool processing;
 
     public bool HasCurse => curse != null;
 
@@ -56,6 +57,11 @@ public class Field : MonoBehaviour
         
         ShowTaskOrPar();
         Invoke(nameof(ShowTaskAndCurseTutorial), 1.1f);
+    }
+
+    private void Update()
+    {
+        Time.timeScale = processing && Input.GetKey(KeyCode.Space) ? 5 : 1;
     }
 
     public Cloud CreateCloud()
@@ -265,6 +271,8 @@ public class Field : MonoBehaviour
 
     private IEnumerator ProcessQueue()
     {
+        processing = true;
+        
         yield return actionQueue.Process(this);
 
         if (HasCurse)
@@ -274,6 +282,8 @@ public class Field : MonoBehaviour
         
         hand.NextTurn();
         spinner.Hide();
+
+        processing = false;
     }
 
     public void Activate(Card card, int multi = 1)

@@ -44,5 +44,10 @@ namespace Actions
             cards.ForEach(c => c.SetBorderColorTo(Color.black));
             queue.Clear();
         }
+
+        public bool Any()
+        {
+            return queue.Count > 0;
+        }
     }
 }
