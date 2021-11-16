@@ -17,7 +17,7 @@ public class PickView : MonoBehaviour
         var amount = 2 + save.GetPassiveLevel(Passive.Options);
         
         Passives.GetRandom(save.passives, amount).ToList().ForEach(AddPassive);
-        scrollContent.sizeDelta = new Vector2 (265 * amount, 300);
+        scrollContent.sizeDelta = new Vector2 (275 * amount, 300);
     }
 
     private void AddPassive(Passive passive)
@@ -57,7 +57,7 @@ public class PickView : MonoBehaviour
 
             var all = Passives.GetAll().ToList();
             all.ForEach(AddPassive);
-            scrollContent.sizeDelta = new Vector2 (265 * all.Count, 300);
+            scrollContent.sizeDelta = new Vector2 (275 * all.Count, 300);
         }
     }
 }
