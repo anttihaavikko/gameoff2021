@@ -17,10 +17,10 @@ namespace Actions
         public IEnumerator Process(Field field)
         {
             var actions = 0;
-            
+
             while (queue.Any())
             {
-                var action = queue[0];
+                var action = GetNextAction();
                 queue.Remove(action);
                 yield return action.Activate(field);
                 actions++;
@@ -31,6 +31,11 @@ namespace Actions
                     yield break;
                 }
             }
+        }
+
+        private BaseAction GetNextAction()
+        {
+            return queue.FirstOrDefault(a => a.IsPriority) ?? queue[0];
         }
 
         public void Add(BaseAction action)

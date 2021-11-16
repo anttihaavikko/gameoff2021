@@ -341,8 +341,12 @@ public class Field : MonoBehaviour
         if (card.IsRotator)
         {
             var neighbours = GetNeighboursFor(card).ToList();
-            actionQueue.Add(new RotateAction(neighbours, card.RotatesClockwise, card));
-            neighbours.ForEach(n => actionQueue.Add(new ActivateAction(n, multi + 1)));
+            var rotations = hand.HasPassive(Passive.DoubleRotations) ? 2 : 1;
+            for (var i = 0; i < rotations; i++)
+            {
+                actionQueue.Add(new RotateAction(neighbours, card.RotatesClockwise, card));
+                neighbours.ForEach(n => actionQueue.Add(new ActivateAction(n, multi + 1)));   
+            }
         }
 
         if (card.IsPusher)

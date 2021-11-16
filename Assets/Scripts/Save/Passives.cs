@@ -30,7 +30,8 @@ namespace Save
         Replacement,
         MegaPush,
         MegaPull,
-        Orphanizer
+        Orphanizer,
+        DoubleRotations
     }
     
     public static class Passives
@@ -264,6 +265,16 @@ namespace Save
                     description = "<r>void</c> <g>OnPlace</c>(<b>Card</c> <o>card</c>)\n{\n\t<r>var</c> amt = <o>card</c>.<g>GetNeighbourCount</c>();\n\t<r>if</c> (<g>NotFirstTurn</c>() <r>&&</c> amt <r>==</c> <p>0</c>)\n\t{\n\t\t<o>card</c>.<g>Explode</c>();\n\t}\n}",
                     repeatable = false,
                     tutorial = "allows you to (discard) bad cards by placing them on (their own) so they'll get (destroyed)."
+                }
+            },
+            {
+                Passive.DoubleRotations,
+                new PassiveDetails
+                {
+                    name = "180",
+                    description = "<r>void</c> <g>OnPlace</c>(<b>Card</c> <o>card</c>)\n{\n\t<r>if</c> (<o>card</c>.<g>IsRotator</c>())\n\t{\n\t\t<o>card</c>.<g>RotateNeighbours</c>();\n\t\t<o>card</c>.<g>RotateNeighbours</c>();\n\t}\n}",
+                    repeatable = false,
+                    tutorial = "makes your (rotator cards) trigger twice."
                 }
             }
         };

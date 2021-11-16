@@ -6,6 +6,8 @@ namespace Actions
 {
     public class ScoreAction : BaseAction
     {
+        public override bool IsPriority => true;
+        
         private readonly Card card;
         private readonly int multiplier;
         
