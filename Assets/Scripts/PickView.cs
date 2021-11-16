@@ -16,21 +16,22 @@ public class PickView : MonoBehaviour
         save = SaveData.LoadOrCreate();
         var amount = 2 + save.GetPassiveLevel(Passive.Options);
         
-        Passives.GetRandom(save.passives, amount).ToList().ForEach(passive =>
+        Passives.GetRandom(save.passives, amount).ToList().ForEach(AddPassive);
+        scrollContent.sizeDelta = new Vector2 (265 * amount, 300);
+    }
+
+    private void AddPassive(Passive passive)
+    {
+        var details = Passives.GetDetails(passive);
+        var panel = Instantiate(panelPrefab, container);
+        panel.SetDetails(details, save.GetPassiveLevel(passive) + 1);
+        panel.pickButton.onClick.AddListener(() =>
         {
-            var details = Passives.GetDetails(passive);
-            var panel = Instantiate(panelPrefab, container);
-            panel.SetDetails(details, save.GetPassiveLevel(passive) + 1);
-            panel.pickButton.onClick.AddListener(() =>
-            {
-                save.passives.Add(passive);
-                save.Save();
-                panel.pickButton.onClick.RemoveAllListeners();
-                SceneChanger.Instance.ChangeScene("Main");
-            });
+            save.passives.Add(passive);
+            save.Save();
+            panel.pickButton.onClick.RemoveAllListeners();
+            SceneChanger.Instance.ChangeScene("Main");
         });
-        
-        scrollContent.sizeDelta = new Vector2 (245 * amount, 300);
     }
 
     private void Update()
@@ -38,13 +39,25 @@ public class PickView : MonoBehaviour
         DevKeys();
     }
 
-    private static void DevKeys()
+    private void DevKeys()
     {
         if (!Application.isEditor) return;
         
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneChanger.Instance.ChangeScene("Pick");
+        }
+        
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            foreach (Transform child in container)
+            {
+                Destroy(child.gameObject);
+            }
+
+            var all = Passives.GetAll().ToList();
+            all.ForEach(AddPassive);
+            scrollContent.sizeDelta = new Vector2 (265 * all.Count, 300);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -70,7 +71,7 @@ namespace Save
                 new PassiveDetails
                 {
                     name = "Options",
-                    description = "<r>void</c> <g>PresentCodeInjections</c>()\n{\n\t<r>for</c> (<r>var</c> i = 0; i<r> < </c><p>2</c> + <p>[LEVEL]</c>; i<r>++</c>)\n\t{\n\t\t<r>var</c> p = <r>new</c> <b>Passive</c>();\n\t\tp.<g><r>Present</c></c>();\n\t}\n}",
+                    description = "<r>void</c> <g>PresentCodeInjections</c>()\n{\n\t<r>for</c> (<r>var</c> i = <p>0</c>; i<r> < </c><p>2</c> + <p>[LEVEL]</c>; i<r>++</c>)\n\t{\n\t\t<r>var</c> p = <r>new</c> <b>Passive</c>();\n\t\tp.<g>Present</c>();\n\t}\n}",
                     repeatable = true,
                     tutorial = "makes you get (more options) for future (code injections)."
                 }
@@ -80,7 +81,7 @@ namespace Save
                 new PassiveDetails
                 {
                     name = "Variety",
-                    description = "<r>void</c> <g>PresentNewCards</c>()\n{\n\t<r>for</c> (<r>var</c> i = 0; i<r> < </c><p>3</c> + <p>[LEVEL]</c>; i<r>++</c>)\n\t{\n\t\t<r>var</c> c = <r>new</c> <b>Card</c>();\n\t\tc.<g><r>Present</c></c>();\n\t}\n}",
+                    description = "<r>void</c> <g>PresentNewCards</c>()\n{\n\t<r>for</c> (<r>var</c> i = <p>0</c>; i<r> < </c><p>3</c> + <p>[LEVEL]</c>; i<r>++</c>)\n\t{\n\t\t<r>var</c> c = <r>new</c> <b>Card</c>();\n\t\tc.<g>Present</c>();\n\t}\n}",
                     repeatable = true,
                     tutorial = "makes you get (more options) on future (cards selections)."
                 }
@@ -90,7 +91,7 @@ namespace Save
                 new PassiveDetails
                 {
                     name = "Lucky Rolls",
-                    description = "<r>bool</c> <g>GetRandomChance</c>(<r>float</c> <o>target</c>)\n{\n\t<r>var</c> mod = <b>Mathf</c>.<g>Pow</c>(<p>0.9f</c>, <p>[LEVEL]</c>);\n\t<r>return</c> <b>Random</c>.value * mod <p><</c> <o>target</c>;\n}",
+                    description = "<r>bool</c> <g>GetRandomChance</c>(<r>float</c> <o>target</c>)\n{\n\t<r>var</c> mod = <b>Mathf</c>.<g>Pow</c>(<p>0.9f</c>, <p>[LEVEL]</c>);\n\t<r>return</c> <b>Random</c>.value * mod <r><</c> <o>target</c>;\n}",
                     repeatable = true,
                     tutorial = "affects your (luck) and makes you get (better cards)."
                 }
@@ -220,7 +221,7 @@ namespace Save
                 new PassiveDetails
                 {
                     name = "Stack Size",
-                    description = "<r>void</c> <g>OnProcess</c>(<b><g>Act</c>ionQueue</c> <o>queue</c>)\n{\n\tif (<o>queue</c>.Count >= <p>40</c> + <p>40</c> * <p>[LEVEL]</c>)\n\t{\n\t\t<g>Tilt</c>();\n\t\t<r>return</c>;\n\t}\n\n\t<o>queue</c>.<g>Pop</c>().<g>Act</c>();\n}",
+                    description = "<r>void</c> <g>OnProcess</c>(<b><g>Act</c>ionQueue</c> <o>queue</c>)\n{\n\tif (<o>queue</c>.Count <r>>=</c> <p>40</c> + <p>40</c> * <p>[LEVEL]</c>)\n\t{\n\t\t<g>Tilt</c>();\n\t\t<r>return</c>;\n\t}\n\n\t<o>queue</c>.<g>Pop</c>().<g>Act</c>();\n}",
                     repeatable = true,
                     tutorial = "increases the (maximum action stack size) giving you more (combo) chances."
                 }
@@ -260,7 +261,7 @@ namespace Save
                 new PassiveDetails
                 {
                     name = "Orphanizer",
-                    description = "<r>void</c> <g>OnPlace</c>(<b>Card</c> <o>card</c>)\n{\n\t<r>var</c> amt = <o>card</c>.<g>GetNeighbourCount</c>();\n\t<r>if</c> (<g>NotFirstTurn</c>() && amt <r>==</c> <p>0</c>)\n\t{\n\t\t<o>card</c>.<g>Explode</c>();\n\t}\n}",
+                    description = "<r>void</c> <g>OnPlace</c>(<b>Card</c> <o>card</c>)\n{\n\t<r>var</c> amt = <o>card</c>.<g>GetNeighbourCount</c>();\n\t<r>if</c> (<g>NotFirstTurn</c>() <r>&&</c> amt <r>==</c> <p>0</c>)\n\t{\n\t\t<o>card</c>.<g>Explode</c>();\n\t}\n}",
                     repeatable = false,
                     tutorial = "allows you to (discard) bad cards by placing them on (their own) so they'll get (destroyed)."
                 }
@@ -274,6 +275,11 @@ namespace Save
                 .OrderBy(_ => Random.value)
                 .Take(amount)
                 .Select(pair => pair.Key);
+        }
+
+        public static IEnumerable<Passive> GetAll()
+        {
+            return ListAll.Select(pair => pair.Key);
         }
 
         public static PassiveDetails GetDetails(Passive passive)
