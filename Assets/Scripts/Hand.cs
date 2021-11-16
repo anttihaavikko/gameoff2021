@@ -318,7 +318,7 @@ public class Hand : MonoBehaviour
     public void NextTurn()
     {
         turnNumber++;
-        turnField.text = $"Turn {turnNumber}";
+        turnField.text = $"TURN {turnNumber}";
         turnFieldShadow.text = turnField.text;
         
         AddCard();

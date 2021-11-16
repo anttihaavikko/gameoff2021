@@ -21,7 +21,7 @@ namespace Tasks
 
         public override string GetText()
         {
-            return "Connect cards";
+            return "CONNECT CARDS";
         }
 
         public override bool Update(Field field)

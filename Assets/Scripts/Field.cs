@@ -77,13 +77,13 @@ public class Field : MonoBehaviour
         }
         
         if (stageTask == null) return;
-        Invoke(nameof(ShowTaskLabel), 0.5f);
+        Invoke(nameof(ShowTaskLabel), 0.3f);
         hand.ShowMessage(stageTask.GetTutorial(), false);
     }
 
     private void ShowTaskLabel()
     {
-        ShowTextAt("SPECIAL TASK", cam.cameraRig.position.WhereZ(0), 2.25f, 3, 2.5f);
+        ShowTextAt("SPECIAL TASK", cam.cameraRig.position.WhereZ(0), 2.25f, 3, 3f);
     }
 
     private void ShowTaskOrPar()
