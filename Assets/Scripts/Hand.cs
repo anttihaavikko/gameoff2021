@@ -150,6 +150,13 @@ public class Hand : MonoBehaviour
             ToggleDeckPreview();
         }
 
+        if (Input.GetKeyDown(KeyCode.KeypadPlus))
+        {
+            save.level++;
+            save.Save();
+            SceneChanger.Instance.ChangeScene("Main");
+        }
+
         Time.timeScale = Input.GetKey(KeyCode.Tab) ? 5 : 1;
     }
 
