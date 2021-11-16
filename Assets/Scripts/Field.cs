@@ -37,6 +37,8 @@ public class Field : MonoBehaviour
     private StageTask stageTask;
     private Curse curse;
     private bool processing;
+    
+    public int PreviousTouched { get; private set; }
 
     public bool HasCurse => curse != null;
 
@@ -120,11 +122,7 @@ public class Field : MonoBehaviour
             }
             case 6:
             {
-                stageTask = new ConnectTask(this, new[]
-                {
-                    new Vector3(-1, 0, 0),
-                    new Vector3(1, 0, 0)
-                });
+                stageTask = GetTask(0);
                 break;
             }
             case 8:
@@ -134,59 +132,30 @@ public class Field : MonoBehaviour
             }
             case 10:
             {
-                stageTask = new ConnectTask(this, new[]
-                {
-                    new Vector3(-2, 0, 0),
-                    new Vector3(2, 0, 0)
-                });
+                stageTask = GetTask(1);
                 break;
             }
             case 12:
             {
                 curse = GetCurse(1);
-                
-                stageTask = new ConnectTask(this, new[]
-                {
-                    new Vector3(-2, 0, 0),
-                    new Vector3(2, 0, 0),
-                    new Vector3(0, 0, 0)
-                });
+                stageTask = GetTask(2);
                 break;
             }
             case 14:
             {
                 curse = GetCurse(2);
-                
-                stageTask = new ConnectTask(this, new[]
-                {
-                    new Vector3(0, -2, 0),
-                    new Vector3(0, 0, 0),
-                    new Vector3(0, 2, 0)
-                });
+                stageTask = GetTask(3);
                 break;
             }
             case 16:
             {
-                stageTask = new ConnectTask(this, new[]
-                {
-                    new Vector3(-1, -1, 0),
-                    new Vector3(1, 1, 0),
-                    new Vector3(-1, 1, 0),
-                    new Vector3(1, -1, 0)
-                });
+                stageTask = GetTask(4);
                 break;
             }
             case 18:
             {
                 curse = GetCurse(3);
-                
-                stageTask = new ConnectTask(this, new[]
-                {
-                    new Vector3(-1, -1, 0),
-                    new Vector3(1, 1, 0),
-                    new Vector3(-1, 1, 0),
-                    new Vector3(1, -1, 0)
-                });
+                stageTask = GetTask(4);
                 break;
             }
         }
@@ -194,6 +163,11 @@ public class Field : MonoBehaviour
         if (hand.Level > 20)
         {
             curse = GetCurse(4);
+
+            if (hand.Level % 3 == 0)
+            {
+                stageTask = GetTask(4);
+            }
         }
     }
 
@@ -201,6 +175,88 @@ public class Field : MonoBehaviour
     {
         var curseCreator = GetCurses(difficulty).Random();
         return curseCreator();
+    }
+    
+    private StageTask GetTask(int difficulty)
+    {
+        var taskCreator = GetTasks(difficulty).Random();
+        return taskCreator();
+    }
+
+    private List<Func<StageTask>> GetTasks(int difficulty)
+    {
+        return difficulty switch
+        {
+            0 => new List<Func<StageTask>>
+            {
+                () => new TouchTask(2, "two"),
+                () => new TouchTask(3, "three"),
+                () => new ConnectTask(this, new[]
+                {
+                    new Vector3(-1, 0, 0),
+                    new Vector3(1, 0, 0)
+                }),
+                () => new ConnectTask(this, new[]
+                {
+                    new Vector3(0, -1, 0),
+                    new Vector3(0, 1, 0)
+                }),
+                () => new ConnectTask(this, new[]
+                {
+                    new Vector3(-1, -1, 0),
+                    new Vector3(1, 1, 0)
+                }),
+                () => new ConnectTask(this, new[]
+                {
+                    new Vector3(1, -1, 0),
+                    new Vector3(-1, 1, 0)
+                })
+            },
+            1 => new List<Func<StageTask>>
+            {
+                () => new TouchTask(2, "two"),
+                () => new TouchTask(3, "three"),
+                () => new ConnectTask(this, new[]
+                {
+                    new Vector3(-2, 0, 0),
+                    new Vector3(2, 0, 0)
+                })
+            },
+            2 => new List<Func<StageTask>>
+            {
+                () => new TouchTask(3, "three"),
+                () => new TouchTask(4, "four"),
+                () => new ConnectTask(this, new[]
+                {
+                    new Vector3(-2, 0, 0),
+                    new Vector3(2, 0, 0),
+                    new Vector3(0, 0, 0)
+                })
+            },
+            3 => new List<Func<StageTask>>
+            {
+                () => new TouchTask(4, "four"),
+                () => new TouchTask(5, "five"),
+                () => new ConnectTask(this, new[]
+                {
+                    new Vector3(0, -2, 0),
+                    new Vector3(0, 0, 0),
+                    new Vector3(0, 2, 0)
+                })
+            },
+            _ => new List<Func<StageTask>>
+            {
+                () => new TouchTask(5, "five"),
+                () => new TouchTask(6, "six"),
+                () => new ConnectTask(this, new[]
+                {
+                    new Vector3(-1, -1, 0),
+                    new Vector3(1, 1, 0),
+                    new Vector3(-1, 1, 0),
+                    new Vector3(1, -1, 0)
+                })
+            }
+        };
     }
 
     private List<Func<Curse>> GetCurses(int difficulty)
@@ -298,7 +354,7 @@ public class Field : MonoBehaviour
         {
             yield return curse.Apply(this);
         }
-        
+
         hand.NextTurn();
         spinner.Hide();
 
@@ -385,6 +441,7 @@ public class Field : MonoBehaviour
         }
         
         turnActivatedCards.Clear();
+        PreviousTouched = 0;
     }
 
     private void MarkCardActivated(Card card)
@@ -703,6 +760,7 @@ public class Field : MonoBehaviour
         connectionLines.MovePreview(pos);
         
         var pips = card.GetAllPips().ToList();
+        PreviousTouched = 0;
         
         PreviewLine(0, card, pos, pips[0], 0+0, -1);
         PreviewLine(1, card, pos, pips[0], 0-1, 0);
@@ -726,6 +784,7 @@ public class Field : MonoBehaviour
         if (pip.gameObject.activeSelf && targetPip != null)
         {
             connectionLines.ShowLine(index, pip.position, targetPip.sprite.transform.position);
+            PreviousTouched++;
         }
     }
 
