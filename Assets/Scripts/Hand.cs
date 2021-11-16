@@ -367,7 +367,8 @@ public class Hand : MonoBehaviour
         for (var i = 0; i < amount; i++)
         {
             var pos = cardPicks.transform.position + Vector3.left * (amount - 1) * 0.5f + Vector3.right * i;
-            var card = Instantiate(cardPrefab, pos, Quaternion.identity);
+            var card = Instantiate(cardPrefab, new Vector3(0, -5f, 0), Quaternion.identity);
+            Tweener.MoveToBounceOut(card.transform, pos, 0.2f + 0.05f * i);
             var data = CardData.GetRandom(luck);
             card.Setup(data);
             card.draggable.CanDrag = false;
