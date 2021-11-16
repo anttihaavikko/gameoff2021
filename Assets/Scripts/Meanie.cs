@@ -8,6 +8,7 @@ public class Meanie : MonoBehaviour
     [SerializeField] private Animator anim;
     
     private static readonly int Walking = Animator.StringToHash("walking");
+    private static readonly int Pushing = Animator.StringToHash("push");
 
     public void MoveTo(Vector3 target, float duration = 1f)
     {
@@ -22,5 +23,10 @@ public class Meanie : MonoBehaviour
     {
         anim.speed = speed;
         anim.SetBool(Walking, state);
+    }
+
+    public void Push()
+    {
+        anim.SetTrigger(Pushing);
     }
 }

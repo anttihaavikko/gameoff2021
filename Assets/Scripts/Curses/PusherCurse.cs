@@ -28,14 +28,23 @@ namespace Curses
             var cards = field.GetCardsOnAxisX(currentSpot)
                 .OrderByDescending(c => (c.transform.position - from).magnitude).ToList();
             cards.ForEach(c => grid.AddToGrid(c));
+            var amt = 0f;
             cards.ForEach(c =>
             {
                 var start = c.GetMirroredCoordinates();
                 grid.Set(null, start.x, start.y);
                 var end = grid.GetFurthestNeighbour(start, Vector3.down);
                 grid.Set(c, end.x, end.y);
-                field.Move(c, end.ToVector() - start.ToVector(), Passive.None, true);
+                var diff = end.ToVector() - start.ToVector();
+                field.Move(c, diff, Passive.None, true);
+                amt += diff.magnitude;
             });
+
+            if (amt > 0)
+            {
+                meanie.Push();
+            }
+            
             yield return new WaitForSeconds(0.35f);
             currentSpot = spots.Where(s => s != currentSpot).ToList().Random();
             MoveMeanie(Random.Range(0.7f, 0.9f));
