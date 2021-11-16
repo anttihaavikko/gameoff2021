@@ -311,6 +311,11 @@ public class Field : MonoBehaviour
         var pos = card.GetCoordinates();
 
         MarkCardActivated(card);
+        
+        if (pos.x == 2 && pos.y == 2)
+        {
+            multi += hand.GetPassiveLevel(Passive.MultiOnCenter) * 5;
+        }
 
         if (pos.y == 4)
         {

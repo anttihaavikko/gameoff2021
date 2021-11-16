@@ -33,7 +33,8 @@ namespace Save
         Orphanizer,
         DoubleRotations,
         DoublePicks,
-        SmallerPars
+        SmallerPars,
+        MultiOnCenter
     }
     
     public static class Passives
@@ -297,6 +298,16 @@ namespace Save
                     description = "<r>override</c> <r>int</c> <g>GetStagePar</c>()\n{\n\t<r>var</c> mod = <b>Mathf</c>.<g>Pow</c>(<p>0.80f</c>, <p>[LEVEL]</c>);\n\t<r>return</c> <o>base</c>.<g>GetStagePar</c>() * mod;\n}",
                     repeatable = true,
                     tutorial = "makes the (pars) of stages more easily (reachable)."
+                }
+            },
+            {
+                Passive.MultiOnCenter,
+                new PassiveDetails
+                {
+                    name = "Center",
+                    description = "<r>void</r> <g>OnPlace</g>(<b>Card</b> <o>card</o>)\n{\n\t<r>if</r> (<o>card</c>.x <r>==</r> <p>2</c> <r>&&</c> <o>card</c>.y <r>==</r> <p>2</c>)\n\t{\n\t\tstartMultiplier = <p>1</c> + <p>[LEVEL]</c> * <p>5</c>;\n\t}\n}",
+                    repeatable = true,
+                    tutorial = "causes the cards placed on the (center cell) to start with (+5) multiplier."
                 }
             }
         };
