@@ -210,27 +210,32 @@ public class Field : MonoBehaviour
             0 => new List<Func<Curse>>
             {
                 () => new PusherCurse(meanie),
-                () => new BlindnessCurse(this, 1)
+                () => new BlindnessCurse(this, 1),
+                () => new DoublerCurse()
             },
             1 => new List<Func<Curse>>
             {
                 () => new PusherCurse(meanie),
-                () => new BlindnessCurse(this, 2)
+                () => new BlindnessCurse(this, 2),
+                () => new DoublerCurse()
             },
             2 => new List<Func<Curse>>
             {
                 () => new PusherCurse(meanie),
-                () => new BlindnessCurse(this, 3)
+                () => new BlindnessCurse(this, 3),
+                () => new DoublerCurse()
             },
             3 => new List<Func<Curse>>
             {
                 () => new PusherCurse(meanie),
-                () => new BlindnessCurse(this, 4)
+                () => new BlindnessCurse(this, 4),
+                () => new DoublerCurse()
             },
             _ => new List<Func<Curse>>
             {
                 () => new PusherCurse(meanie),
-                () => new BlindnessCurse(this, 5)
+                () => new BlindnessCurse(this, 5),
+                () => new DoublerCurse()
             }
         };
     }
@@ -263,6 +268,17 @@ public class Field : MonoBehaviour
         output.text = grid.DataAsString();
         
         hand.LockCards(true);
+
+        if (HasCurse && curse.GetType() == typeof(DoublerCurse))
+        {
+            var neighbours = GetFreeNeighboursFor(card).ToList();
+            if (neighbours.Any())
+            {
+                var p = card.transform.position + neighbours.Random();
+                var c = hand.CreateCard(p, CardData.Empty());
+                PlaceCard(c);   
+            }
+        }
 
         actionQueue.Add(new ActivateAction(card, 1));
 
@@ -475,6 +491,12 @@ public class Field : MonoBehaviour
     {
         var pos = card.transform.position;
         return card.GetDirections(all).Select(dir => GetNeighbourFor(pos, dir, distance)).Where(c => c != null);
+    }
+
+    private IEnumerable<Vector3> GetFreeNeighboursFor(Card card)
+    {
+        var pos = card.transform.position;
+        return card.GetDirections(true).Where(dir => IsOnArea(pos + dir) && !GetNeighbourFor(pos, dir, 1));
     }
     
     private Card GetNeighbourFor(Vector3 pos, Vector3 dir, int maxSteps = 1)
