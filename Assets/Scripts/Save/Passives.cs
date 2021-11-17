@@ -34,7 +34,8 @@ namespace Save
         DoubleRotations,
         DoublePicks,
         SmallerPars,
-        MultiOnCenter
+        MultiOnCenter,
+        PreviewInOrder
     }
     
     public static class Passives
@@ -308,6 +309,16 @@ namespace Save
                     description = "<r>void</r> <g>OnPlace</g>(<b>Card</b> <o>card</o>)\n{\n\t<r>if</r> (<o>card</c>.x <r>==</r> <p>2</c> <r>&&</c> <o>card</c>.y <r>==</r> <p>2</c>)\n\t{\n\t\tstartMultiplier = <p>1</c> + <p>[LEVEL]</c> * <p>5</c>;\n\t}\n}",
                     repeatable = true,
                     tutorial = "causes the cards placed on the (center cell) to start with (+5) multiplier."
+                }
+            },
+            {
+                Passive.PreviewInOrder,
+                new PassiveDetails
+                {
+                    name = "Visions",
+                    description = "<b>IList</c><<b>Card</c>> <g>DeckContentsForPreview</c>()\n{\n\t<r>return</c> deck.<g>OrderBy</c>(<o>c</c> => <o>c</c>.Order);\n}",
+                    repeatable = false,
+                    tutorial = "allows you to see the (draw pile) cards in correct (order)."
                 }
             }
         };

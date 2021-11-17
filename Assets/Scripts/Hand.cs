@@ -178,7 +178,7 @@ public class Hand : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        var pile = save.deck.Preview;
+        var pile = HasPassive(Passive.PreviewInOrder) ? save.deck.PreviewInOrder : save.deck.Preview;
         pile.ForEach(c =>
         {
             var preview = Instantiate(cardPreviewPrefab, deckPreviewContainer);

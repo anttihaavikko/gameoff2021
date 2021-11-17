@@ -13,6 +13,7 @@ namespace Save
         
         public bool IsEmpty => !pile.Any();
         public List<CardData> Preview => pile.OrderByDescending(c => c.SortValue()).ToList();
+        public List<CardData> PreviewInOrder => pile.ToList();
 
         public Deck()
         {
