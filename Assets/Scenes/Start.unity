@@ -4836,7 +4836,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5244400817378973815, guid: 345b61705769f476fabf6d90c2daab12, type: 3}
       propertyPath: gameName
-      value: rollo
+      value: bug
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 345b61705769f476fabf6d90c2daab12, type: 3}

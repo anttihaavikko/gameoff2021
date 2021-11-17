@@ -105,12 +105,14 @@ namespace Leaderboards
 			certHandler = new CustomCertificateHandler();
 		}
 
-		public void SubmitScore(string entryName, long scoreSub, long levelSub, string id) {
-			var check = (int)Secrets.GetVerificationNumber(entryName, scoreSub, levelSub);
+		public void SubmitScore(long scoreSub, long levelSub)
+		{
+			var playerName = PlayerPrefs.GetString("PlayerName");
+			var check = (int)Secrets.GetVerificationNumber(playerName, scoreSub, levelSub);
 			
 			var parameters = "";
-			parameters += entryName;
-			parameters += "," + id;
+			parameters += playerName;
+			parameters += "," + PlayerPrefs.GetString("PlayerId");
 			parameters += "," + levelSub;
 			parameters += "," + scoreSub;
 			parameters += "," + check;

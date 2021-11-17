@@ -4,6 +4,7 @@ using System.Linq;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
 using AnttiStarterKit.Utils;
+using Leaderboards;
 using Save;
 using TMPro;
 using UnityEngine;
@@ -28,6 +29,8 @@ public class Hand : MonoBehaviour
     [SerializeField] private TransformState deckPreview;
     [SerializeField] private CardPreview cardPreviewPrefab;
     [SerializeField] private BoxCollider2D drawPileCollider;
+    [SerializeField] private Appearer gameOver, tryAgain, backToMenu;
+    [SerializeField] private ScoreManager scoreManager;
 
     private List<Card> cards;
     private SaveData save;
@@ -365,7 +368,14 @@ public class Hand : MonoBehaviour
         
         if (LevelFailed())
         {
-            // TODO: restart etc
+            scoreManager.SubmitScore(save.score, Level);
+            
+            gameOver.Show();
+            tryAgain.ShowAfter(0.3f);
+            backToMenu.ShowAfter(0.6f);
+            
+            Saver.Clear();
+            
             return;
         }
         
