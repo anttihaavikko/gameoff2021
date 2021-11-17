@@ -8,4 +8,9 @@ public class StartView : MonoBehaviour
         var scene = PlayerPrefs.HasKey("PlayerName") ? "Main" : "Name";
         SceneChanger.Instance.ChangeScene(scene);
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

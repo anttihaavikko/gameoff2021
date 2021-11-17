@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Extensions;
 using Save;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class CardPreview : MonoBehaviour
 {
@@ -11,9 +13,18 @@ public class CardPreview : MonoBehaviour
     [SerializeField] private Sprite starSprite, bombSprite, circleSprite;
     [SerializeField] private GameObject rotateIcon, pushIcon, pullIcon;
     [SerializeField] private List<GameObject> directionIndicators;
+    [SerializeField] private bool randomize;
     
     private CardData data;
-    
+
+    private void Start()
+    {
+        if (randomize)
+        {
+            Setup(CardData.GetRandom());
+        }
+    }
+
     public void Setup(CardData cardData)
     {
         data = cardData.Clone();
