@@ -231,6 +231,16 @@ public class Field : MonoBehaviour
                     new Vector3(-2, 0, 0),
                     new Vector3(2, 0, 0),
                     new Vector3(0, 0, 0)
+                }),
+                () => new ConnectTask(this, new[]
+                {
+                    new CardPlacement(CardData.StubLeft(), new Vector3(-1, 0, 0)),
+                    new CardPlacement(CardData.StubRight(), new Vector3(1, 0, 0))
+                }),
+                () => new ConnectTask(this, new[]
+                {
+                    new CardPlacement(CardData.StubUp(), new Vector3(0, 1, 0)),
+                    new CardPlacement(CardData.StubDown(), new Vector3(0, -1, 0))
                 })
             },
             3 => new List<Func<StageTask>>
@@ -248,6 +258,7 @@ public class Field : MonoBehaviour
             {
                 () => new TouchTask(5, "five"),
                 () => new TouchTask(6, "six"),
+                () => new TouchTask(7, "seven"),
                 () => new ConnectTask(this, new[]
                 {
                     new Vector3(-1, -1, 0),

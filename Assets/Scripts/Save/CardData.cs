@@ -237,6 +237,34 @@ namespace Save
             return card;
         }
 
+        public static CardData StubLeft()
+        {
+            var card = Starter();
+            card.pips = new List<int> { 3, 4 };
+            return card;
+        }
+        
+        public static CardData StubRight()
+        {
+            var card = Starter();
+            card.pips = new List<int> { 5, 4 };
+            return card;
+        }
+        
+        public static CardData StubUp()
+        {
+            var card = Starter();
+            card.pips = new List<int> { 1, 4 };
+            return card;
+        }
+        
+        public static CardData StubDown()
+        {
+            var card = Starter();
+            card.pips = new List<int> { 7, 4 };
+            return card;
+        }
+
         public int SortValue()
         {
             var value = 0;

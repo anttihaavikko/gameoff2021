@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Save;
@@ -8,6 +9,11 @@ namespace Tasks
     public class ConnectTask : StageTask
     {
         private readonly List<Card> targetCards;
+
+        public ConnectTask(Field field, IEnumerable<CardPlacement> cards)
+        {
+            targetCards = cards.Select(c => field.CreateAndPlaceCard(c.Position, c.Card)).ToList();
+        }
         
         public ConnectTask(Field field, IEnumerable<Vector3> positions)
         {
@@ -29,6 +35,18 @@ namespace Tasks
             if (!targetCards.All(field.WasCardActivated)) return false;
             IsCompleted = true;
             return true;
+        }
+    }
+
+    public class CardPlacement
+    {
+        public CardData Card { get; }
+        public Vector3 Position { get; }
+        
+        public CardPlacement(CardData card, Vector3 position)
+        {
+            Card = card;
+            Position = position;
         }
     }
 }
