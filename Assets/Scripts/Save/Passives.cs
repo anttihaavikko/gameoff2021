@@ -128,7 +128,7 @@ namespace Save
                     name = "Detonator",
                     description = "<r>void</c> <g>OnExplode</c>(<b>Card</c> <o>card</c>)\n{\n\t<o>card</c>.<g>GetNeighbours</c>().<g>Activate</c>();\n}",
                     repeatable = false,
-                    tutorial = "causes (exploding cards) to (activate) it's (neighbour) cards."
+                    tutorial = "causes (exploding cards) to (activate) its (neighbour) cards."
                 }
             },
             {
