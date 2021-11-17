@@ -6903,6 +6903,7 @@ GameObject:
   - component: {fileID: 547193171}
   - component: {fileID: 547193173}
   - component: {fileID: 547193172}
+  - component: {fileID: 547193174}
   m_Layer: 0
   m_Name: Text Shadow
   m_TagString: Untagged
@@ -7063,6 +7064,20 @@ MeshRenderer:
   m_SortingLayer: 2
   m_SortingOrder: -1
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &547193174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547193170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd78f00156b840c092ce66dc032c7f9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 0.02
+  speed: 7
 --- !u!1 &550779230
 GameObject:
   m_ObjectHideFlags: 0
@@ -16905,7 +16920,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2119121680}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.9999999
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -23142,6 +23157,7 @@ GameObject:
   - component: {fileID: 1971925990}
   - component: {fileID: 1971925992}
   - component: {fileID: 1971925991}
+  - component: {fileID: 1971925993}
   m_Layer: 0
   m_Name: Select a new card
   m_TagString: Untagged
@@ -23302,6 +23318,20 @@ MeshRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1971925993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971925989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd78f00156b840c092ce66dc032c7f9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 0.02
+  speed: 7
 --- !u!1 &1989324425
 GameObject:
   m_ObjectHideFlags: 0
