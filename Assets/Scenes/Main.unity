@@ -13849,6 +13849,7 @@ MonoBehaviour:
   - {fileID: 5901857389752271184, guid: cf511e15ae18647faae2fa43b04f4ad4, type: 3}
   - {fileID: 1182684343191752608, guid: 3422f9e212db44164827333fe25eb77d, type: 3}
   - {fileID: 1821656006865347872, guid: 714e03162ec8149b2b54f7f75696ed85, type: 3}
+  - {fileID: 93859070532907134, guid: 33f8dd822cdd34e3fbf7a7caf11c8aeb, type: 3}
 --- !u!4 &1223809973
 Transform:
   m_ObjectHideFlags: 0
@@ -20193,6 +20194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b84f0aff1496c4fc98fc48b350ab6393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  randomizeSpeed: 0
   speed: 4
   pulsingSpeed: 2
   pulsingMin: 0.2

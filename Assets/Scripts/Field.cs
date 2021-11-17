@@ -367,6 +367,7 @@ public class Field : MonoBehaviour
     public void Place(Card card)
     {
         cards.Add(card);
+        card.PlaceEffect();
         
         spinner.Show();
         connectionLines.Hide();
@@ -384,7 +385,7 @@ public class Field : MonoBehaviour
             {
                 var p = card.transform.position + neighbours.Random();
                 var c = hand.CreateCard(p, ((DoublerCurse)curse).CardType);
-                PlaceCard(c);   
+                PlaceCard(c, false, true);   
             }
         }
 
@@ -556,20 +557,24 @@ public class Field : MonoBehaviour
         if (hand.HasPassive(Passive.Replacement))
         {
             var next = hand.GetRandomCard(card.GetPositionBeforeShaking());
-            PlaceCard(next);
+            PlaceCard(next, false, true);
             actionQueue.Add(new ActivateAction(next, 1));
         }
         
         Destroy(card.gameObject);
     }
 
-    private void PlaceCard(Card card, bool mark = false)
+    private void PlaceCard(Card card, bool mark = false, bool doEffect = false)
     {
         card.draggable.enabled = false;
         card.hoverer.enabled = false;
         card.SetMarking(mark);
         PlacePipsToGrid(card);
         cards.Add(card);
+        if (doEffect)
+        {
+            card.PlaceEffect();
+        }
         output.text = grid.DataAsString();
     }
 

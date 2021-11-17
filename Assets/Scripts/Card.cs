@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
+using AnttiStarterKit.Managers;
 using Save;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -330,6 +331,11 @@ public class Card : MonoBehaviour
     public void SetMarking(bool state)
     {
         marking.SetActive(state);
+    }
+
+    public void PlaceEffect()
+    {
+        EffectManager.AddEffects(new []{ 4 }, transform.position);
     }
 }
 
