@@ -88,7 +88,7 @@ namespace AnttiStarterKit.Visuals
                 var diff = new Vector3(Random.Range(-shakeAmount, shakeAmount) * mod,
                     Random.Range(-shakeAmount, shakeAmount) * mod, 0);
 
-                var rot = Quaternion.Euler(0, 0, Random.Range(-shakeAmount, shakeAmount) * mod * 1.5f);
+                var rot = Quaternion.Euler(0, 0, Random.Range(-shakeAmount, shakeAmount) * mod * 4f);
                 var pos = cameraRig.transform.position;
                 cameraRig.position = pos + diff * 0.075f;
                 cameraRig.rotation = rot;

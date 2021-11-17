@@ -4,6 +4,8 @@ namespace AnttiStarterKit.Animations
 {
 	public class Rotator : MonoBehaviour {
 
+		[SerializeField] private bool randomizeSpeed;
+
 		public float speed = 1f;
 		public float pulsingSpeed, pulsingMin;
 
@@ -11,6 +13,11 @@ namespace AnttiStarterKit.Animations
 
 		private void Start()
 		{
+			if (randomizeSpeed)
+			{
+				speed = Random.Range(-2f, 2f);
+			}
+			
 			angle = Random.value * 360f;
 		}
 		
