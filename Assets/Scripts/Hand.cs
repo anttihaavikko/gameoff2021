@@ -422,7 +422,7 @@ public class Hand : MonoBehaviour
         var par = field.GetPar(Level);
         var noPar = GetScore() < par;
         if(noPar) scalab.ShowMessage($"{badIntros.Random()} You did (not) reach the stage (par) of ({par}) points.", true);
-        return noPar || CardsLeft();
+        return noPar;
     }
 
     private bool CardsLeft()
