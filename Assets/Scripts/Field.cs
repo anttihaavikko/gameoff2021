@@ -298,33 +298,38 @@ public class Field : MonoBehaviour
             {
                 () => new PusherCurse(meanie),
                 () => new BlindnessCurse(this, 1),
-                () => new DoublerCurse(CardData.Starter(), "cards")
+                () => new DoublerCurse(CardData.Starter(), "cards"),
+                () => new RotationCurse()
             },
             1 => new List<Func<Curse>>
             {
                 () => new PusherCurse(meanie),
                 () => new BlindnessCurse(this, 2),
                 () => new DoublerCurse(CardData.Empty(), "blank cards"),
-                () => new DoublerCurse(CardData.Starter(), "cards")
+                () => new DoublerCurse(CardData.Starter(), "cards"),
+                () => new RotationCurse()
                 
             },
             2 => new List<Func<Curse>>
             {
                 () => new PusherCurse(meanie),
                 () => new BlindnessCurse(this, 3),
-                () => new DoublerCurse(CardData.Empty(), "blank cards")
+                () => new DoublerCurse(CardData.Empty(), "blank cards"),
+                () => new RotationCurse()
             },
             3 => new List<Func<Curse>>
             {
                 () => new PusherCurse(meanie),
                 () => new BlindnessCurse(this, 4),
-                () => new DoublerCurse(CardData.Empty(), "blank cards")
+                () => new DoublerCurse(CardData.Empty(), "blank cards"),
+                () => new RotationCurse()
             },
             _ => new List<Func<Curse>>
             {
                 () => new PusherCurse(meanie),
                 () => new BlindnessCurse(this, 5),
-                () => new DoublerCurse(CardData.Empty(), "blank cards")
+                () => new DoublerCurse(CardData.Empty(), "blank cards"),
+                () => new RotationCurse()
             }
         };
     }
@@ -887,5 +892,13 @@ public class Field : MonoBehaviour
     public bool TaskComplete()
     {
         return stageTask.IsCompleted;
+    }
+
+    public void ApplyCurseToDrawnCard(Card card)
+    {
+        if (HasCurse && curse.GetType() == typeof(RotationCurse))
+        {
+            card.Rotate(Random.value < 0.5f);   
+        }
     }
 }

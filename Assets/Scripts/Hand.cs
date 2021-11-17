@@ -297,6 +297,8 @@ public class Hand : MonoBehaviour
 
         cards.Insert(0, c);
         PositionCards();
+
+        field.ApplyCurseToDrawnCard(c);
     }
 
     private void UpdateDrawPile()
