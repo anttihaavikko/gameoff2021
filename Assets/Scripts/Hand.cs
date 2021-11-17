@@ -41,12 +41,16 @@ public class Hand : MonoBehaviour
 
     private readonly string[] badIntros =
     {
+        "",
         "Too bad!",
         "Oh no!",
         "Oh noes!",
         "Uh oh!",
         "Darn!",
-        "Not quite!"
+        "Not quite!",
+        "Bummer!",
+        "Oh dang!",
+        "Alas!"
     };
 
     public bool HasPassive(Passive passive) => save.HasPassive(passive);

@@ -307,6 +307,7 @@ public class Field : MonoBehaviour
                 () => new BlindnessCurse(this, 2),
                 () => new DoublerCurse(CardData.Empty(), "blank cards"),
                 () => new DoublerCurse(CardData.Starter(), "cards"),
+                () => new DoublerCurse(CardData.StarterWithBomb(), "bombs"),
                 () => new RotationCurse()
                 
             },
@@ -315,6 +316,7 @@ public class Field : MonoBehaviour
                 () => new PusherCurse(meanie),
                 () => new BlindnessCurse(this, 3),
                 () => new DoublerCurse(CardData.Empty(), "blank cards"),
+                () => new DoublerCurse(CardData.StarterWithBomb(), "bombs"),
                 () => new RotationCurse()
             },
             3 => new List<Func<Curse>>
@@ -322,6 +324,7 @@ public class Field : MonoBehaviour
                 () => new PusherCurse(meanie),
                 () => new BlindnessCurse(this, 4),
                 () => new DoublerCurse(CardData.Empty(), "blank cards"),
+                () => new DoublerCurse(CardData.StarterWithBomb(), "bombs"),
                 () => new RotationCurse()
             },
             _ => new List<Func<Curse>>
@@ -329,6 +332,7 @@ public class Field : MonoBehaviour
                 () => new PusherCurse(meanie),
                 () => new BlindnessCurse(this, 5),
                 () => new DoublerCurse(CardData.Empty(), "blank cards"),
+                () => new DoublerCurse(CardData.StarterWithBomb(), "bombs"),
                 () => new RotationCurse()
             }
         };

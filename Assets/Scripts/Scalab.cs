@@ -22,7 +22,8 @@ public class Scalab : MonoBehaviour
         "The (code) you just picked up",
         "That piece of (code)",
         "That there (code)",
-        "That new (code)"
+        "That new (code)",
+        "That (code) is interesting, it"
     };
 
     private void Start()

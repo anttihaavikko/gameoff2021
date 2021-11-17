@@ -265,6 +265,14 @@ namespace Save
             return card;
         }
 
+        public static CardData StarterWithBomb()
+        {
+            var card = Starter();
+            var index = card.pips.Random();
+            card.bombs.Add(index);
+            return card;
+        }
+
         public int SortValue()
         {
             var value = 0;
