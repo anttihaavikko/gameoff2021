@@ -69,6 +69,11 @@ public class Field : MonoBehaviour
         Time.timeScale = processing && Input.GetKey(KeyCode.Space) ? 5 : 1;
     }
 
+    public void BaseEffect(float amount)
+    {
+        cam.BaseEffect(amount);
+    }
+
     public Cloud CreateCloud()
     {
         return Instantiate(cloudPrefab, Vector3.zero, Quaternion.identity);

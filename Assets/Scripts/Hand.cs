@@ -372,6 +372,8 @@ public class Hand : MonoBehaviour
             tryAgain.ShowAfter(0.3f);
             backToMenu.ShowAfter(0.6f);
             
+            field.BaseEffect(0.3f);
+
             Saver.Clear();
             
             return;
