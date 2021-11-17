@@ -30,13 +30,14 @@ public class Field : MonoBehaviour
     [SerializeField] private Cloud cloudPrefab;
 
     private TileGrid<Pip> grid;
-    private int totalScore;
+    private int totalScore, shownScore;
     private ActionQueue actionQueue;
     private List<Card> cards;
     private List<Card> turnActivatedCards;
     private StageTask stageTask;
     private Curse curse;
     private bool processing;
+    private int scoreScroll;
     
     public int PreviousTouched { get; private set; }
 
@@ -50,6 +51,7 @@ public class Field : MonoBehaviour
         actionQueue = new ActionQueue();
         grid = new TileGrid<Pip>(15, 15);
         totalScore = hand.GetScore();
+        shownScore = totalScore;
         UpdateScore();
         
         PlaceLevelCards();
@@ -63,6 +65,7 @@ public class Field : MonoBehaviour
 
     private void Update()
     {
+        UpdateScore();
         Time.timeScale = processing && Input.GetKey(KeyCode.Space) ? 5 : 1;
     }
 
@@ -351,7 +354,8 @@ public class Field : MonoBehaviour
 
     private void UpdateScore()
     {
-        totalScoreField.text = hand.GetScore().ToString();
+        shownScore = Mathf.RoundToInt(Mathf.MoveTowards(shownScore, totalScore, scoreScroll));
+        totalScoreField.text = shownScore.ToString();
         totalScoreFieldShadow.text = totalScoreField.text;
     }
 
@@ -756,9 +760,9 @@ public class Field : MonoBehaviour
 
     private void AddScore(int amount)
     {
+        scoreScroll = Mathf.CeilToInt(amount * 0.05f);
         totalScore += amount;
         hand.SetScore(totalScore);
-        UpdateScore();
     }
 
     private void ShowTextAt(string text, Vector3 pos, float scale = 1f, int sortOrder = 1, float hideAfter = 1f)

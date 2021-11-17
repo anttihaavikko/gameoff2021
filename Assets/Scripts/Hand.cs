@@ -39,7 +39,7 @@ public class Hand : MonoBehaviour
     private int previousScore;
     private bool previewShown;
     private bool firstPicked;
-    
+
     private const float PreviewWindowOffset = 650f;
 
     private readonly string[] badIntros =
