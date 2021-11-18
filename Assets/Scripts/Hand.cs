@@ -10,6 +10,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class Hand : MonoBehaviour
 {
@@ -64,6 +65,7 @@ public class Hand : MonoBehaviour
     private void Awake()
     {
         save = SaveData.LoadOrCreate();
+        Random.InitState(save.seed + Level);
     }
 
     private void Start()
