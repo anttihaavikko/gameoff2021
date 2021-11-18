@@ -891,7 +891,6 @@ public class Field : MonoBehaviour
 
     public bool IsFull()
     {
-        Debug.Log($"Currently {cards.Count} cards on field.");
         return cards.Count >= 25;
     }
 

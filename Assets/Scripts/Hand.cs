@@ -235,17 +235,17 @@ public class Hand : MonoBehaviour
         }
 
         previousScore = GetScore();
+
+        if (field.IsFull())
+        {
+            Invoke(nameof(CreateOptions), 1.5f);
+            return;
+        }
         
         if (HasPassive(Passive.Chaos) && turnNumber % 5 == 0)
         {
             var luck = GetLuck();
             AddCard(CardData.GetRandom(luck), Vector3.down * 5, true);
-            return;
-        }
-
-        if (field.IsFull())
-        {
-            Invoke(nameof(CreateOptions), 1.5f);
             return;
         }
         
