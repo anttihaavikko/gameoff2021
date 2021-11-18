@@ -26,7 +26,7 @@ public class Hand : MonoBehaviour
     [SerializeField] private TMP_Text turnField, turnFieldShadow;
     [SerializeField] private Scalab scalab;
     [SerializeField] private Transform deckPreviewContainer;
-    [SerializeField] private TransformState deckPreview;
+    [SerializeField] private TransformState deckPreview, confirmDialog;
     [SerializeField] private CardPreview cardPreviewPrefab;
     [SerializeField] private BoxCollider2D drawPileCollider;
     [SerializeField] private Appearer gameOver, tryAgain, backToMenu;
@@ -37,7 +37,7 @@ public class Hand : MonoBehaviour
     private Stack<GameObject> stuffers;
     private int turnNumber = 1;
     private int previousScore;
-    private bool previewShown;
+    private bool previewShown, confirmShown;
     private bool firstPicked;
 
     private readonly string[] badIntros =
@@ -69,7 +69,9 @@ public class Hand : MonoBehaviour
     private void Start()
     {
         cards = new List<Card>();
+        
         deckPreview.transform.position += Vector3.down * Screen.height;
+        confirmDialog.transform.position += Vector3.down * Screen.height;
         
         save.deck.Shuffle();
         CreateStuffers();
@@ -116,6 +118,11 @@ public class Hand : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ToggleQuitConfirm();
+        }
+        
         DebugControls();
     }
 
@@ -466,5 +473,25 @@ public class Hand : MonoBehaviour
     public void ShowMessage(string message, bool force)
     {
         scalab.ShowMessage(message, force);
+    }
+
+    public void BackToMenu()
+    {
+        ToggleQuitConfirm();
+        SceneChanger.Instance.ChangeScene("Start");
+    }
+
+    public void CancelQuit()
+    {
+        ToggleQuitConfirm();
+    }
+
+    private void ToggleQuitConfirm()
+    {
+        confirmShown = !confirmShown;
+        drawPileCollider.enabled = !confirmShown;
+        var target = confirmDialog.Position +  Vector3.down * (confirmShown ? 0 : Screen.height);
+        var t = confirmDialog.transform;
+        Tweener.MoveToBounceOut(t, target.WhereX(t.position.x), 0.5f);
     }
 }
