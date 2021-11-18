@@ -238,6 +238,7 @@ public class Hand : MonoBehaviour
 
         if (field.IsFull())
         {
+            cards.ForEach(MoveCardDown);
             Invoke(nameof(CreateOptions), 1.5f);
             return;
         }
@@ -268,6 +269,11 @@ public class Hand : MonoBehaviour
 
     private void SecondTurnMessages()
     {
+        if (Level >= 2 && turnNumber == 3)
+        {
+            TriggerTutorial(BaseTutorial.DeckPreview);
+        }
+        
         if (GetScore() - previousScore >= 8)
         {
             TriggerTutorial(BaseTutorial.NiceKeepGoing);
@@ -276,11 +282,6 @@ public class Hand : MonoBehaviour
         }
         
         TriggerTutorial(BaseTutorial.NotQuite);
-
-        if (Level >= 2 && turnNumber == 3)
-        {
-            TriggerTutorial(BaseTutorial.DeckPreview);
-        }
     }
 
     public Card GetRandomCard(Vector3 startPosition)
@@ -426,7 +427,7 @@ public class Hand : MonoBehaviour
             {
                 card.draggable.click = null;
                 save.deck.Add(data);
-                Tweener.MoveToBounceOut(card.transform, Vector3.down * 10f, 0.3f);
+                MoveCardDown(card);
 
                 if (firstPicked || !HasPassive(Passive.DoublePicks))
                 {
@@ -438,6 +439,11 @@ public class Hand : MonoBehaviour
                 firstPicked = true;
             };
         }
+    }
+
+    private static void MoveCardDown(Card card)
+    {
+        Tweener.MoveToBounceOut(card.transform, Vector3.down * 10f, 0.3f);
     }
 
     private bool LevelFailed()
