@@ -384,7 +384,7 @@ public class Field : MonoBehaviour
             if (neighbours.Any())
             {
                 var p = card.transform.position + neighbours.Random();
-                var c = hand.CreateCard(p, ((DoublerCurse)curse).CardType);
+                var c = hand.CreateCard(p, ((DoublerCurse)curse).CardType, hand.HasPassive(Passive.StarOnGenerated));
                 PlaceCard(c, false, true);   
             }
         }

@@ -239,7 +239,7 @@ public class Hand : MonoBehaviour
         if (HasPassive(Passive.Chaos) && turnNumber % 5 == 0)
         {
             var luck = GetLuck();
-            AddCard(CardData.GetRandom(luck), Vector3.down * 5);
+            AddCard(CardData.GetRandom(luck), Vector3.down * 5, true);
             return;
         }
 
@@ -287,18 +287,24 @@ public class Hand : MonoBehaviour
     {
         var luck = GetLuck();
         var data = CardData.GetRandom(luck);
-        var card = CreateCard(startPosition, data);
+        var card = CreateCard(startPosition, data, HasPassive(Passive.StarOnGenerated));
         return card;
     }
 
-    public Card CreateCard(Vector3 startPosition, CardData data)
+    public Card CreateCard(Vector3 startPosition, CardData data, bool addStar = false)
     {
         var card = Instantiate(cardPrefab, startPosition, Quaternion.identity);
         card.Setup(data);
+
+        if (addStar)
+        {
+            card.AddRandomStar();
+        }
+        
         return card;
     }
 
-    private void AddCard(CardData cardData, Vector3 from)
+    private void AddCard(CardData cardData, Vector3 from, bool addStar = false)
     {
         UpdateDrawPile();
 
@@ -308,6 +314,11 @@ public class Hand : MonoBehaviour
         c.draggable.preview += ConnectionPreview;
         c.draggable.hidePreview += HidePreview;
         c.draggable.dropCancelled += PositionCards;
+
+        if (addStar)
+        {
+            c.AddRandomStar();
+        }
 
         cards.Insert(0, c);
         PositionCards();

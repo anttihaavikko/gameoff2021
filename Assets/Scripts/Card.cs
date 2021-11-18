@@ -337,6 +337,13 @@ public class Card : MonoBehaviour
     {
         EffectManager.AddEffects(new []{ 4 }, transform.position);
     }
+
+    public void AddRandomStar()
+    {
+        if (!pips.Any()) return;
+        var pip = pips.Random();
+        StarPip(pip);
+    }
 }
 
 public class IntPair

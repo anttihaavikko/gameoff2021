@@ -35,7 +35,8 @@ namespace Save
         DoublePicks,
         SmallerPars,
         MultiOnCenter,
-        PreviewInOrder
+        PreviewInOrder,
+        StarOnGenerated
     }
     
     public static class Passives
@@ -319,6 +320,16 @@ namespace Save
                     description = "<b>IList</c><<b>Card</c>> <g>DeckContentsForPreview</c>()\n{\n\t<r>return</c> deck.<g>OrderBy</c>(<o>c</c> => <o>c</c>.Order);\n}",
                     repeatable = false,
                     tutorial = "allows you to see the (draw pile) cards in correct (order)."
+                }
+            },
+            {
+                Passive.StarOnGenerated,
+                new PassiveDetails
+                {
+                    name = "Stardust",
+                    description = "<r>override</c> <b>Card</c> <g>GenerateCard</c>()\n{\n\t<r>var</c> card = <o>base</c>.<g>GenerateCard</c>();\n\t<r>var</c> pip = card.<g>GetRandomPip</c>();\n\tpip.<g>TransformToStar</c>();\n\t<r>return</c> card;\n}",
+                    repeatable = false,
+                    tutorial = "makes every (generated card) have at least one (star) pip."
                 }
             }
         };
