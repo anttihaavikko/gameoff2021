@@ -927,7 +927,7 @@ public class Field : MonoBehaviour
 
     public void StartTimer()
     {
-        if (stageTask.GetType() == typeof(TimedTask))
+        if (HasTask() && stageTask.GetType() == typeof(TimedTask))
         {
             StartCoroutine(UpdateTimer());   
         }
@@ -935,7 +935,7 @@ public class Field : MonoBehaviour
 
     public void StopTimer()
     {
-        if (stageTask.GetType() != typeof(TimedTask)) return;
+        if (!HasTask() || stageTask.GetType() != typeof(TimedTask)) return;
         var task = (TimedTask)stageTask;
         if (!task.HasTime()) return;
         task.MarkDone();

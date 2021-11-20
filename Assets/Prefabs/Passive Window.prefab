@@ -934,8 +934,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Bigger Hand
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7fc46f05d96e0479cbb59598e57784c1, type: 2}
-  m_sharedMaterial: {fileID: -8645398838637780628, guid: 7fc46f05d96e0479cbb59598e57784c1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 450ef0d783b6c445ab239b5bf4e50248, type: 2}
+  m_sharedMaterial: {fileID: 5591544407385039606, guid: 450ef0d783b6c445ab239b5bf4e50248, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -959,8 +959,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

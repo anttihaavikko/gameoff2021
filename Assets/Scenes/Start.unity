@@ -791,8 +791,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: do;MIN[0]
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7fc46f05d96e0479cbb59598e57784c1, type: 2}
-  m_sharedMaterial: {fileID: -8645398838637780628, guid: 7fc46f05d96e0479cbb59598e57784c1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 450ef0d783b6c445ab239b5bf4e50248, type: 2}
+  m_sharedMaterial: {fileID: 5591544407385039606, guid: 450ef0d783b6c445ab239b5bf4e50248, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1442,8 +1442,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: do;MIN[0]
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7fc46f05d96e0479cbb59598e57784c1, type: 2}
-  m_sharedMaterial: {fileID: -8645398838637780628, guid: 7fc46f05d96e0479cbb59598e57784c1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 450ef0d783b6c445ab239b5bf4e50248, type: 2}
+  m_sharedMaterial: {fileID: 5591544407385039606, guid: 450ef0d783b6c445ab239b5bf4e50248, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2455,8 +2455,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Leaderboards
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7fc46f05d96e0479cbb59598e57784c1, type: 2}
-  m_sharedMaterial: {fileID: -8645398838637780628, guid: 7fc46f05d96e0479cbb59598e57784c1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 91c1c5bdb65bd4a9dbc947104d667d9f, type: 2}
+  m_sharedMaterial: {fileID: -3855635441029034031, guid: 91c1c5bdb65bd4a9dbc947104d667d9f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3506,8 +3506,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Antti Haavikko presents
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7fc46f05d96e0479cbb59598e57784c1, type: 2}
-  m_sharedMaterial: {fileID: -8645398838637780628, guid: 7fc46f05d96e0479cbb59598e57784c1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 450ef0d783b6c445ab239b5bf4e50248, type: 2}
+  m_sharedMaterial: {fileID: 5591544407385039606, guid: 450ef0d783b6c445ab239b5bf4e50248, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6938,8 +6938,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Antti Haavikko presents
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7fc46f05d96e0479cbb59598e57784c1, type: 2}
-  m_sharedMaterial: {fileID: -8645398838637780628, guid: 7fc46f05d96e0479cbb59598e57784c1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 450ef0d783b6c445ab239b5bf4e50248, type: 2}
+  m_sharedMaterial: {fileID: 5591544407385039606, guid: 450ef0d783b6c445ab239b5bf4e50248, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7928,7 +7928,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -4.4000244, y: 3.800003}
+  m_AnchoredPosition: {x: -2.100006, y: 2.4000015}
   m_SizeDelta: {x: 935.84, y: 81.789}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1751998334
@@ -7953,8 +7953,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Leaderboards
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7fc46f05d96e0479cbb59598e57784c1, type: 2}
-  m_sharedMaterial: {fileID: -8645398838637780628, guid: 7fc46f05d96e0479cbb59598e57784c1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 91c1c5bdb65bd4a9dbc947104d667d9f, type: 2}
+  m_sharedMaterial: {fileID: -3855635441029034031, guid: 91c1c5bdb65bd4a9dbc947104d667d9f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
