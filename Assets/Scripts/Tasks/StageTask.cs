@@ -6,7 +6,6 @@ namespace Tasks
 
         public abstract string GetTutorial();
         public abstract string GetText();
-
         public abstract bool Update(Field field);
     }
 }

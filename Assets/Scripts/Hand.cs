@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Animations;
@@ -40,6 +41,7 @@ public class Hand : MonoBehaviour
     private int previousScore;
     private bool previewShown, confirmShown;
     private bool firstPicked;
+    private bool alreadyFailed;
 
     private readonly string[] badIntros =
     {
@@ -61,6 +63,7 @@ public class Hand : MonoBehaviour
     public bool IsEvenTurn => turnNumber % 2 == 0;
     public bool IsOddTurn => !IsEvenTurn;
     public bool IsFirstTurn => turnNumber == 1;
+    public int GetDeckSize => save.deck.GetCount();
 
     private void Awake()
     {
@@ -86,6 +89,8 @@ public class Hand : MonoBehaviour
         
         ShowPassives();
         Invoke(nameof(ShowPassiveTutorial), 1.2f);
+        
+        field.StartTimer();
     }
 
     private void ShowPassiveTutorial()
@@ -238,8 +243,7 @@ public class Hand : MonoBehaviour
 
         if (field.IsFull())
         {
-            cards.ForEach(MoveCardDown);
-            Invoke(nameof(CreateOptions), 1.5f);
+            StageDone();
             return;
         }
         
@@ -254,7 +258,7 @@ public class Hand : MonoBehaviour
         {
             if (!cards.Any())
             {
-                Invoke(nameof(CreateOptions), 1.5f);   
+                StageDone();
             }
             
             return;
@@ -265,6 +269,13 @@ public class Hand : MonoBehaviour
         var cardData = save.deck.Draw();
         AddCard(cardData, deckTop.position);
         UpdateDeckPreviewContents();
+    }
+
+    private void StageDone()
+    {
+        cards.ForEach(MoveCardDown);
+        field.StopTimer();
+        Invoke(nameof(CreateOptions), 1.5f);   
     }
 
     private void SecondTurnMessages()
@@ -378,8 +389,16 @@ public class Hand : MonoBehaviour
         PositionCards();
     }
 
+    public void FailStage()
+    {
+        CreateOptions();
+        alreadyFailed = true;
+    }
+
     private void CreateOptions()
     {
+        if (alreadyFailed) return;
+        
         if (previewShown)
         {
             ToggleDeckPreview();    

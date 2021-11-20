@@ -38,7 +38,7 @@ public class Field : MonoBehaviour
     private Curse curse;
     private bool processing;
     private int scoreScroll;
-    
+
     public int PreviousTouched { get; private set; }
 
     public bool HasCurse => curse != null;
@@ -199,6 +199,7 @@ public class Field : MonoBehaviour
             {
                 () => new TouchTask(2, "two"),
                 () => new TouchTask(3, "three"),
+                () => new TimedTask(hand.Level, 5),
                 () => new ConnectTask(this, new[]
                 {
                     new Vector3(-1, 0, 0),
@@ -224,6 +225,7 @@ public class Field : MonoBehaviour
             {
                 () => new TouchTask(2, "two"),
                 () => new TouchTask(3, "three"),
+                () => new TimedTask(hand.Level, 4),
                 () => new ConnectTask(this, new[]
                 {
                     new Vector3(-2, 0, 0),
@@ -234,6 +236,7 @@ public class Field : MonoBehaviour
             {
                 () => new TouchTask(3, "three"),
                 () => new TouchTask(4, "four"),
+                () => new TimedTask(hand.Level, 3),
                 () => new ConnectTask(this, new[]
                 {
                     new Vector3(-2, 0, 0),
@@ -255,6 +258,7 @@ public class Field : MonoBehaviour
             {
                 () => new TouchTask(4, "four"),
                 () => new TouchTask(5, "five"),
+                () => new TimedTask(hand.Level, 2),
                 () => new ConnectTask(this, new[]
                 {
                     new Vector3(0, -2, 0),
@@ -277,6 +281,7 @@ public class Field : MonoBehaviour
                 () => new TouchTask(5, "five"),
                 () => new TouchTask(6, "six"),
                 () => new TouchTask(7, "seven"),
+                () => new TimedTask(hand.Level, 1),
                 () => new ConnectTask(this, new[]
                 {
                     new Vector3(-1, -1, 0),
@@ -918,5 +923,40 @@ public class Field : MonoBehaviour
         {
             card.Rotate(Random.value < 0.5f);   
         }
+    }
+
+    public void StartTimer()
+    {
+        if (stageTask.GetType() == typeof(TimedTask))
+        {
+            StartCoroutine(UpdateTimer());   
+        }
+    }
+
+    public void StopTimer()
+    {
+        if (stageTask.GetType() != typeof(TimedTask)) return;
+        var task = (TimedTask)stageTask;
+        if (!task.HasTime()) return;
+        task.MarkDone();
+        hand.ShowMessage($"Nice! You (finished) the stage with ({task.GetTimeLeft()}) left to spare.", true);
+    }
+    
+    private IEnumerator UpdateTimer()
+    {
+        var task = (TimedTask)stageTask;
+        while (task.HasTime())
+        {
+            if (!processing && !hand.IsFirstTurn && !task.IsCompleted)
+            {
+                task.TickDown();
+                ShowTaskOrPar();
+                yield return new WaitForSeconds(1f);
+            }
+
+            yield return null;
+        }
+        
+        hand.FailStage();
     }
 }
