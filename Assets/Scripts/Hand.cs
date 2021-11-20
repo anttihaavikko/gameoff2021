@@ -33,6 +33,8 @@ public class Hand : MonoBehaviour
     [SerializeField] private BoxCollider2D drawPileCollider;
     [SerializeField] private Appearer gameOver, tryAgain, backToMenu;
     [SerializeField] private ScoreManager scoreManager;
+    [SerializeField] private TMP_Text pickText, pickTextShadow;
+    
 
     private List<Card> cards;
     private SaveData save;
@@ -453,6 +455,11 @@ public class Hand : MonoBehaviour
                     save.level++;
                     save.Save();
                     SceneChanger.Instance.ChangeScene("Pick");   
+                }
+
+                if (HasPassive(Passive.DoublePicks))
+                {
+                    pickText.text = pickTextShadow.text = "Pick another new card!";   
                 }
 
                 firstPicked = true;

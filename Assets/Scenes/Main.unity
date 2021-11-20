@@ -15715,6 +15715,8 @@ MonoBehaviour:
   tryAgain: {fileID: 694438954}
   backToMenu: {fileID: 1142207053}
   scoreManager: {fileID: 339851970}
+  pickText: {fileID: 1971925991}
+  pickTextShadow: {fileID: 547193172}
 --- !u!1 &1300062628
 GameObject:
   m_ObjectHideFlags: 0
