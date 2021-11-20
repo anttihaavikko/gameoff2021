@@ -14,12 +14,14 @@ public class PassiveIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     
     private PassiveDetails details;
     private PassiveTooltip tooltip;
+    private Passive passive;
     private int level;
     
     public void Setup(Passive passive, PassiveTooltip tooltipComponent, int lvl)
     {
         tooltip = tooltipComponent;
         details = Passives.GetDetails(passive);
+        this.passive = passive;
         letter.text = details.name.Substring(0, 1);
         level = lvl;
         icon.sprite = iconShadow.sprite = sprites.Get((int)passive);
@@ -27,7 +29,7 @@ public class PassiveIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        tooltip.Show(transform.position, details, level);
+        tooltip.Show(transform.position, passive, details, level);
     }
 
     public void OnPointerExit(PointerEventData eventData)
