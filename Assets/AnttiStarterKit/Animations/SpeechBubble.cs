@@ -136,7 +136,7 @@ namespace AnttiStarterKit.Animations
             {
                 var text = GetMessagePart(message, pos);
                 textArea.text = ApplyColors(text);
-                var current = text.Substring(text.Length - 1);
+                var current = message.Substring(pos - 1, 1);
                 CheckForVocal(current);
                 var delay = current == " " ? delayBetweenWords : delayBetweenLetters;
                 pos++;
