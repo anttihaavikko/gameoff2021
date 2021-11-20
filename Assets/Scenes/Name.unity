@@ -1351,7 +1351,7 @@ MonoBehaviour:
       m_Calls: []
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
-  m_SelectionColor: {r: 0.8352941, g: 0.5372549, b: 0.21176471, a: 1}
+  m_SelectionColor: {r: 1, g: 0.7921569, b: 0.83137256, a: 1}
   m_Text: 
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 5
@@ -2544,8 +2544,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Your name
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7fc46f05d96e0479cbb59598e57784c1, type: 2}
-  m_sharedMaterial: {fileID: -8645398838637780628, guid: 7fc46f05d96e0479cbb59598e57784c1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 450ef0d783b6c445ab239b5bf4e50248, type: 2}
+  m_sharedMaterial: {fileID: 5591544407385039606, guid: 450ef0d783b6c445ab239b5bf4e50248, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2678,8 +2678,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7fc46f05d96e0479cbb59598e57784c1, type: 2}
-  m_sharedMaterial: {fileID: -8645398838637780628, guid: 7fc46f05d96e0479cbb59598e57784c1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 450ef0d783b6c445ab239b5bf4e50248, type: 2}
+  m_sharedMaterial: {fileID: 5591544407385039606, guid: 450ef0d783b6c445ab239b5bf4e50248, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4362,8 +4362,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7fc46f05d96e0479cbb59598e57784c1, type: 2}
-  m_sharedMaterial: {fileID: -8645398838637780628, guid: 7fc46f05d96e0479cbb59598e57784c1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 450ef0d783b6c445ab239b5bf4e50248, type: 2}
+  m_sharedMaterial: {fileID: 5591544407385039606, guid: 450ef0d783b6c445ab239b5bf4e50248, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5259,8 +5259,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Your name
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7fc46f05d96e0479cbb59598e57784c1, type: 2}
-  m_sharedMaterial: {fileID: -8645398838637780628, guid: 7fc46f05d96e0479cbb59598e57784c1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 450ef0d783b6c445ab239b5bf4e50248, type: 2}
+  m_sharedMaterial: {fileID: 5591544407385039606, guid: 450ef0d783b6c445ab239b5bf4e50248, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
