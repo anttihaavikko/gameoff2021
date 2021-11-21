@@ -16,7 +16,7 @@ namespace Save
         public int seed;
         public string daily;
 
-        public bool IsDaily => daily != default;
+        public bool IsDaily => daily != string.Empty;
 
         public SaveData()
         {
@@ -44,6 +44,7 @@ namespace Save
             }
             
             data.seed = Random.Range(1, 99999);
+            data.daily = string.Empty;
 
             return data;
         }
