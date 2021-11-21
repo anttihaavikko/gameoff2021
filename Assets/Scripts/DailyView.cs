@@ -17,22 +17,35 @@ public class DailyView : MonoBehaviour
     [SerializeField] private CardPreview cardPrefab;
     [SerializeField] private PassiveIcon passivePrefab;
     [SerializeField] private PassiveTooltip passiveTooltip;
+    [SerializeField] private TMP_Text errorMessage, errorMessageShadow;
+    [SerializeField] private GameObject startButton;
 
     private DateTime current;
     private List<CardData> cards;
     private List<Passive> passives;
+    private bool todayDone;
 
-    private string DateString => current.ToString("MMM dd yyyy");
+    private string DateString => FormatDate(current);
     private int Seed => int.Parse(current.ToString("yyyyMMdd"));
+    private static string FormatDate(DateTime date) => date.ToString("MMM dd yyyy");
 
     private void Start()
     {
         current = DateTime.Today;
+        todayDone = PlayerPrefs.GetString("LastDaily", null) == DateString;
         DayChanged();
+    }
+
+    private void ShowError(string text)
+    {
+        startButton.SetActive(text == string.Empty);
+        errorMessageShadow.gameObject.SetActive(text != string.Empty);
+        errorMessage.text = errorMessageShadow.text = text;
     }
 
     public void Continue()
     {
+        PlayerPrefs.SetString("LastDaily", DateString);
         var save = SaveData.Create(cards, passives, Seed, DateString);
         save.Save();
         var scene = PlayerPrefs.HasKey("PlayerName") ? "Main" : "Name";
@@ -54,11 +67,23 @@ public class DailyView : MonoBehaviour
 
     private void DayChanged()
     {
+        ShowErrorMessages();
         title.text = titleShadow.text = $"DAILY RUN FOR {DateString}";
         scoreManager.gameName = $"BUG-{DateString}";
         scoreManager.LoadLeaderBoards(0);
         Random.InitState(Seed);
         UpdateStarters();
+    }
+
+    private void ShowErrorMessages()
+    {
+        if (DateString == FormatDate(DateTime.Today))
+        {
+            ShowError(todayDone ? "You have already played this daily!" : string.Empty);
+            return;
+        }
+        
+        ShowError("Past dailies can not be played!");
     }
 
     private CardData GetCard()

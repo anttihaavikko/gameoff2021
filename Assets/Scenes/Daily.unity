@@ -493,6 +493,9 @@ MonoBehaviour:
   cardPrefab: {fileID: 4406266767258020939, guid: c4c54e1a2d55545c392078bbba4a7096, type: 3}
   passivePrefab: {fileID: 8136406308149170491, guid: 4062979744697447b98158cfed52b93b, type: 3}
   passiveTooltip: {fileID: 1852056680}
+  errorMessage: {fileID: 1544721268}
+  errorMessageShadow: {fileID: 822181531}
+  startButton: {fileID: 1624123607}
 --- !u!114 &76663155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -538,7 +541,7 @@ RectTransform:
   m_Children:
   - {fileID: 220194125}
   m_Father: {fileID: 150420346}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -711,7 +714,7 @@ RectTransform:
   - {fileID: 1683288527}
   - {fileID: 1448585885}
   m_Father: {fileID: 150420346}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
@@ -769,7 +772,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 822181529}
   - {fileID: 108742107}
   - {fileID: 465479350}
   - {fileID: 1542954056}
@@ -783,6 +785,7 @@ RectTransform:
   - {fileID: 164112600}
   - {fileID: 1054874050}
   - {fileID: 1852056679}
+  - {fileID: 822181529}
   m_Father: {fileID: 76663152}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -872,7 +875,7 @@ RectTransform:
   m_Children:
   - {fileID: 681666610}
   m_Father: {fileID: 150420346}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1610,7 +1613,7 @@ RectTransform:
   m_Children:
   - {fileID: 1751998333}
   m_Father: {fileID: 150420346}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1885,7 +1888,7 @@ RectTransform:
   m_Children:
   - {fileID: 198887184}
   m_Father: {fileID: 150420346}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -2467,12 +2470,12 @@ GameObject:
   - component: {fileID: 822181530}
   - component: {fileID: 822181533}
   m_Layer: 5
-  m_Name: Author
+  m_Name: Error
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &822181529
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2486,12 +2489,12 @@ RectTransform:
   m_Children:
   - {fileID: 1544721266}
   m_Father: {fileID: 150420346}
-  m_RootOrder: 0
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 238}
-  m_SizeDelta: {x: 935.8401, y: 81.789}
+  m_AnchoredPosition: {x: 0, y: -246.17}
+  m_SizeDelta: {x: 935.84, y: 79.455}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &822181530
 MonoBehaviour:
@@ -2500,12 +2503,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 822181528}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd78f00156b840c092ce66dc032c7f9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 3
+  amount: 1.5
   speed: 7
 --- !u!114 &822181531
 MonoBehaviour:
@@ -2527,7 +2530,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Antti Haavikko presents
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 450ef0d783b6c445ab239b5bf4e50248, type: 2}
   m_sharedMaterial: {fileID: 5591544407385039606, guid: 450ef0d783b6c445ab239b5bf4e50248, type: 2}
@@ -2554,8 +2557,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3295,7 +3298,7 @@ RectTransform:
   - {fileID: 990025694}
   - {fileID: 54847879}
   m_Father: {fileID: 150420346}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3726,7 +3729,7 @@ RectTransform:
   m_Children:
   - {fileID: 1913183233}
   m_Father: {fileID: 150420346}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3782,7 +3785,7 @@ RectTransform:
   m_Children:
   - {fileID: 958019419}
   m_Father: {fileID: 150420346}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4087,7 +4090,7 @@ RectTransform:
   - {fileID: 1387329711}
   - {fileID: 743506224}
   m_Father: {fileID: 150420346}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4336,7 +4339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5244400817378973800, guid: 345b61705769f476fabf6d90c2daab12, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5244400817378973800, guid: 345b61705769f476fabf6d90c2daab12, type: 3}
       propertyPath: m_AnchorMax.x
@@ -4472,7 +4475,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -1.5, y: 2.4}
+  m_AnchoredPosition: {x: -1.5, y: 2.4000244}
   m_SizeDelta: {x: 935.84, y: 81.789}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1544721267
@@ -4482,12 +4485,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1544721265}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd78f00156b840c092ce66dc032c7f9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 3
+  amount: 1.5
   speed: 7
 --- !u!114 &1544721268
 MonoBehaviour:
@@ -4509,7 +4512,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Antti Haavikko presents
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 450ef0d783b6c445ab239b5bf4e50248, type: 2}
   m_sharedMaterial: {fileID: 5591544407385039606, guid: 450ef0d783b6c445ab239b5bf4e50248, type: 2}
@@ -4536,8 +4539,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4619,7 +4622,7 @@ RectTransform:
   m_Children:
   - {fileID: 2052652298}
   m_Father: {fileID: 150420346}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5042,7 +5045,7 @@ RectTransform:
   m_Children:
   - {fileID: 674121784}
   m_Father: {fileID: 150420346}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -5759,7 +5762,7 @@ RectTransform:
   m_Children:
   - {fileID: 990350088}
   m_Father: {fileID: 150420346}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
