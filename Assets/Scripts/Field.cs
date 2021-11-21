@@ -187,6 +187,8 @@ public class Field : MonoBehaviour
 
     private void CreateDailyLevel()
     {
+        hand.ApplySeed();
+        
         if (hand.Level == 1)
         {
             if (Random.value < 0.8f)
