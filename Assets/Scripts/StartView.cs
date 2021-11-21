@@ -1,7 +1,6 @@
-using System;
 using AnttiStarterKit.Utils;
+using Save;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class StartView : MonoBehaviour
@@ -11,13 +10,23 @@ public class StartView : MonoBehaviour
 
     private void Start()
     {
-        if (!Saver.Exists()) return;
+        if (!Saver.Exists() || HasDailySave()) return;
         restartButton.SetActive(true);
         startText.text = "Continue";
     }
 
+    private static bool HasDailySave()
+    {
+        return Saver.Exists() && Saver.Load<SaveData>().IsDaily;
+    }
+
     public void Continue()
     {
+        if (HasDailySave())
+        {
+            Saver.Clear();
+        }
+        
         var scene = PlayerPrefs.HasKey("PlayerName") ? "Main" : "Name";
         SceneChanger.Instance.ChangeScene(scene);
     }

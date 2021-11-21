@@ -34,7 +34,7 @@ public class Hand : MonoBehaviour
     [SerializeField] private Appearer gameOver, tryAgain, backToMenu;
     [SerializeField] private ScoreManager scoreManager;
     [SerializeField] private TMP_Text pickText, pickTextShadow;
-    
+
 
     private List<Card> cards;
     private SaveData save;
@@ -66,11 +66,13 @@ public class Hand : MonoBehaviour
     public bool IsOddTurn => !IsEvenTurn;
     public bool IsFirstTurn => turnNumber == 1;
     public int GetDeckSize => save.deck.GetCount();
+    public bool IsDaily => save.IsDaily;
+    public void ApplySeed() => save.ApplySeed();
 
     private void Awake()
     {
         save = SaveData.LoadOrCreate();
-        Random.InitState(save.seed + Level);
+        save.ApplySeed();
     }
 
     private void Start()
@@ -408,12 +410,21 @@ public class Hand : MonoBehaviour
         
         if (LevelFailed())
         {
+            if (save.IsDaily)
+            {
+                scoreManager.gameName = $"BUG-{save.daily}";
+            }
+            
             scoreManager.SubmitScore(save.score, Level);
             
             gameOver.Show();
-            tryAgain.ShowAfter(0.3f);
             backToMenu.ShowAfter(0.6f);
             
+            if (!save.IsDaily)
+            {
+                tryAgain.ShowAfter(0.3f);    
+            }
+
             field.BaseEffect(0.3f);
 
             Saver.Clear();
@@ -422,6 +433,8 @@ public class Hand : MonoBehaviour
         }
         
         TriggerTutorial(BaseTutorial.NewCard);
+        
+        save.ApplySeed();
         
         cardPicks.Show();
 

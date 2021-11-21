@@ -105,6 +105,12 @@ public class Field : MonoBehaviour
 
     private void PlaceLevelCards()
     {
+        if (hand.IsDaily)
+        {
+            CreateDailyLevel();
+            return;
+        }
+        
         switch (hand.Level)
         {
             case 1:
@@ -177,6 +183,60 @@ public class Field : MonoBehaviour
                 stageTask = GetTask(4);
             }
         }
+    }
+
+    private void CreateDailyLevel()
+    {
+        if (hand.Level == 1)
+        {
+            if (Random.value < 0.8f)
+            {
+                PlaceCard(hand.CreateCard(Vector3.zero, GetDailyStarter()));                
+            }
+            
+            return;
+        }
+        
+        if (Random.value < 0.3f)
+        {
+            stageTask = GetTask(GetDailyDifficulty());
+        }
+
+        if (Random.value < 0.3f)
+        {
+            curse = GetCurse(GetDailyDifficulty());
+        }
+    }
+
+    private int GetDailyDifficulty()
+    {
+        return Mathf.Max(hand.Level, Random.Range(0, 5));
+    }
+
+    private CardData GetDailyStarter()
+    {
+        var createFunc = GetDailyStarterFunc();
+        return createFunc();
+    }
+
+    private Func<CardData> GetDailyStarterFunc()
+    {
+        return new List<Func<CardData>>
+        {
+            CardData.Loop,
+            () => CardData.GetRandom(0.9f),
+            () => CardData.GetRandom(1f),
+            () => CardData.GetRandom(1.1f),
+            () => CardData.GetRandom(1.2f),
+            () => CardData.GetRandom(1.3f),
+            CardData.Empty,
+            CardData.Starter,
+            CardData.StubDown,
+            CardData.StubRight,
+            CardData.StubLeft,
+            CardData.StubUp,
+            CardData.StarterWithBomb
+        }.Random();
     }
 
     private Curse GetCurse(int difficulty)

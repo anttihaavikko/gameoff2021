@@ -14,6 +14,9 @@ namespace Save
         public int score;
         public int level;
         public int seed;
+        public string daily;
+
+        public bool IsDaily => daily != default;
 
         public SaveData()
         {
@@ -45,6 +48,16 @@ namespace Save
             return data;
         }
 
+        public static SaveData Create(List<CardData> cards, List<Passive> passives, int seed, string daily)
+        {
+            var data = new SaveData();
+            cards.ForEach(c => data.deck.Add(c));
+            passives.ForEach(p => data.passives.Add(p));
+            data.seed = seed;
+            data.daily = daily;
+            return data;
+        }
+
         public bool HasPassive(Passive passive)
         {
             return passives.Contains(passive);
@@ -53,6 +66,11 @@ namespace Save
         public int GetPassiveLevel(Passive passive)
         {
             return passives.Count(p => p == passive);
+        }
+
+        public void ApplySeed()
+        {
+            Random.InitState(seed + level * 66);
         }
     }
 }

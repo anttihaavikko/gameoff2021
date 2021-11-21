@@ -14,6 +14,7 @@ public class PickView : MonoBehaviour
     private void Start()
     {
         save = SaveData.LoadOrCreate();
+        save.ApplySeed();
         var amount = 2 + save.GetPassiveLevel(Passive.Options);
         
         Passives.GetRandom(save.passives, amount).ToList().ForEach(AddPassive);
