@@ -31,10 +31,10 @@ public class Hand : MonoBehaviour
     [SerializeField] private TransformState deckPreview, confirmDialog;
     [SerializeField] private CardPreview cardPreviewPrefab;
     [SerializeField] private BoxCollider2D drawPileCollider;
-    [SerializeField] private Appearer gameOver, tryAgain, backToMenu;
+    [SerializeField] private Appearer gameOver, tryAgain, backToMenu, dailyBack;
     [SerializeField] private ScoreManager scoreManager;
     [SerializeField] private TMP_Text pickText, pickTextShadow;
-
+    [SerializeField] private GameObject normalEndButtons;
 
     private List<Card> cards;
     private SaveData save;
@@ -413,17 +413,15 @@ public class Hand : MonoBehaviour
             if (save.IsDaily)
             {
                 scoreManager.gameName = $"BUG-{save.daily}";
+                normalEndButtons.SetActive(false);
+                dailyBack.ShowAfter(0.3f);
             }
             
             scoreManager.SubmitScore(save.score, Level);
             
             gameOver.Show();
             backToMenu.ShowAfter(0.6f);
-            
-            if (!save.IsDaily)
-            {
-                tryAgain.ShowAfter(0.3f);    
-            }
+            tryAgain.ShowAfter(0.3f);
 
             field.BaseEffect(0.3f);
 
