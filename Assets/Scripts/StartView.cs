@@ -1,3 +1,4 @@
+using AnttiStarterKit.Managers;
 using AnttiStarterKit.Utils;
 using Save;
 using TMPro;
@@ -10,6 +11,8 @@ public class StartView : MonoBehaviour
 
     private void Start()
     {
+        AudioManager.Instance.ChangeMusic(0);
+        
         if (!Saver.Exists() || HasDailySave()) return;
         restartButton.SetActive(true);
         startText.text = "Continue";

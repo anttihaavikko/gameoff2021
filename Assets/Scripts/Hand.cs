@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
+using AnttiStarterKit.Managers;
 using AnttiStarterKit.Utils;
 using Leaderboards;
 using Save;
@@ -429,6 +430,8 @@ public class Hand : MonoBehaviour
             
             return;
         }
+        
+        AudioManager.Instance.ChangeMusic(0);
         
         TriggerTutorial(BaseTutorial.NewCard);
         

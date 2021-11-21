@@ -75,7 +75,7 @@ namespace AnttiStarterKit.Managers
 			doingLowpass = false;
 		}
 
-		private void ChangeMusic(int next, float fadeOutDur, float fadeInDur, float startDelay)
+		public void ChangeMusic(int next, float fadeOutDur = 1f, float fadeInDur = 0.5f, float startDelay = 0.5f)
 		{
 			if (musics[next] == curMusic) return;
 		
@@ -87,8 +87,6 @@ namespace AnttiStarterKit.Managers
 
 			prevMusic = curMusic;
 			curMusic = musics [next];
-
-			prevMusic.time = 0f;
 
 			Invoke (nameof(StartNext), startDelay);
 		}

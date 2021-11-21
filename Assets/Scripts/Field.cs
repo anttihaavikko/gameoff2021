@@ -61,6 +61,8 @@ public class Field : MonoBehaviour
         
         ShowTaskOrPar();
         Invoke(nameof(ShowTaskAndCurseTutorial), 1.1f);
+        
+        AudioManager.Instance.ChangeMusic(1);
     }
 
     private void Update()

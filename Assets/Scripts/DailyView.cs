@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using AnttiStarterKit.Managers;
 using AnttiStarterKit.Utils;
 using Leaderboards;
 using Save;
@@ -34,6 +35,8 @@ public class DailyView : MonoBehaviour
         current = DateTime.Today;
         todayDone = PlayerPrefs.GetString("LastDaily", null) == DateString;
         DayChanged();
+        
+        AudioManager.Instance.ChangeMusic(0);
     }
 
     private void Update()
