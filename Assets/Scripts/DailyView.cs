@@ -36,6 +36,14 @@ public class DailyView : MonoBehaviour
         DayChanged();
     }
 
+    private void Update()
+    {
+        if (Application.isEditor && Input.GetKeyDown(KeyCode.F))
+        {
+            ShowError(string.Empty);
+        }
+    }
+
     private void ShowError(string text)
     {
         startButton.SetActive(text == string.Empty);
