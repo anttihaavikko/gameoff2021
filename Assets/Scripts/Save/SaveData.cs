@@ -70,7 +70,7 @@ namespace Save
 
         public void ApplySeed()
         {
-            Random.InitState(seed + level * 66);
+            Random.InitState(seed + level * 666);
         }
     }
 }
