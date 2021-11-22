@@ -1015,10 +1015,9 @@ public class Field : MonoBehaviour
             {
                 task.TickDown();
                 ShowTaskOrPar();
-                yield return new WaitForSeconds(1f);
             }
 
-            yield return null;
+            yield return new WaitForSeconds(1f);
         }
         
         hand.FailStage();
