@@ -322,7 +322,7 @@ public class Field : MonoBehaviour
             {
                 () => new TouchTask(4, "four"),
                 () => new TouchTask(5, "five"),
-                () => new TimedTask(hand.Level, 2),
+                () => new TimedTask(hand.Level, 3),
                 () => new ConnectTask(this, new[]
                 {
                     new Vector3(0, -2, 0),
@@ -345,7 +345,7 @@ public class Field : MonoBehaviour
                 () => new TouchTask(5, "five"),
                 () => new TouchTask(6, "six"),
                 () => new TouchTask(7, "seven"),
-                () => new TimedTask(hand.Level, 1),
+                () => new TimedTask(hand.Level, 2),
                 () => new ConnectTask(this, new[]
                 {
                     new Vector3(-1, -1, 0),
