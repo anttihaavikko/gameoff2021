@@ -134,6 +134,11 @@ namespace Save
         {
             furthestStage = Mathf.Max(furthestStage, stage);
         }
+
+        public List<int> GetScores()
+        {
+            return scoreHistory;
+        }
     }
 
     [Serializable]
