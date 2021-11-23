@@ -137,6 +137,7 @@ public class Hand : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             ToggleQuitConfirm();
+            stats.Save();
         }
         
         DebugControls();

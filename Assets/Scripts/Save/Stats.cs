@@ -20,12 +20,17 @@ namespace Save
         public void AddPassive(Passive passive)
         {
             Data.AddPassive(passive);
-            Saver.Save(Data, Key);
+            Save();
         }
 
         public void AddScore(int score, bool daily = false)
         {
             Data.AddScore(score);
+            Save();
+        }
+
+        public void Save()
+        {
             Saver.Save(Data, Key);
         }
     }
