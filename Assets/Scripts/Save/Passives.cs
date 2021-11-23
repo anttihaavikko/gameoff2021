@@ -87,7 +87,7 @@ namespace Save
                 new PassiveDetails
                 {
                     name = "Variety",
-                    description = "<r>void</c> <g>PresentNewCards</c>()\n{\n\t<r>for</c> (<r>var</c> i = <p>0</c>; i<r> < </c><p>3</c> + <p>[LEVEL]</c>; i<r>++</c>)\n\t{\n\t\t<r>var</c> c = <r>new</c> <b>Card</c>();\n\t\tc.<g>Present</c>();\n\t}\n}",
+                    description = "<r>void</c> <g>PresentNewCards</c>()\n{\n\t<r>for</c> (<r>var</c> i = <p>0</c>; i<r> < </c><p>2</c> + <p>[LEVEL]</c>; i<r>++</c>)\n\t{\n\t\t<r>var</c> c = <r>new</c> <b>Card</c>();\n\t\tc.<g>Present</c>();\n\t}\n}",
                     repeatable = true,
                     tutorial = "makes you get (more options) on future (cards selections)."
                 }

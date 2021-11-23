@@ -2626,6 +2626,8 @@ MonoBehaviour:
   passiveNames: {fileID: 427417949}
   passiveCounts: {fileID: 1311753871}
   iconSprites: {fileID: 11400000, guid: 382c85d1c513d4d8296d5cd4176383f3, type: 2}
+  chartWindow: {fileID: 1858935613}
+  passiveWindow: {fileID: 555102727}
 --- !u!114 &710017596
 MonoBehaviour:
   m_ObjectHideFlags: 0
