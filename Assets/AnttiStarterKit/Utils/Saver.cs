@@ -36,5 +36,10 @@ namespace AnttiStarterKit.Utils
         {
             UnityEngine.Debug.Log(PlayerPrefs.GetString(Key + keySuffix, "No data"));
         }
+
+        public static T LoadOrCreate<T>(string keySuffix = "") where T : class, new()
+        {
+            return Exists(keySuffix) ? Load<T>(keySuffix) : new T();
+        }
     }
 }

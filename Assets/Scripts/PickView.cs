@@ -9,7 +9,8 @@ public class PickView : MonoBehaviour
     [SerializeField] private Transform container;
     [SerializeField] private RectTransform scrollContent;
 
-    private SaveData save; 
+    private SaveData save;
+    private Stats stats;
 
     private void Start()
     {
@@ -19,6 +20,8 @@ public class PickView : MonoBehaviour
         
         Passives.GetRandom(save.passives, amount).ToList().ForEach(AddPassive);
         scrollContent.sizeDelta = new Vector2 (275 * amount, 300);
+
+        stats = new Stats();
     }
 
     private void AddPassive(Passive passive)
@@ -28,6 +31,7 @@ public class PickView : MonoBehaviour
         panel.SetDetails(passive, details, save.GetPassiveLevel(passive) + 1);
         panel.pickButton.onClick.AddListener(() =>
         {
+            stats.AddPassive(passive);
             save.passives.Add(passive);
             save.Save();
             panel.pickButton.onClick.RemoveAllListeners();

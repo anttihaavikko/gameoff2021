@@ -842,6 +842,7 @@ public class Field : MonoBehaviour
         scoreScroll = Mathf.CeilToInt(amount * 0.05f);
         totalScore += amount;
         hand.SetScore(totalScore);
+        hand.AddTurnScore(amount);
     }
 
     private void ShowTextAt(string text, Vector3 pos, float scale = 1f, int sortOrder = 1, float hideAfter = 1f)

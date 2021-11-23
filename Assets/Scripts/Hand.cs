@@ -45,6 +45,7 @@ public class Hand : MonoBehaviour
     private bool previewShown, confirmShown;
     private bool firstPicked;
     private bool alreadyFailed;
+    private Stats stats;
 
     private readonly string[] badIntros =
     {
@@ -72,6 +73,7 @@ public class Hand : MonoBehaviour
 
     private void Awake()
     {
+        stats = new Stats();
         save = SaveData.LoadOrCreate();
         save.ApplySeed();
     }
@@ -96,6 +98,8 @@ public class Hand : MonoBehaviour
         Invoke(nameof(ShowPassiveTutorial), 1.2f);
         
         field.StartTimer();
+        
+        stats.Data.AddStageNumber(Level);
     }
 
     private void ShowPassiveTutorial()
@@ -411,6 +415,8 @@ public class Hand : MonoBehaviour
         
         if (LevelFailed())
         {
+            stats.AddScore(save.score, save.IsDaily);
+            
             if (save.IsDaily)
             {
                 scoreManager.gameName = $"BUG-{save.daily}";
@@ -552,5 +558,10 @@ public class Hand : MonoBehaviour
         var target = confirmDialog.Position +  Vector3.down * (confirmShown ? 0 : Screen.height);
         var t = confirmDialog.transform;
         Tweener.MoveToBounceOut(t, target.WhereX(t.position.x), 0.5f);
+    }
+    
+    public void AddTurnScore(int score)
+    {
+        stats.Data.AddStageScore(score);
     }
 }
