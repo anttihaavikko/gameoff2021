@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Actions;
 using AnttiStarterKit.Animations;
@@ -743,6 +744,13 @@ public class Field : MonoBehaviour
         
         var pos = pips.First().sprite.transform.position;
         var pop = state ? Instantiate(scorePopPrefab, pos, Quaternion.identity) : null;
+        
+        var postMulti = 1;
+        
+        if (hand.HasPassive(Passive.Tactician))
+        {
+            postMulti = hand.IsEvenTurn ? 3 : 0;
+        }
 
         foreach (var pip in pips)
         {
@@ -792,13 +800,8 @@ public class Field : MonoBehaviour
                     }
                 }
 
-                if (hand.HasPassive(Passive.Tactician))
-                {
-                    multi = hand.IsEvenTurn ? 3 : 0;
-                }
-                
                 total++;
-                pop.SetText((total * multi).ToString());
+                pop.SetText((total * multi * postMulti).ToString(CultureInfo.InvariantCulture));
                 var pt = pop.transform;
                 sum += pip.sprite.transform.position;
                 amount++;
@@ -810,7 +813,7 @@ public class Field : MonoBehaviour
             yield return new WaitForSeconds(0.02f);
         }
         
-        AddScore(total * multi);
+        AddScore(total * multi * postMulti);
 
         if (pop)
         {
