@@ -106,6 +106,11 @@ public class Field : MonoBehaviour
         parFieldShadow.text = text;
     }
 
+    public bool HasCurseOfType<T>()
+    {
+        return HasCurse && curse.GetType() == typeof(T);
+    }
+
     private void PlaceLevelCards()
     {
         if (hand.IsDaily)
@@ -113,7 +118,7 @@ public class Field : MonoBehaviour
             CreateDailyLevel();
             return;
         }
-        
+
         switch (hand.Level)
         {
             case 1:
@@ -377,7 +382,8 @@ public class Field : MonoBehaviour
                 () => new PusherCurse(meanie),
                 () => new BlindnessCurse(this, 1),
                 () => new DoublerCurse(CardData.Starter(), "cards"),
-                () => new RotationCurse()
+                () => new RotationCurse(),
+                () => new NoPreviewCurse()
             },
             1 => new List<Func<Curse>>
             {
@@ -386,7 +392,8 @@ public class Field : MonoBehaviour
                 () => new DoublerCurse(CardData.Empty(), "blank cards"),
                 () => new DoublerCurse(CardData.Starter(), "cards"),
                 () => new DoublerCurse(CardData.StarterWithBomb(), "bombs"),
-                () => new RotationCurse()
+                () => new RotationCurse(),
+                () => new NoPreviewCurse()
                 
             },
             2 => new List<Func<Curse>>
@@ -395,7 +402,8 @@ public class Field : MonoBehaviour
                 () => new BlindnessCurse(this, 3),
                 () => new DoublerCurse(CardData.Empty(), "blank cards"),
                 () => new DoublerCurse(CardData.StarterWithBomb(), "bombs"),
-                () => new RotationCurse()
+                () => new RotationCurse(),
+                () => new NoPreviewCurse()
             },
             3 => new List<Func<Curse>>
             {
@@ -403,7 +411,8 @@ public class Field : MonoBehaviour
                 () => new BlindnessCurse(this, 4),
                 () => new DoublerCurse(CardData.Empty(), "blank cards"),
                 () => new DoublerCurse(CardData.StarterWithBomb(), "bombs"),
-                () => new RotationCurse()
+                () => new RotationCurse(),
+                () => new NoPreviewCurse()
             },
             _ => new List<Func<Curse>>
             {
@@ -411,7 +420,8 @@ public class Field : MonoBehaviour
                 () => new BlindnessCurse(this, 5),
                 () => new DoublerCurse(CardData.Empty(), "blank cards"),
                 () => new DoublerCurse(CardData.StarterWithBomb(), "bombs"),
-                () => new RotationCurse()
+                () => new RotationCurse(),
+                () => new NoPreviewCurse()
             }
         };
     }

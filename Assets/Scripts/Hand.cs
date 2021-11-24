@@ -6,6 +6,7 @@ using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
 using AnttiStarterKit.Managers;
 using AnttiStarterKit.Utils;
+using Curses;
 using Leaderboards;
 using Save;
 using TMPro;
@@ -190,6 +191,12 @@ public class Hand : MonoBehaviour
 
     public void ToggleDeckPreview()
     {
+        if (field.HasCurseOfType<NoPreviewCurse>())
+        {
+            scalab.ShowMessage("Some (mysterious force) is blocking your (draw pile) viewing.", true);
+            return;
+        }
+        
         previewShown = !previewShown;
         drawPileCollider.enabled = !previewShown;
         var target = deckPreview.Position +  Vector3.down * (previewShown ? 0 : Screen.height);
