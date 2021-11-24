@@ -69,7 +69,7 @@ public class StatsView : MonoBehaviour
 
         for (var i = 0; i < amount; i++)
         {
-            var x = -0.5f + 1f * i / amount;
+            var x = -0.5f + 1f * i / (amount - 1);
             var y = best > 0 ? -0.5f + 1f * scores[i] / best : 0;
             line.SetPosition(i, new Vector3(x, y, 0));
         }
