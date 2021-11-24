@@ -25,7 +25,7 @@ namespace Save
 
         public void AddScore(int score, bool daily = false)
         {
-            Data.AddScore(score);
+            Data.AddScore(score, daily);
             Save();
         }
 
