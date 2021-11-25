@@ -118,7 +118,7 @@ public class DailyView : MonoBehaviour
             card.Setup(data);
         }
 
-        var passiveCount = Mathf.Max(0, Random.Range(-2, 4));
+        var passiveCount = Mathf.Max(0, Random.Range(-1, 4));
         passiveContainer.gameObject.SetActive(passiveCount > 0);
         passives = Passives.GetRandom(new List<Passive>(), passiveCount).ToList();
         passives.ToList().ForEach(p =>
