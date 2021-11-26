@@ -793,6 +793,7 @@ public class Field : MonoBehaviour
                     ShowTextAt($"x{multi}", pip.sprite.transform.position + Vector3.right * 0.3f);
                     
                     PlayRandomNote(pos);
+                    AudioManager.Instance.PlayEffectAt(5, pos, 1f);
 
                     if (hand.HasPassive(Passive.BombTransformer))
                     {
