@@ -41,6 +41,7 @@ public class Field : MonoBehaviour
     private Curse curse;
     private bool processing;
     private int scoreScroll;
+    private int turnScore;
 
     public int PreviousTouched { get; private set; }
 
@@ -486,6 +487,9 @@ public class Field : MonoBehaviour
         {
             yield return curse.Apply(this);
         }
+        
+        hand.AddTurnScore(turnScore);
+        turnScore = 0;
 
         hand.NextTurn();
         spinner.Hide();
@@ -876,7 +880,7 @@ public class Field : MonoBehaviour
         scoreScroll = Mathf.CeilToInt(amount * 0.05f);
         totalScore += amount;
         hand.SetScore(totalScore);
-        hand.AddTurnScore(amount);
+        turnScore += amount;
     }
 
     private void ShowTextAt(string text, Vector3 pos, float scale = 1f, int sortOrder = 1, float hideAfter = 1f)
