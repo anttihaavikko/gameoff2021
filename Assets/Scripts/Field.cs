@@ -42,6 +42,7 @@ public class Field : MonoBehaviour
     private bool processing;
     private int scoreScroll;
     private int turnScore;
+    private int notePos;
 
     public int PreviousTouched { get; private set; }
 
@@ -851,7 +852,9 @@ public class Field : MonoBehaviour
 
     private void PlayRandomNote(Vector3 pos)
     {
-        AudioManager.Instance.PlayEffectAt(noteSounds.Random(), pos, 0.2f, false);
+        notePos += Random.Range(-1, 2);
+        var note = notePos.LoopAround(0, noteSounds.Count);
+        AudioManager.Instance.PlayEffectAt(noteSounds.At(note), pos, 0.2f, false);
     }
 
     private void CheckPipTransforms(int total, Pip pip)

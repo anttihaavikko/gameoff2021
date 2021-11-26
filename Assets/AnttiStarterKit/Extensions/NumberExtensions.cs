@@ -21,5 +21,11 @@ namespace AnttiStarterKit.Extensions
         {
             return (value - valueRangeMin) / (valueRangeMax - valueRangeMin) * (newRangeMax - newRangeMin) + newRangeMin;
         }
+
+        public static int LoopAround(this int value, int min, int max)
+        {
+            if (value < min) return max - 1;
+            return value % max;
+        }
     }
 }
