@@ -130,7 +130,7 @@ namespace Save
             return bestTurnScore;
         }
 
-        public void AddStageScore(int score)
+        public void AddTurnScore(int score)
         {
             bestTurnScore = Mathf.Max(bestTurnScore, score);
         }
