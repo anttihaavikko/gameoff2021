@@ -42,7 +42,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ac2fac29826ed4fd2970776281d78325, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
@@ -173,12 +173,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 114852473009967456, guid: 3d15b96e9a8fd4b68902e126f7cce22b, type: 3}
-  curMusic: {fileID: 140413319664507003}
+  curMusic: {fileID: 140413321294189882}
   musics:
   - {fileID: 140413319664507003}
   - {fileID: 140413321294189882}
   volume: 0.5
-  effects: []
+  effects:
+  - {fileID: 8300000, guid: 27fe6eb8784a74017a251a463867501b, type: 3}
+  - {fileID: 8300000, guid: 2fefaecca40d9475792827ddee13fe65, type: 3}
+  - {fileID: 8300000, guid: d4bd4b9cc0b894543bff0c2d9b488a32, type: 3}
+  - {fileID: 8300000, guid: 7ea7b561a64ef44f0ba0b9310d376615, type: 3}
+  - {fileID: 8300000, guid: 1f6eeba978597460fa436e00d0099651, type: 3}
   soundCollections: []
 --- !u!1 &140413321294189860
 GameObject:
@@ -222,7 +227,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: fe51a60cb70c64eecac3bf49eec03c87, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
   Loop: 1

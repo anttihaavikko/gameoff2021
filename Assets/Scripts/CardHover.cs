@@ -19,7 +19,6 @@ public class CardHover : MonoBehaviour
     
     private void OnMouseEnter()
     {
-        AudioManager.Instance.PlayEffectAt(2, transform.position, 1f);
         ApplyScaling(scaleAmount, TweenEasings.BounceEaseOut);
         onHover?.Invoke();
     }
@@ -28,6 +27,7 @@ public class CardHover : MonoBehaviour
     {
         if (!enabled) return;
         Tweener.Instance.ScaleTo(transform, originalScale * (1f + amount), 0.2f, 0f, easing);
+        AudioManager.Instance.PlayEffectAt(2, transform.position, 1f);
     }
 
     private void OnMouseExit()

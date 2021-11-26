@@ -629,6 +629,8 @@ public class Field : MonoBehaviour
         cam.BaseEffect(0.4f);
         ClearPipsFromGrid(card);
         cards.Remove(card);
+        
+        AudioManager.Instance.PlayEffectAt(4, transform.position, 1.5f);
 
         if (hand.HasPassive(Passive.Detonator))
         {

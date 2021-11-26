@@ -4662,11 +4662,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 373970946}
   m_CullTransparentMesh: 1
---- !u!82 &374838064 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 140413321294189882, guid: acdc659e005b54d28b4bc3c995d5ca35, type: 3}
-  m_PrefabInstance: {fileID: 140413321121531402}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &382073081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24426,38 +24421,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 140413319664507003, guid: acdc659e005b54d28b4bc3c995d5ca35, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 140413320275254708, guid: acdc659e005b54d28b4bc3c995d5ca35, type: 3}
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
-    - target: {fileID: 140413320275254709, guid: acdc659e005b54d28b4bc3c995d5ca35, type: 3}
-      propertyPath: curMusic
-      value: 
-      objectReference: {fileID: 374838064}
-    - target: {fileID: 140413320275254709, guid: acdc659e005b54d28b4bc3c995d5ca35, type: 3}
-      propertyPath: effects.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 140413320275254709, guid: acdc659e005b54d28b4bc3c995d5ca35, type: 3}
-      propertyPath: effects.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 27fe6eb8784a74017a251a463867501b, type: 3}
-    - target: {fileID: 140413320275254709, guid: acdc659e005b54d28b4bc3c995d5ca35, type: 3}
-      propertyPath: effects.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: 2fefaecca40d9475792827ddee13fe65, type: 3}
-    - target: {fileID: 140413320275254709, guid: acdc659e005b54d28b4bc3c995d5ca35, type: 3}
-      propertyPath: effects.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: d4bd4b9cc0b894543bff0c2d9b488a32, type: 3}
-    - target: {fileID: 140413320275254709, guid: acdc659e005b54d28b4bc3c995d5ca35, type: 3}
-      propertyPath: effects.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: 7ea7b561a64ef44f0ba0b9310d376615, type: 3}
     - target: {fileID: 140413320275254730, guid: acdc659e005b54d28b4bc3c995d5ca35, type: 3}
       propertyPath: m_RootOrder
       value: 19
@@ -24501,10 +24468,6 @@ PrefabInstance:
     - target: {fileID: 140413320275254730, guid: acdc659e005b54d28b4bc3c995d5ca35, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 140413321294189882, guid: acdc659e005b54d28b4bc3c995d5ca35, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acdc659e005b54d28b4bc3c995d5ca35, type: 3}
