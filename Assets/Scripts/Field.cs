@@ -9,6 +9,7 @@ using TMPro;
 using UnityEngine;
 using AnttiStarterKit.Extensions;
 using AnttiStarterKit.Managers;
+using AnttiStarterKit.ScriptableObjects;
 using AnttiStarterKit.Utils;
 using AnttiStarterKit.Visuals;
 using Curses;
@@ -29,6 +30,7 @@ public class Field : MonoBehaviour
     [SerializeField] private EffectCamera cam;
     [SerializeField] private Meanie meanie;
     [SerializeField] private Cloud cloudPrefab;
+    [SerializeField] private SoundCollection noteSounds;
 
     private TileGrid<Pip> grid;
     private int totalScore, shownScore;
@@ -771,6 +773,11 @@ public class Field : MonoBehaviour
             const float duration = 0.15f;
             Tweener.ColorToBounceOut(pip.sprite, targetColor, duration);
             Tweener.ScaleToBounceOut(pip.sprite.transform, targetSize, duration);
+            
+            if (amount % 2 == 0)
+            {
+                PlayRandomNote(pos);
+            }
 
             if (state)
             {
@@ -782,6 +789,8 @@ public class Field : MonoBehaviour
                 {
                     multi += 1;
                     ShowTextAt($"x{multi}", pip.sprite.transform.position + Vector3.right * 0.3f);
+                    
+                    PlayRandomNote(pos);
 
                     if (hand.HasPassive(Passive.BombTransformer))
                     {
@@ -792,6 +801,8 @@ public class Field : MonoBehaviour
 
                 if (pip.isBomb && !skipBombActivation)
                 {
+                    PlayRandomNote(pos);
+                    
                     if(pip.isShaking)
                     {
                         actionQueue.Add(new DestroyAction(pip.GetCard(), multi));
@@ -831,12 +842,18 @@ public class Field : MonoBehaviour
         }
     }
 
+    private void PlayRandomNote(Vector3 pos)
+    {
+        AudioManager.Instance.PlayEffectAt(noteSounds.Random(), pos, 0.2f, false);
+    }
+
     private void CheckPipTransforms(int total, Pip pip)
     {
         if (hand.HasPassive(Passive.Bomberman))
         {
             if ((total + 1) % 20 == 0)
             {
+                PlayRandomNote(pip.GetCard().transform.position);
                 pip.MakeBomb();
             }
         }
@@ -845,6 +862,7 @@ public class Field : MonoBehaviour
         {
             if ((total + 1) % 30 == 0)
             {
+                PlayRandomNote(pip.GetCard().transform.position);
                 pip.MakeStar();
             }
         }

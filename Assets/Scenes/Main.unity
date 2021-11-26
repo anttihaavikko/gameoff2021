@@ -3349,6 +3349,7 @@ MonoBehaviour:
   cam: {fileID: 519420034}
   meanie: {fileID: 1122637467}
   cloudPrefab: {fileID: 3875278661202147452, guid: 808980ae98b3b43608279d8261008b3d, type: 3}
+  noteSounds: {fileID: 11400000, guid: 4c652e0325f784a3499032367466741c, type: 2}
 --- !u!1 &249405132
 GameObject:
   m_ObjectHideFlags: 0
@@ -16584,7 +16585,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2119121680}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.9999999
+  m_Size: 0.99999976
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
