@@ -336,6 +336,8 @@ public class Hand : MonoBehaviour
     private void AddCard(CardData cardData, Vector3 from, bool addStar = false)
     {
         UpdateDrawPile();
+        
+        AudioManager.Instance.PlayEffectAt(2, from, 1f);
 
         var c = Instantiate(cardPrefab, from, Quaternion.identity);
         c.Setup(cardData);
@@ -395,6 +397,8 @@ public class Hand : MonoBehaviour
 
     private void CardMoved(Draggable draggable)
     {
+        AudioManager.Instance.PlayEffectAt(1, draggable.transform.position, 1f);
+        
         var card = cards.First(c => c.draggable == draggable);
         card.hoverer.Disable();
         card.draggable.dropped -= CardMoved;
@@ -461,11 +465,14 @@ public class Hand : MonoBehaviour
             var pos = cardPicks.transform.position + Vector3.left * (amount - 1) * 0.5f + Vector3.right * i;
             var card = Instantiate(cardPrefab, new Vector3(0, -10f, 0), Quaternion.identity);
             Tweener.MoveToBounceOut(card.transform, pos, 0.2f + 0.05f * i);
+            AudioManager.Instance.PlayEffectAt(2, pos, 1f);
             var data = CardData.GetRandom(luck);
             card.Setup(data);
             card.draggable.CanDrag = false;
             card.hoverer.onHover += () =>
             {
+                AudioManager.Instance.PlayEffectAt(2, pos, 1f);
+                
                 var message = card.GetInfo();
                 if (message != null)
                 {
@@ -474,6 +481,8 @@ public class Hand : MonoBehaviour
             };
             card.draggable.click += () =>
             {
+                AudioManager.Instance.PlayEffectAt(0, pos, 1f);
+                
                 card.draggable.click = null;
                 save.deck.Add(data);
                 MoveCardDown(card);

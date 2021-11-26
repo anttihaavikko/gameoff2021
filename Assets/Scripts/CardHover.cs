@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using AnttiStarterKit.Animations;
+using AnttiStarterKit.Managers;
 using UnityEngine;
 
 public class CardHover : MonoBehaviour
@@ -18,6 +19,7 @@ public class CardHover : MonoBehaviour
     
     private void OnMouseEnter()
     {
+        AudioManager.Instance.PlayEffectAt(2, transform.position, 1f);
         ApplyScaling(scaleAmount, TweenEasings.BounceEaseOut);
         onHover?.Invoke();
     }

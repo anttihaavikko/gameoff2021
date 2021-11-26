@@ -952,6 +952,7 @@ public class Field : MonoBehaviour
     {
         if (!card) return;
         var p = card.transform.position;
+        AudioManager.Instance.PlayEffectAt(3, p, 1f);
         var blocked = !ignoreBlocks && GetNeighbourFor(p, direction);
         if (!blocked && IsOnArea(p + direction))
         {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AnttiStarterKit.Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -46,8 +47,7 @@ namespace AnttiStarterKit.Animations
             ApplyColors(backColor, frontColor);
         
             var pos = GetSoundPos();
-            // AudioManager.Instance.PlayEffectAt(53, pos, 0.22f);
-            // AudioManager.Instance.PlayEffectAt(49, pos, 0.718f);
+            AudioManager.Instance.PlayEffectAt(2, pos, 1f);
         }
     
         private void ApplyScaling(float amount, Func<float, float> easing)
@@ -97,9 +97,7 @@ namespace AnttiStarterKit.Animations
         public void OnPointerClick(PointerEventData eventData)
         {
             var pos = GetSoundPos();
-            // AudioManager.Instance.PlayEffectAt(36, pos, 0.1f);
-            // AudioManager.Instance.PlayEffectAt(25, pos, 4f);
-            // AudioManager.Instance.PlayEffectAt(35, pos, 0.629f);
+            AudioManager.Instance.PlayEffectAt(1, pos, 1f);
         }
     }
 }

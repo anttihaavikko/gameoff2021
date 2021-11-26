@@ -160,6 +160,7 @@ public class Card : MonoBehaviour
 
     public void Rotate(bool clockWise)
     {
+        AudioManager.Instance.PlayEffectAt(3, transform.position, 1f);
         var dir = clockWise ? 1 : -1;
         VisualRotate(dir);
         data.Rotate(dir);

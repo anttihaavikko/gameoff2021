@@ -1,6 +1,7 @@
 using System;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
+using AnttiStarterKit.Managers;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -41,6 +42,8 @@ public class Draggable : MonoBehaviour
         offset = start - GetMousePos();
         layerId = go.layer;
         go.layer = 0;
+        
+        AudioManager.Instance.PlayEffectAt(0, start, 1f);
 
         SetSortOrder(dragSortOrder);
     }

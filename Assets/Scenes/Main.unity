@@ -6110,6 +6110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 457561980}
   - component: {fileID: 457561981}
+  - component: {fileID: 457561982}
   m_Layer: 0
   m_Name: Animation Wrapper
   m_TagString: Untagged
@@ -6157,6 +6158,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &457561982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457561979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71e288b794a54f699b4b3699b8b19255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 11400000, guid: 329263da08351414ea9670b4248a01e5, type: 2}
+  composition: {fileID: 0}
+  volume: 1
 --- !u!1 &473169820
 GameObject:
   m_ObjectHideFlags: 0
@@ -24422,6 +24438,26 @@ PrefabInstance:
       propertyPath: curMusic
       value: 
       objectReference: {fileID: 374838064}
+    - target: {fileID: 140413320275254709, guid: acdc659e005b54d28b4bc3c995d5ca35, type: 3}
+      propertyPath: effects.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 140413320275254709, guid: acdc659e005b54d28b4bc3c995d5ca35, type: 3}
+      propertyPath: effects.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 27fe6eb8784a74017a251a463867501b, type: 3}
+    - target: {fileID: 140413320275254709, guid: acdc659e005b54d28b4bc3c995d5ca35, type: 3}
+      propertyPath: effects.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2fefaecca40d9475792827ddee13fe65, type: 3}
+    - target: {fileID: 140413320275254709, guid: acdc659e005b54d28b4bc3c995d5ca35, type: 3}
+      propertyPath: effects.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: d4bd4b9cc0b894543bff0c2d9b488a32, type: 3}
+    - target: {fileID: 140413320275254709, guid: acdc659e005b54d28b4bc3c995d5ca35, type: 3}
+      propertyPath: effects.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7ea7b561a64ef44f0ba0b9310d376615, type: 3}
     - target: {fileID: 140413320275254730, guid: acdc659e005b54d28b4bc3c995d5ca35, type: 3}
       propertyPath: m_RootOrder
       value: 19
