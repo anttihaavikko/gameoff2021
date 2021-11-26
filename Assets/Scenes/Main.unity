@@ -18697,6 +18697,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 938724171}
   speechBubble: {fileID: 1206935377}
+  speechSounds: {fileID: 11400000, guid: e051d35af662c42b69af14bc29cbff2d, type: 2}
 --- !u!114 &1639719833
 MonoBehaviour:
   m_ObjectHideFlags: 0

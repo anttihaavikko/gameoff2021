@@ -1,6 +1,8 @@
 using System;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
+using AnttiStarterKit.Managers;
+using AnttiStarterKit.ScriptableObjects;
 using AnttiStarterKit.Utils;
 using Save;
 using UnityEngine;
@@ -10,6 +12,7 @@ public class Scalab : MonoBehaviour
 {
     [SerializeField] private Animator anim;
     [SerializeField] private SpeechBubble speechBubble;
+    [SerializeField] private SoundCollection speechSounds;
 
     private static readonly int Walking = Animator.StringToHash("walking");
 
@@ -36,6 +39,8 @@ public class Scalab : MonoBehaviour
 
         tutorial.onShow += ShowTutorial;
         skillTutorials.onShow += ShowTutorial;
+
+        speechBubble.onWord += PlaySpeechSound;
     }
 
     public void TriggerTutorial(BaseTutorial tut)
@@ -124,6 +129,11 @@ public class Scalab : MonoBehaviour
     public void MarkTutorial(BaseTutorial tut)
     {
         tutorial.Mark(tut);
+    }
+
+    private void PlaySpeechSound()
+    {
+        AudioManager.Instance.PlayEffectAt(speechSounds.Random(), transform.position, 2f);
     }
 }
 

@@ -9,7 +9,7 @@ namespace AnttiStarterKit.Animations
 {
     public class SpeechBubble : MonoBehaviour
     {
-        public Action onVocal;
+        public Action onVocal, onWord;
         
         [SerializeField] private TMP_Text textArea;
         [SerializeField] private Color highlightColor = Color.red;
@@ -138,12 +138,21 @@ namespace AnttiStarterKit.Animations
                 textArea.text = ApplyColors(text);
                 var current = message.Substring(pos - 1, 1);
                 CheckForVocal(current);
+                CheckForWord(pos, current);
                 var delay = current == " " ? delayBetweenWords : delayBetweenLetters;
                 pos++;
                 yield return new WaitForSeconds(delay);
             }
 
             RevealDone();
+        }
+
+        private void CheckForWord(int pos, string current)
+        {
+            if (pos == 0 || current == " ")
+            {
+                onWord?.Invoke();
+            }
         }
 
         private void RevealDone()
