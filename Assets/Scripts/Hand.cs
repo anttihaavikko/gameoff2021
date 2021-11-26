@@ -440,6 +440,7 @@ public class Hand : MonoBehaviour
             scoreManager.SubmitScore(save.score, Level);
             
             AudioManager.Instance.PlayEffectAt(8, Vector3.zero, 2f);
+            AudioManager.Instance.StopMusic();
             
             gameOver.Show();
             backToMenu.ShowAfter(0.6f);

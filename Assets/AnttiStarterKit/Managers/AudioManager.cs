@@ -101,6 +101,8 @@ namespace AnttiStarterKit.Managers
 
 		private void Update()
 		{
+			if (!curMusic) return;
+			
 			var targetLowpass = (doingLowpass) ? 5000f : 22000;
 			var targetHighpass = (doingHighpass) ? 400f : 10f;
 			const float changeSpeed = 0.075f;
@@ -176,6 +178,13 @@ namespace AnttiStarterKit.Managers
 			Instance.PlayEffectAt(24, p, 0.644f * vol);
 			Instance.PlayEffectAt(9, p, 0.286f * vol);
 			Instance.PlayEffectAt(0, p, 4f * vol);
+		}
+
+		public void StopMusic()
+		{
+			curMusic.Stop();
+			curMusic.time = 0;
+			curMusic = null;
 		}
 	}
 }
