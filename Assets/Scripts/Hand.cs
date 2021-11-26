@@ -202,6 +202,7 @@ public class Hand : MonoBehaviour
         var target = deckPreview.Position +  Vector3.down * (previewShown ? 0 : Screen.height);
         var t = deckPreview.transform;
         Tweener.MoveToBounceOut(t, target.WhereX(t.position.x), 0.5f);
+        AudioManager.Instance.PlayEffectAt(3, Vector3.zero, 1f);
         UpdateDeckPreviewContents();
     }
 
@@ -575,6 +576,7 @@ public class Hand : MonoBehaviour
         var target = confirmDialog.Position +  Vector3.down * (confirmShown ? 0 : Screen.height);
         var t = confirmDialog.transform;
         Tweener.MoveToBounceOut(t, target.WhereX(t.position.x), 0.5f);
+        AudioManager.Instance.PlayEffectAt(3, Vector3.zero, 1f);
     }
     
     public void AddTurnScore(int score)

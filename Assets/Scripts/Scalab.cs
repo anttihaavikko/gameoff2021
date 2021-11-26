@@ -58,6 +58,7 @@ public class Scalab : MonoBehaviour
         var message = GetTutorialText(tut);
         var force = tut == BaseTutorial.NiceKeepGoing || tut == BaseTutorial.NotQuite;
         speechBubble.Show(message, force);
+        AudioManager.Instance.PlayEffectAt(3, speechBubble.transform.position, 1f);
     }
     
     private void ShowTutorial(Passive passive)
@@ -65,11 +66,13 @@ public class Scalab : MonoBehaviour
         var details = Passives.GetDetails(passive);
         var start = skillStarters.Random();
         speechBubble.Show($"{start} {details.tutorial}", false);
+        AudioManager.Instance.PlayEffectAt(3, speechBubble.transform.position, 1f);
     }
 
     public void ShowMessage(string message, bool forced)
     {
         speechBubble.Show(message, forced);
+        AudioManager.Instance.PlayEffectAt(3, speechBubble.transform.position, 1f);
     }
 
     private string GetTutorialText(BaseTutorial tut)
