@@ -987,7 +987,7 @@ public class Field : MonoBehaviour
         ShowTextAt("TILT", cam.cameraRig.position.WhereZ(0), 3f, 2);
         actionQueue.Clear();
         cam.BaseEffect(0.4f);
-        AudioManager.Instance.PlayEffectAt(5, Vector3.zero, 1f);
+        AudioManager.Instance.PlayEffectAt(6, Vector3.zero, 2f);
     }
 
     public int GetStackSize()

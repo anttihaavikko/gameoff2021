@@ -439,6 +439,8 @@ public class Hand : MonoBehaviour
             
             scoreManager.SubmitScore(save.score, Level);
             
+            AudioManager.Instance.PlayEffectAt(8, Vector3.zero, 2f);
+            
             gameOver.Show();
             backToMenu.ShowAfter(0.6f);
             tryAgain.ShowAfter(0.3f);
@@ -451,6 +453,7 @@ public class Hand : MonoBehaviour
         }
         
         AudioManager.Instance.ChangeMusic(0);
+        AudioManager.Instance.PlayEffectAt(7, Vector3.zero, 1f);
         
         TriggerTutorial(BaseTutorial.NewCard);
         

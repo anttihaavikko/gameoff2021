@@ -186,6 +186,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1f6eeba978597460fa436e00d0099651, type: 3}
   - {fileID: 8300000, guid: 435f90c1555de49ab84c4163937e465e, type: 3}
   - {fileID: 8300000, guid: 931f5fe57cdb14fd7a1f22834a18d44e, type: 3}
+  - {fileID: 8300000, guid: bf8f43e56b06649fca27ae9e2ea0cb72, type: 3}
+  - {fileID: 8300000, guid: 3f5ed062d286c49b7a15311b1dbc77fb, type: 3}
   soundCollections: []
 --- !u!1 &140413321294189860
 GameObject:
