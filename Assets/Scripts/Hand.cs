@@ -587,7 +587,7 @@ public class Hand : MonoBehaviour
     
     public void AddTurnScore(int score)
     {
-        Debug.Log($"Turn score was {score}");
+        // Debug.Log($"Turn score was {score}");
         stats.Data.AddTurnScore(score);
     }
 }
