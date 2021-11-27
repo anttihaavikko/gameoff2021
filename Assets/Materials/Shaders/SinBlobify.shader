@@ -19,6 +19,7 @@ Shader "CustomSprites/SinBlobify"
 
         ZWrite off
         Cull off
+        ZTest Off
 
         Pass{
 

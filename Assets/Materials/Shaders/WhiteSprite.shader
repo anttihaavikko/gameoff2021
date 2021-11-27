@@ -23,6 +23,7 @@
 
         ZWrite off
         Cull off
+        ZTest Off
 
         Pass{
 
