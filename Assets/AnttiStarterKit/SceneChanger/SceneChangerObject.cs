@@ -9,6 +9,13 @@ public class SceneChangerObject : MonoBehaviour
         SceneChanger.Instance.ChangeScene(scene);
     }
 
+    public void ChangeSceneOrName(string scene)
+    {
+        PlayerPrefs.SetString("NextScene", scene);
+        var sceneName = PlayerPrefs.HasKey("PlayerName") ? scene : "Name";
+        SceneChanger.Instance.ChangeScene(sceneName);
+    }
+
     public void Quit()
     {
         SceneChanger.Instance.blinders.Close();

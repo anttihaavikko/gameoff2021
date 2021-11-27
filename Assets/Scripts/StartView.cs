@@ -30,6 +30,7 @@ public class StartView : MonoBehaviour
             Saver.Clear();
         }
         
+        PlayerPrefs.SetString("NextScene", "Main");
         var scene = PlayerPrefs.HasKey("PlayerName") ? "Main" : "Name";
         SceneChanger.Instance.ChangeScene(scene);
     }
