@@ -4116,10 +4116,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 140413319664507003, guid: acdc659e005b54d28b4bc3c995d5ca35, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 140413320275254708, guid: acdc659e005b54d28b4bc3c995d5ca35, type: 3}
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 140413320275254709, guid: acdc659e005b54d28b4bc3c995d5ca35, type: 3}
+      propertyPath: curMusic
+      value: 
+      objectReference: {fileID: 1549837082}
     - target: {fileID: 140413320275254730, guid: acdc659e005b54d28b4bc3c995d5ca35, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -4164,8 +4172,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 140413321294189882, guid: acdc659e005b54d28b4bc3c995d5ca35, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acdc659e005b54d28b4bc3c995d5ca35, type: 3}
+--- !u!82 &1549837082 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 140413319664507003, guid: acdc659e005b54d28b4bc3c995d5ca35, type: 3}
+  m_PrefabInstance: {fileID: 1549837081}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1624123607
 GameObject:
   m_ObjectHideFlags: 0
